@@ -325,8 +325,8 @@
                 </div>
             </div>
 
-            <!-- Active Durak Table Board (Static Premium Felt) -->
-            <div id="dk-board" class="hidden flex-1 flex-col relative table-felt-durak w-full h-full select-none overflow-hidden">
+            <!-- Active Durak Table Board (Static Premium Felt with added "flex" class to ensure correct rendering on hidden removal) -->
+            <div id="dk-board" class="hidden flex flex-1 flex-col relative table-felt-durak w-full h-full select-none overflow-hidden">
                 
                 <!-- Floating Slim Game Header (Full-screen optimization) -->
                 <div class="absolute top-0 left-0 w-full h-12 flex justify-between items-center px-4 bg-black/60 border-b border-emerald-900/40 z-40 backdrop-blur-sm">
@@ -377,8 +377,8 @@
                         </div>
                     </div>
 
-                    <!-- Action Zone -->
-                    <div id="dk-table" class="bg-black/25 rounded-[30px] mx-auto w-[68%] h-[55%] md:h-[65%] border border-emerald-500/10 shadow-[inset_0_0_30px_rgba(0,0,0,0.85)] transition-all flex flex-wrap items-center justify-center gap-2 md:gap-4 p-4 relative z-0">
+                    <!-- Action Zone (Optimized with responsive width and overflow control) -->
+                    <div id="dk-table" class="bg-black/25 rounded-[30px] mx-auto w-[85%] md:w-[68%] h-[55%] md:h-[65%] border border-emerald-500/10 shadow-[inset_0_0_30px_rgba(0,0,0,0.85)] transition-all flex flex-wrap items-center justify-center gap-2 md:gap-4 p-4 relative z-0 overflow-y-auto">
                         <!-- Table cards injected here -->
                     </div>
                     
@@ -426,8 +426,8 @@
                 </div>
             </div>
 
-            <!-- Active Blackjack Table Board (Static Premium Mahogany felt) -->
-            <div id="bj-board" class="hidden flex-1 flex-col justify-between w-full h-full table-felt-blackjack relative select-none overflow-hidden">
+            <!-- Active Blackjack Table Board (Static Premium Mahogany felt with added "flex" class to ensure correct rendering on hidden removal) -->
+            <div id="bj-board" class="hidden flex flex-1 flex-col justify-between w-full h-full table-felt-blackjack relative select-none overflow-hidden">
                 
                 <!-- Floating Slim BJ Header -->
                 <div class="absolute top-0 left-0 w-full h-12 flex justify-between items-center px-4 bg-black/60 border-b border-amber-900/40 z-40 backdrop-blur-sm">
@@ -454,7 +454,8 @@
                         <span id="bj-dealer-label">Дилер (ИИ)</span>
                         <span id="bj-dealer-score" class="bg-black/80 px-2 py-0.5 rounded text-amber-400 border border-amber-500/30">?</span>
                     </div>
-                    <div id="bj-dealer-hand" class="flex justify-center relative min-h-[var(--card-height-bj)]" style="gap: -20px;"></div>
+                    <!-- Fixed overlapping styling of dealer cards -->
+                    <div id="bj-dealer-hand" class="flex justify-center relative min-h-[var(--card-height-bj)] gap-2"></div>
                 </div>
 
                 <!-- Dynamic Status Messages inside game area -->
@@ -500,7 +501,8 @@
                         <span id="bj-player-label">ИГРОК</span>
                         <span id="bj-player-score" class="bg-black/80 px-2 py-0.5 rounded text-white border border-slate-600 font-mono">0</span>
                     </div>
-                    <div id="bj-player-hand" class="flex justify-center relative min-h-[var(--card-height-bj)] mb-4" style="gap: 10px;"></div>
+                    <!-- Fixed overlapping styling of player cards -->
+                    <div id="bj-player-hand" class="flex justify-center relative min-h-[var(--card-height-bj)] mb-4 gap-2"></div>
                     
                     <!-- Controls -->
                     <div id="bj-controls" class="flex gap-2 w-full max-w-sm px-4">
@@ -839,6 +841,7 @@
             });
         }
 
+        // --- STREAMING_CHUNK: Configuring PeerJS networking and signaling... ---
         function startHeartbeat() {
             stopHeartbeat();
             pingInterval = setInterval(() => {
@@ -1054,7 +1057,7 @@
             }
         }
 
-        // --- STREAMING_CHUNK: Setting up Durak Game Engine variables... ---
+        // --- STREAMING_CHUNK: Implementing Durak game rules and logic... ---
         // --- DURAK ENGINE ---
         const DK_SUITS = ['♠', '♥', '♦', '♣'];
         const DK_COLORS = {'♠': 'black', '♣': 'black', '♥': 'red', '♦': 'red'};
@@ -1315,7 +1318,7 @@
             }
         }
 
-        // --- STREAMING_CHUNK: Coding drag and touch events handlers... ---
+        // --- STREAMING_CHUNK: Creating professional drag and drop touch bindings... ---
         let dk_dragCard, dk_dragEl, dk_tX, dk_tY;
         function dk_touchStart(e) { 
             if(dk_locked || !dk_active) return; 
@@ -1588,7 +1591,7 @@
             dk_sync();
         }
 
-        // --- STREAMING_CHUNK: Setting up Blackjack Game Engine variables... ---
+        // --- STREAMING_CHUNK: Coding Blackjack croupier rules... ---
         // --- BLACKJACK ENGINE ---
         let bj_deck = [], bj_pHand = [], bj_dHand = [];
         let bj_active = false, bj_turn = 'NONE'; 
@@ -1947,7 +1950,7 @@
             }
         }
 
-        // --- STREAMING_CHUNK: Coding professional canvas gold ruble coin rain effect... ---
+        // --- STREAMING_CHUNK: Starting the gold ruble particle rain effect... ---
         // --- COIN RAIN ANIMATION ENGINE ---
         const canvas = document.getElementById("coin-canvas");
         const ctx = canvas.getContext("2d");
