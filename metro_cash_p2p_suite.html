@@ -225,9 +225,9 @@
             </div>
         </div>
         <div class="flex items-center gap-2">
-            <!-- Global persistent ruble wallet balance -->
+            <!-- Global persistent ruble profile balance -->
             <div class="flex items-center gap-1.5 px-2 py-1 rounded bg-slate-900 border border-emerald-500/30">
-                <span class="text-[8px] text-gray-400 font-bold uppercase">КОШЕЛЕК</span>
+                <span id="profile-name-label" class="text-[8px] text-gray-400 font-bold uppercase"><i class="fa-solid fa-user-circle mr-1"></i> ПРОФИЛЬ</span>
                 <span id="global-rub-balance" class="text-[11px] font-mono text-emerald-400 font-extrabold">0.00 ₽</span>
                 <button onclick="openDepositModal()" class="ml-1 px-1.5 py-0.5 bg-amber-500 text-black text-[8px] font-black rounded hover:bg-amber-400 transition shadow-[0_0_8px_rgba(251,191,36,0.5)]">
                     + ПОПОЛНИТЬ
@@ -591,6 +591,69 @@
     <!-- Global Notifications -->
     <div id="toast-box" class="fixed top-16 left-1/2 -translate-x-1/2 flex flex-col gap-2 z-[9999] pointer-events-none w-[90%] max-w-sm"></div>
 
+    <!-- Интеграция с вашей файловой/API базой данных (Backend) -->
+    <script>
+        // Флаг успешной связи с БД
+        window.dbSyncEnabled = false;
+        
+        // ВАЖНО: GitHub Pages поддерживает только статические файлы.
+        // Для записи в файл (например, db.json или SQLite) вам нужен свой бэкенд-сервер (Node.js, Python, PHP).
+        // Укажите здесь URL вашего API, который будет принимать запросы на чтение/запись.
+        const BACKEND_API_URL = "https://ваша-ссылка-на-бэкенд.com/api/balance"; 
+        
+        async function loadProfileBalance() {
+            // Получаем ID пользователя из Telegram
+            let userId = "guest";
+            try {
+                if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe?.user) {
+                    userId = window.Telegram.WebApp.initDataUnsafe.user.id.toString();
+                }
+            } catch(e) {}
+
+            try {
+                // Пытаемся получить баланс из вашей файловой базы данных через API
+                const response = await fetch(`${BACKEND_API_URL}?user_id=${userId}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data && data.balance !== undefined) {
+                        window.rubBalance = parseFloat(data.balance);
+                        window.dbSyncEnabled = true;
+                        if(typeof window.updateRUBBalancesUI === 'function') window.updateRUBBalancesUI();
+                    }
+                } else {
+                    console.warn("Бэкенд недоступен, используем локальное хранилище.");
+                }
+            } catch(error) {
+                console.warn("Ошибка подключения к файловой БД. Работаем оффлайн.", error);
+            }
+        }
+
+        window.syncBalanceToDB = async (newBalance) => {
+            let userId = "guest";
+            try {
+                if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe?.user) {
+                    userId = window.Telegram.WebApp.initDataUnsafe.user.id.toString();
+                }
+            } catch(e) {}
+
+            // Отправляем новый баланс на ваш бэкенд, который запишет его в файл
+            if (window.dbSyncEnabled || BACKEND_API_URL !== "https://ваша-ссылка-на-бэкенд.com/api/balance") {
+                try {
+                    await fetch(BACKEND_API_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ user_id: userId, balance: newBalance })
+                    });
+                } catch(error) {
+                    console.error("Не удалось сохранить баланс в файл на сервере:", error);
+                }
+            }
+        };
+
+        // Запускаем загрузку профиля при старте
+        document.addEventListener('DOMContentLoaded', loadProfileBalance);
+    </script>
+
     <script>
         // --- CONSTANTS & GLOBALS ---
         const TG_BOT_TOKEN = "8575086263:AAG74PmRjUT8ExtDkC_kOxfYfmss2BG0C_A"; 
@@ -600,8 +663,8 @@
         let isHost = false, currentGameMode = null, isSingleplayer = false;
         let tgLobbyPostId = null;
 
-        // Core RUB Balance system persistent in storage
-        let rubBalance = parseFloat(localStorage.getItem('metro_rub_balance')) || 1000.00;
+        // Core RUB Balance system persistent in storage & synced with Firebase/Custom DB
+        window.rubBalance = parseFloat(localStorage.getItem('metro_rub_balance')) || 1000.00;
         let selectedDepositAmount = 500;
 
         // WebApp Heartbeat Keep-Alive
@@ -667,19 +730,26 @@
         }
 
         // --- RUB BALANCE CONTROLLER & MODAL ---
-        function updateRUBBalances() {
-            localStorage.setItem('metro_rub_balance', rubBalance.toFixed(2));
-            document.getElementById('global-rub-balance').innerText = `${rubBalance.toLocaleString('ru-RU')} ₽`;
+        window.updateRUBBalancesUI = function() {
+            document.getElementById('global-rub-balance').innerText = `${window.rubBalance.toLocaleString('ru-RU')} ₽`;
             
             const dkBal = document.getElementById('dk-game-rub-balance');
-            if(dkBal) dkBal.innerText = `${rubBalance.toLocaleString('ru-RU')} ₽`;
+            if(dkBal) dkBal.innerText = `${window.rubBalance.toLocaleString('ru-RU')} ₽`;
             
             const bjBal = document.getElementById('bj-game-rub-balance');
-            if(bjBal) bjBal.innerText = `${rubBalance.toLocaleString('ru-RU')} ₽`;
+            if(bjBal) bjBal.innerText = `${window.rubBalance.toLocaleString('ru-RU')} ₽`;
             
             // Sync with betting screens
-            document.getElementById('bj-balance-preview').innerText = `${rubBalance.toLocaleString('ru-RU')} ₽`;
-            document.getElementById('bj-current-balance-display').innerText = `${rubBalance.toLocaleString('ru-RU')} ₽`;
+            document.getElementById('bj-balance-preview').innerText = `${window.rubBalance.toLocaleString('ru-RU')} ₽`;
+            document.getElementById('bj-current-balance-display').innerText = `${window.rubBalance.toLocaleString('ru-RU')} ₽`;
+        }
+
+        function updateRUBBalances() {
+            localStorage.setItem('metro_rub_balance', window.rubBalance.toFixed(2));
+            if(typeof window.syncBalanceToDB === 'function') {
+                window.syncBalanceToDB(window.rubBalance); // Отправляем в базу
+            }
+            window.updateRUBBalancesUI();
         }
 
         function openDepositModal() {
@@ -695,8 +765,13 @@
         function setDepositAmount(amount) {
             triggerHaptic('light');
             selectedDepositAmount = amount;
-            const myIdText = myPeerId || "[Сначала включите сеть]";
-            document.getElementById('deposit-message-template').innerText = `Привет! Хочу пополнить баланс в Metro Cash Suite. Мой P2P ID: ${myIdText}. Сумма: ${amount} рублей.`;
+            let myIdText = myPeerId || "[Сначала включите сеть]";
+            try {
+                if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe?.user) {
+                    myIdText = window.Telegram.WebApp.initDataUnsafe.user.id.toString(); // Используем TG ID для пополнения
+                }
+            } catch(e) {}
+            document.getElementById('deposit-message-template').innerText = `Привет! Хочу пополнить баланс в Metro Cash Suite. Мой Telegram ID: ${myIdText}. Сумма: ${amount} рублей.`;
         }
 
         function copyDepositTemplate() {
@@ -765,7 +840,14 @@
                 const tg = window.Telegram.WebApp;
                 tg.ready(); tg.expand();
                 if (tg.initDataUnsafe?.user) {
-                    document.getElementById('player-nickname').value = tg.initDataUnsafe.user.first_name || 'Игрок TG';
+                    const tgName = tg.initDataUnsafe.user.first_name || 'Игрок TG';
+                    document.getElementById('player-nickname').value = tgName;
+                    
+                    // Обновляем метку Профиля
+                    const profileLabel = document.getElementById('profile-name-label');
+                    if (profileLabel) {
+                        profileLabel.innerHTML = `<i class="fa-solid fa-user-circle mr-1"></i> ${tgName.toUpperCase()}`;
+                    }
                 }
             }
             initPeer();
@@ -1222,7 +1304,7 @@
         }
 
         function dk_renderUI() {
-            updateRUBBalances();
+            updateRUBBalancesUI();
 
             // Deck & Trump Card
             const tEl = document.getElementById('dk-trump-card');
@@ -1637,7 +1719,7 @@
         }
 
         function bj_selectBet(amount) {
-            if (amount <= rubBalance) {
+            if (amount <= window.rubBalance) {
                 bj_bet = amount;
                 triggerHaptic('light');
                 document.getElementById('bj-bet-preview').innerText = `${bj_bet} ₽`;
@@ -1655,7 +1737,8 @@
         function bj_confirmBet() {
             triggerHaptic('medium');
             bj_current_bet_placed = bj_bet;
-            rubBalance -= bj_current_bet_placed;
+            window.rubBalance -= bj_current_bet_placed;
+            updateRUBBalances(); // Сохраняем в базу новое значение после ставки
             
             document.getElementById('bj-bet-tray').classList.add('hidden');
             
@@ -1694,7 +1777,7 @@
         }
 
         function bj_renderUI() {
-            updateRUBBalances();
+            updateRUBBalancesUI();
 
             document.getElementById('bj-shoe-info').innerText = `Шуз: ${bj_deck.length} карт`;
 
@@ -1721,7 +1804,7 @@
 
             document.getElementById('bj-current-bet-display').innerText = `${bj_current_bet_placed} ₽`;
 
-            if (bj_pHand.length === 2 && rubBalance >= bj_current_bet_placed) {
+            if (bj_pHand.length === 2 && window.rubBalance >= bj_current_bet_placed) {
                 doubleBtn.classList.remove('opacity-40', 'pointer-events-none');
             } else {
                 doubleBtn.classList.add('opacity-40', 'pointer-events-none');
@@ -1729,7 +1812,7 @@
 
             if(bj_turn === 'BETTING') {
                 document.getElementById('bj-bet-tray').classList.remove('hidden');
-                document.getElementById('bj-balance-preview').innerText = `${rubBalance.toLocaleString('ru-RU')} ₽`;
+                document.getElementById('bj-balance-preview').innerText = `${window.rubBalance.toLocaleString('ru-RU')} ₽`;
                 bj_selectBet(10);
             } else if(bj_turn === 'OVER') {
                 msgEl.innerText = bj_msg; 
@@ -1795,12 +1878,13 @@
 
         window.bj_doubleDown = function() {
             if(!bj_active) return;
-            if (rubBalance < bj_current_bet_placed) return toast("Недостаточно рублей на балансе!", true);
+            if (window.rubBalance < bj_current_bet_placed) return toast("Недостаточно рублей на балансе!", true);
 
             playSnd('card'); triggerHaptic('heavy');
             
-            rubBalance -= bj_current_bet_placed;
+            window.rubBalance -= bj_current_bet_placed;
             bj_current_bet_placed *= 2;
+            updateRUBBalances();
 
             if (isSingleplayer && bj_turn === 'PLAYER') {
                 bj_pHand.push(bj_deck.pop());
@@ -1848,17 +1932,20 @@
         function bj_payoutWins() {
             triggerHaptic('success');
             startCoinsRain();
-            rubBalance += bj_current_bet_placed * 2;
+            window.rubBalance += bj_current_bet_placed * 2;
+            updateRUBBalances(); // Сразу кидаем победу в базу
         }
 
         function bj_payoutBlackjack() {
             triggerHaptic('success');
             startCoinsRain();
-            rubBalance += Math.floor(bj_current_bet_placed * 2.5); 
+            window.rubBalance += Math.floor(bj_current_bet_placed * 2.5); 
+            updateRUBBalances();
         }
 
         function bj_payoutDraw() {
-            rubBalance += bj_current_bet_placed; 
+            window.rubBalance += bj_current_bet_placed; 
+            updateRUBBalances();
         }
 
         function bj_calcWinner() {
@@ -1891,9 +1978,10 @@
         window.bj_resetGame = function() {
             playSnd('click');
             stopCoinsRain();
-            if (rubBalance <= 0) {
+            if (window.rubBalance <= 0) {
                 toast("Вы обанкротились! Получите кредит в 100 ₽.");
-                rubBalance = 100;
+                window.rubBalance = 100;
+                updateRUBBalances(); // Даем кредит в базу
             }
             bj_turn = 'BETTING';
             bj_pHand = [];
@@ -1910,7 +1998,7 @@
             
             const state = { 
                 pHand: bj_pHand, dHand: sendDHand, turn: bj_turn, msg: bj_msg, 
-                placedBet: bj_current_bet_placed, hostBalance: rubBalance 
+                placedBet: bj_current_bet_placed, hostBalance: window.rubBalance 
             };
             p2pConn.send({type: 'BJ_STATE', state: state});
             bj_renderUI();
