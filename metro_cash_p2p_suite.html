@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>METRO CASH</title>
+    <!-- Подключаем Tailwind, FontAwesome для иконок, PeerJS для p2p и Telegram WebApp SDK -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
@@ -19,11 +20,11 @@
             --metro-gold-glow: rgba(251, 191, 36, 0.45);
             --metro-dark: #020617;
             
-            /* Увеличенные размеры карт для лучшей видимости и тач-таргетинга */
-            --card-width-dk: clamp(60px, 13vw, 84px);
-            --card-height-dk: clamp(88px, 19vw, 122px);
-            --card-width-bj: clamp(66px, 14vw, 92px);
-            --card-height-bj: clamp(96px, 20.5vw, 134px);
+            /* Увеличенные на 15% размеры карт для лучшего тач-таргетинга и видимости мастей */
+            --card-width-dk: clamp(68px, 14.5vw, 96px);
+            --card-height-dk: clamp(98px, 21vw, 138px);
+            --card-width-bj: clamp(74px, 15.5vw, 104px);
+            --card-height-bj: clamp(108px, 22.5vw, 150px);
         }
 
         body {
@@ -37,6 +38,7 @@
             padding-bottom: env(safe-area-inset-bottom);
         }
 
+        /* Столы с мягкими глубокими тенями */
         .table-felt-durak {
             background: radial-gradient(circle at center, #064e3b 0%, #022c22 65%, #011510 100%);
             box-shadow: inset 0 0 120px rgba(0,0,0,0.95);
@@ -60,13 +62,14 @@
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.05);
         }
 
+        /* Увеличенные карты с контрастным шрифтом */
         .playing-card {
             background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(0,0,0,0.08);
+            border-radius: 14px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(0,0,0,0.1);
             display: flex; flex-direction: column; justify-content: space-between;
-            padding: 8px;
-            font-size: clamp(12px, 2.6vw, 16px);
+            padding: 10px;
+            font-size: clamp(14px, 3vw, 19px);
             font-weight: 800; position: relative;
             cursor: pointer; user-select: none;
             touch-action: none;
@@ -77,7 +80,7 @@
         
         .playing-card .top-left { text-align: left; line-height: 1.1; }
         .playing-card .bottom-right { text-align: right; transform: rotate(180deg); line-height: 1.1; }
-        .playing-card .center-suit { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 2.8em; opacity: 0.12; pointer-events: none; }
+        .playing-card .center-suit { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 3.2em; opacity: 0.15; pointer-events: none; }
 
         /* Рубашки карт с неоновым свечением */
         .card-back { color: transparent !important; }
@@ -89,7 +92,7 @@
         .skin-emerald::after {
             content: 'M'; font-family: 'Orbitron', sans-serif; position: absolute;
             top: 50%; left: 50%; transform: translate(-50%, -50%);
-            color: var(--metro-green); font-size: clamp(22px, 5vw, 30px);
+            color: var(--metro-green); font-size: clamp(26px, 5.5vw, 36px);
             text-shadow: 0 0 10px var(--metro-green);
         }
         .skin-gold {
@@ -100,39 +103,42 @@
         .skin-gold::after {
             content: '★'; font-family: 'Orbitron', sans-serif; position: absolute;
             top: 50%; left: 50%; transform: translate(-50%, -50%);
-            color: var(--metro-gold); font-size: clamp(22px, 5vw, 30px);
+            color: var(--metro-gold); font-size: clamp(26px, 5.5vw, 36px);
             text-shadow: 0 0 10px var(--metro-gold);
         }
 
         .dk-card { width: var(--card-width-dk); height: var(--card-height-dk); }
+        
+        /* Плавное парение карт в руке при перетаскивании */
         .card-in-hand { 
             transform-origin: bottom center; 
-            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.2), z-index 0.1s, box-shadow 0.25s; 
+            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.25), z-index 0.1s, box-shadow 0.25s; 
         }
         .card-in-hand:hover, .card-in-hand:active {
-            transform: translateY(-35px) scale(1.3) rotate(0deg) !important;
+            transform: translateY(-40px) scale(1.35) rotate(0deg) !important;
             z-index: 250 !important;
-            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.75), 0 0 18px var(--metro-green);
+            box-shadow: 0 25px 50px rgba(16, 185, 129, 0.8), 0 0 22px var(--metro-green);
             border: 1px solid var(--metro-green);
         }
         .dragging {
-            opacity: 0.95; transform: scale(1.22) !important; z-index: 1000 !important;
-            box-shadow: 0 25px 50px rgba(16, 185, 129, 0.85) !important;
+            opacity: 0.95; transform: scale(1.25) !important; z-index: 1000 !important;
+            box-shadow: 0 30px 60px rgba(16, 185, 129, 0.9) !important;
             transition: none !important;
         }
         .drag-target-active {
-            box-shadow: inset 0 0 60px rgba(16, 185, 129, 0.35) !important;
-            border: 2px dashed rgba(16, 185, 129, 0.8) !important;
+            box-shadow: inset 0 0 70px rgba(16, 185, 129, 0.45) !important;
+            border: 2.5px dashed rgba(16, 185, 129, 0.85) !important;
         }
 
-        /* Блэкджек CSS */
-        .bj-card { width: var(--card-width-bj); height: var(--card-height-bj); font-size: clamp(14px, 3vw, 18px); padding: 9px; }
+        /* Анимации Блэкджека */
+        .bj-card { width: var(--card-width-bj); height: var(--card-height-bj); font-size: clamp(16px, 3.2vw, 20px); padding: 11px; }
         .card-animate { animation: dropIn 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.25) forwards; opacity: 0; }
         @keyframes dropIn { 
-            from { transform: translateY(-80px) scale(0.5) rotate(15deg); opacity: 0; } 
+            from { transform: translateY(-100px) scale(0.4) rotate(20deg); opacity: 0; } 
             to { transform: translateY(0) scale(1) rotate(0); opacity: 1; } 
         }
 
+        /* Неоновые кнопки управления */
         .btn-neon-emerald {
             background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(16, 185, 129, 0.05));
             border: 1px solid var(--metro-green); color: var(--metro-green);
@@ -153,7 +159,7 @@
         .app-view.active { display: flex; animation: fadeIn 0.35s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Эмодзи Реакции */
+        /* Эмодзи-реакции */
         .reaction-bubble {
             position: absolute; font-size: 3.5rem; pointer-events: none; z-index: 999;
             animation: floatUpAndFade 1.5s cubic-bezier(0.18, 0.89, 0.32, 1.2) forwards;
@@ -164,7 +170,7 @@
             100% { transform: translateY(-400px) scale(1.7) rotate(35deg); opacity: 0; }
         }
 
-        /* Фишки */
+        /* Фишки ставок */
         .metro-chip {
             width: clamp(52px, 12vw, 68px); height: clamp(52px, 12vw, 68px);
             border-radius: 50%; border: 4px dashed rgba(255,255,255,0.95);
@@ -184,6 +190,7 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.25); border-radius: 6px; }
         
+        /* Лампочка статуса сети в логотипе */
         #header-lightbulb { filter: drop-shadow(0 0 6px currentColor); }
     </style>
 </head>
@@ -216,6 +223,7 @@
         </div>
     </header>
 
+    <!-- Main Container -->
     <main class="w-full flex-1 relative overflow-hidden flex flex-col z-10 pb-16">
         
         <!-- View 1: Home (Главная) -->
@@ -227,7 +235,6 @@
                 </p>
             </div>
 
-            <!-- Иллюстративный стек карт -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="glass-panel p-6 rounded-3xl space-y-4 border-l-4 border-emerald-500 relative overflow-hidden group">
                     <div class="absolute -right-12 -bottom-12 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all"></div>
@@ -246,7 +253,6 @@
                 </div>
             </div>
 
-            <!-- Крупная кнопка моментального перехода -->
             <div class="flex flex-col items-center justify-center py-6">
                 <button onclick="switchTab('hub')" class="btn-neon-emerald px-10 py-5 rounded-2xl text-xs font-black uppercase tracking-widest shadow-2xl flex items-center gap-3">
                     <i class="fa-solid fa-gamepad text-base"></i> Открыть Игровой Хаб
@@ -635,14 +641,19 @@
         </div>
     </div>
 
+    <!-- Hidden username input fallback if TG is not active -->
+    <input type="hidden" id="player-nickname" value="Игрок">
+
     <div id="toast-box" class="fixed top-20 left-1/2 -translate-x-1/2 flex flex-col gap-3 z-[9999] pointer-events-none w-[90%] max-w-sm"></div>
 
     <script>
+        // Конфигурация для сети и логирования в Telegram канал
         const savedConfig = JSON.parse(localStorage.getItem('metro_admin_config') || '{}');
         const TG_BOT_TOKEN = savedConfig.botToken || "8575086263:AAG74PmRjUT8ExtDkC_kOxfYfmss2BG0C_A"; 
         const TG_CHANNEL_NAME = savedConfig.lobbyChannel || "@metrocash_p2p_lobbies";
         const DB_CHANNEL_ID = savedConfig.dbChannel || "-1003734695647";
         
+        // Загрузка баланса и данных пользователя из Telegram WebApp CloudStorage
         async function loadProfileBalance() {
             let loaded = false;
             if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.CloudStorage) {
@@ -661,6 +672,7 @@
             }
         }
 
+        // Синхронизация транзакций с общим логом
         window.syncBalanceToDB = async (newBalance) => {
             let userId = "guest"; let userName = "Unknown";
             if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe?.user) {
@@ -712,21 +724,27 @@
             } catch (e) {}
         }
 
-        // Формирование приглашения с возможностью открытия WebApp кнопкой
+        // Формирование приглашения с возможностью мгновенного запуска через startapp
         function shareInviteLink() {
             triggerHaptic('light');
             const modeName = currentGameMode === 'DURAK' ? 'Дурак' : 'Блэкджек';
-            const textMsg = `Присоединяйся к моей онлайн игре!\nРежим: ${modeName}\nP2P ID комнаты: ${myPeerId}`;
-            const inviteUrl = `https://t.me/share/url?url=${encodeURIComponent(window.location.origin + window.location.pathname + '?join=' + myPeerId + '&mode=' + currentGameMode)}&text=${encodeURIComponent(textMsg)}`;
+            
+            // Получаем юзернейм бота для генерации красивой ссылки
+            const botUsername = savedConfig.botUsername || "MetroCash_P2P_Bot";
+            const inviteParam = `join_${myPeerId}_mode_${currentGameMode}_bet_${setupMatchBet}`;
+            const directAppUrl = `https://t.me/${botUsername}/app?startapp=${inviteParam}`;
+            
+            const textMsg = `Присоединяйся к моей игре в ${modeName} на ставку ${setupMatchBet} ₽!`;
+            const inviteUrl = `https://t.me/share/url?url=${encodeURIComponent(directAppUrl)}&text=${encodeURIComponent(textMsg)}`;
             
             if (window.Telegram && window.Telegram.WebApp) {
                 window.Telegram.WebApp.openTelegramLink(inviteUrl);
             } else {
                 const dummy = document.createElement('input');
                 document.body.appendChild(dummy);
-                dummy.value = window.location.origin + window.location.pathname + '?join=' + myPeerId + '&mode=' + currentGameMode;
+                dummy.value = directAppUrl;
                 dummy.select(); document.execCommand('copy'); document.body.removeChild(dummy);
-                toast("Ссылка на комнату скопирована!");
+                toast("Прямая ссылка скопирована в буфер обмена!");
             }
         }
 
@@ -818,6 +836,22 @@
                     document.getElementById('profile-name-label').innerHTML = `<i class="fa-solid fa-user-circle mr-1.5 text-slate-500 shrink-0"></i> ${tgName.toUpperCase()}`;
                     document.getElementById('profile-full-name').innerText = tgName;
                     document.getElementById('profile-tg-id').innerText = tg.initDataUnsafe.user.id.toString();
+                }
+
+                // Чтение параметров быстрого запуска start_param для моментального соединения
+                const startParam = tg.initDataUnsafe?.start_param;
+                if (startParam) {
+                    // Формат: join_PEERID_mode_MODE_bet_BET
+                    if (startParam.startsWith('join_')) {
+                        const parts = startParam.split('_');
+                        const peerId = parts[1];
+                        const mode = parts[3] || 'DURAK';
+                        const bet = parseInt(parts[5]) || 10;
+                        toast(`Обнаружено быстрое приглашение! Подключение...`);
+                        setTimeout(() => {
+                            joinLobby(peerId, mode, 36, 'classic', bet);
+                        }, 1200);
+                    }
                 }
             }
             initPeer(); switchTab('home');
@@ -1276,7 +1310,7 @@
             });
 
             const ind = document.getElementById('dk-turn-ind'); const btn = document.getElementById('dk-action-btn');
-            if(dk_myTurn) { ind.innerText = "Ваш ход"; ind.className = "absolute top-14 left-1/2 -translate-x-1/2 bg-slate-900/95 px-5 py-2 rounded-full border border-emerald-500 text-emerald-400 text-[10px] font-bold uppercase tracking-widest z-30 animate-pulse shadow-[0_0_20px_rgba(16,185,129,0.4)] opacity-100 transition-opacity"; } 
+            if(dk_myTurn) { ind.innerText = "Ваш ход"; ind.className = "absolute top-14 left-1/2 -translate-x-1/2 bg-slate-900/95 px-5 py-2 rounded-full border border-emerald-500 text-emerald-400 text-[9px] font-bold uppercase tracking-widest z-30 animate-pulse shadow-[0_0_20px_rgba(16,185,129,0.4)] opacity-100 transition-opacity"; } 
             else { ind.className = "opacity-0 absolute top-14 pointer-events-none"; }
 
             if(!dk_table.length) { btn.classList.add('hidden'); }
