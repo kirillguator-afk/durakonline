@@ -14,15 +14,15 @@
 
         :root {
             --metro-green: #10b981;
-            --metro-green-glow: rgba(16, 185, 129, 0.35);
+            --metro-green-glow: rgba(16, 185, 129, 0.4);
             --metro-gold: #fbbf24;
-            --metro-gold-glow: rgba(251, 191, 36, 0.35);
+            --metro-gold-glow: rgba(251, 191, 36, 0.4);
             --metro-dark: #030712;
             
-            --card-width-dk: clamp(48px, 11vw, 68px);
-            --card-height-dk: clamp(72px, 16.5vw, 100px);
-            --card-width-bj: clamp(54px, 12vw, 76px);
-            --card-height-bj: clamp(80px, 18vw, 112px);
+            --card-width-dk: clamp(52px, 11vw, 72px);
+            --card-height-dk: clamp(76px, 16.5vw, 106px);
+            --card-width-bj: clamp(56px, 12vw, 78px);
+            --card-height-bj: clamp(82px, 18vw, 114px);
         }
 
         body {
@@ -32,39 +32,43 @@
             -webkit-tap-highlight-color: transparent;
             background-color: var(--metro-dark);
             height: 100dvh;
-            background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, var(--metro-dark) 70%);
+            background-image: radial-gradient(circle at 50% 0%, #111827 0%, var(--metro-dark) 80%);
         }
 
+        /* Столы с объемными тенями */
         .table-felt-durak {
             background: radial-gradient(circle at center, #0f4d2a 0%, #062b16 65%, #021209 100%);
-            box-shadow: inset 0 0 80px rgba(0,0,0,0.9);
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.95);
         }
         .table-felt-blackjack {
             background: radial-gradient(circle at center, #3d0e05 0%, #1f0501 65%, #080000 100%);
-            box-shadow: inset 0 0 80px rgba(0,0,0,0.95);
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.95);
         }
 
         .title-font { font-family: 'Orbitron', sans-serif; }
 
+        /* Улучшенный Glassmorphism */
         .glass-panel {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+            background: rgba(15, 23, 42, 0.55);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            border-left: 1px solid rgba(255, 255, 255, 0.08);
+            border-right: 1px solid rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.05);
         }
 
+        /* Общие стили карт */
         .playing-card {
             background: #ffffff;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(0,0,0,0.05);
             display: flex; flex-direction: column; justify-content: space-between;
             padding: 6px;
             font-size: clamp(10px, 2.2vw, 13px);
             font-weight: 800; position: relative;
-            transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.25s, opacity 0.25s;
             cursor: pointer; user-select: none;
-            border: 1px solid rgba(255, 255, 255, 0.15);
             touch-action: none;
         }
         .playing-card.red { color: #ef4444; }
@@ -72,103 +76,114 @@
         
         .playing-card .top-left { text-align: left; line-height: 1; }
         .playing-card .bottom-right { text-align: right; transform: rotate(180deg); line-height: 1; }
-        .playing-card .center-suit { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 2.2em; opacity: 0.12; pointer-events: none; }
+        .playing-card .center-suit { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 2.4em; opacity: 0.1; pointer-events: none; }
 
-        .card-back { color: transparent !important; transition: all 0.3s ease; }
+        /* Рубашки карт */
+        .card-back { color: transparent !important; }
         .skin-emerald {
             background: radial-gradient(circle, #065f46 0%, #022c22 100%);
             border: 2px solid var(--metro-green);
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.8), 0 0 6px var(--metro-green-glow);
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.9), 0 0 8px var(--metro-green-glow);
         }
         .skin-emerald::after {
             content: 'M'; font-family: 'Orbitron', sans-serif; position: absolute;
             top: 50%; left: 50%; transform: translate(-50%, -50%);
-            color: var(--metro-green); font-size: clamp(16px, 3.5vw, 24px);
-            text-shadow: 0 0 6px var(--metro-green);
+            color: var(--metro-green); font-size: clamp(18px, 4vw, 26px);
+            text-shadow: 0 0 8px var(--metro-green);
         }
         .skin-gold {
             background: radial-gradient(circle, #92400e 0%, #451a03 100%);
             border: 2px solid var(--metro-gold);
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.8), 0 0 6px var(--metro-gold-glow);
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.9), 0 0 8px var(--metro-gold-glow);
         }
         .skin-gold::after {
             content: '★'; font-family: 'Orbitron', sans-serif; position: absolute;
             top: 50%; left: 50%; transform: translate(-50%, -50%);
-            color: var(--metro-gold); font-size: clamp(16px, 3.5vw, 24px);
-            text-shadow: 0 0 6px var(--metro-gold);
+            color: var(--metro-gold); font-size: clamp(18px, 4vw, 26px);
+            text-shadow: 0 0 8px var(--metro-gold);
         }
 
+        /* Дурак CSS */
         .dk-card { width: var(--card-width-dk); height: var(--card-height-dk); }
-        .card-in-hand { transform-origin: bottom center; transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), z-index 0.1s; }
+        .card-in-hand { 
+            transform-origin: bottom center; 
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.15), z-index 0.1s, box-shadow 0.3s; 
+        }
         .card-in-hand:hover, .card-in-hand:active {
-            transform: translateY(-24px) scale(1.22) rotate(0deg) !important;
+            transform: translateY(-28px) scale(1.25) rotate(0deg) !important;
             z-index: 250 !important;
-            box-shadow: 0 12px 25px rgba(16, 185, 129, 0.5), 0 0 10px var(--metro-green);
-            border-color: var(--metro-green);
+            box-shadow: 0 15px 30px rgba(16, 185, 129, 0.6), 0 0 12px var(--metro-green);
+            border: 1px solid var(--metro-green);
         }
         .dragging {
-            opacity: 0.85; transform: scale(1.1) !important; z-index: 1000 !important;
-            box-shadow: 0 12px 25px rgba(16, 185, 129, 0.6) !important;
+            opacity: 0.9; transform: scale(1.15) !important; z-index: 1000 !important;
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.7) !important;
+            transition: none !important; /* Убираем лаги при перетаскивании */
         }
         .drag-target-active {
-            box-shadow: inset 0 0 35px rgba(16, 185, 129, 0.4) !important;
+            box-shadow: inset 0 0 40px rgba(16, 185, 129, 0.5) !important;
             border: 1px solid rgba(16, 185, 129, 0.8) !important;
         }
-        .bj-card { width: var(--card-width-bj); height: var(--card-height-bj); font-size: clamp(12px, 2.8vw, 16px); padding: 7px; }
-        .card-animate { animation: dropIn 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards; opacity: 0; }
-        @keyframes dropIn { from { transform: translateY(-50px) scale(0.75) rotate(15deg); opacity: 0; } to { transform: translateY(0) scale(1) rotate(0); opacity: 1; } }
-        .card-dealing { animation: dealFromDeck 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
-        @keyframes dealFromDeck { from { transform: translate(-100px, -50px) scale(0.3) rotate(45deg); opacity: 0; } to { opacity: 1; } }
 
+        /* Блэкджек CSS */
+        .bj-card { width: var(--card-width-bj); height: var(--card-height-bj); font-size: clamp(12px, 2.8vw, 16px); padding: 7px; }
+        .card-animate { animation: dropIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards; opacity: 0; }
+        @keyframes dropIn { 
+            from { transform: translateY(-60px) scale(0.6) rotate(10deg); opacity: 0; } 
+            to { transform: translateY(0) scale(1) rotate(0); opacity: 1; } 
+        }
+
+        /* UI Кнопки */
         .btn-neon-emerald {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));
             border: 1px solid var(--metro-green); color: var(--metro-green);
             transition: all 0.25s ease;
         }
-        .btn-neon-emerald:hover { background: var(--metro-green); color: var(--metro-dark); box-shadow: 0 0 20px var(--metro-green-glow); }
-        .btn-neon-emerald:active { transform: scale(0.96); }
+        .btn-neon-emerald:hover { background: var(--metro-green); color: var(--metro-dark); box-shadow: 0 0 25px var(--metro-green-glow); }
+        .btn-neon-emerald:active { transform: scale(0.95); }
 
         .btn-neon-gold {
-            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(251, 191, 36, 0.05));
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(251, 191, 36, 0.05));
             border: 1px solid var(--metro-gold); color: var(--metro-gold);
             transition: all 0.25s ease;
         }
-        .btn-neon-gold:hover { background: var(--metro-gold); color: var(--metro-dark); box-shadow: 0 0 20px var(--metro-gold-glow); }
-        .btn-neon-gold:active { transform: scale(0.96); }
+        .btn-neon-gold:hover { background: var(--metro-gold); color: var(--metro-dark); box-shadow: 0 0 25px var(--metro-gold-glow); }
+        .btn-neon-gold:active { transform: scale(0.95); }
 
         .app-view { display: none; }
         .app-view.active { display: flex; animation: fadeIn 0.3s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* Эмодзи Реакции */
         .reaction-bubble {
-            position: absolute; font-size: 2.8rem; pointer-events: none; z-index: 999;
-            animation: floatUpAndFade 1.2s cubic-bezier(0.18, 0.89, 0.32, 1.2) forwards;
+            position: absolute; font-size: 3.2rem; pointer-events: none; z-index: 999;
+            animation: floatUpAndFade 1.4s cubic-bezier(0.18, 0.89, 0.32, 1.2) forwards;
         }
         @keyframes floatUpAndFade {
-            0% { transform: translateY(50px) scale(0.4) rotate(0deg); opacity: 0; }
-            30% { opacity: 1; }
-            100% { transform: translateY(-300px) scale(1.5) rotate(25deg); opacity: 0; }
+            0% { transform: translateY(50px) scale(0.3) rotate(0deg); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateY(-350px) scale(1.6) rotate(35deg); opacity: 0; }
         }
 
+        /* Фишки */
         .metro-chip {
-            width: clamp(44px, 10vw, 58px); height: clamp(44px, 10vw, 58px);
-            border-radius: 50%; border: 4px dashed #ffffff;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5), inset 0 0 6px rgba(0,0,0,0.4);
+            width: clamp(48px, 11vw, 62px); height: clamp(48px, 11vw, 62px);
+            border-radius: 50%; border: 4px dashed rgba(255,255,255,0.9);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.6), inset 0 0 8px rgba(0,0,0,0.5);
             display: flex; align-items: center; justify-content: center;
-            font-weight: 800; font-size: 11px; cursor: pointer;
+            font-weight: 900; font-size: 12px; cursor: pointer;
             transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.25);
         }
         .metro-chip:active { transform: scale(0.85) rotate(-15deg); }
 
-        .discard-pile-slot {
-            border: 2px dashed rgba(255, 255, 255, 0.12); background: rgba(0, 0, 0, 0.25); transition: all 0.3s;
-        }
-        .card-flying-to-discard { position: fixed; z-index: 500; transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1); pointer-events: none; }
+        .discard-pile-slot { border: 2px dashed rgba(255, 255, 255, 0.15); background: rgba(0, 0, 0, 0.3); transition: all 0.3s; }
+        .card-flying-to-discard { position: fixed; z-index: 500; transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1); pointer-events: none; }
+        
         #coin-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100; display: none; }
         input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
         ::-webkit-scrollbar { width: 4px; height: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
     </style>
 </head>
 <body class="flex flex-col relative w-full h-[100dvh] overflow-hidden">
@@ -176,9 +191,9 @@
     <canvas id="coin-canvas"></canvas>
 
     <!-- Global Header -->
-    <header class="w-full p-3 flex flex-row justify-between items-center gap-2 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-xl shrink-0 z-50 transition-all duration-300" id="main-header">
+    <header class="w-full p-3 flex flex-row justify-between items-center gap-2 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-xl shrink-0 z-50 transition-all duration-300 shadow-lg" id="main-header">
         <div class="flex items-center gap-2">
-            <div id="header-icon" class="p-1.5 bg-emerald-500/10 rounded-xl border border-emerald-500/30 transition-colors shadow-[0_0_10px_rgba(16,185,129,0.1)]">
+            <div id="header-icon" class="p-1.5 bg-emerald-500/10 rounded-xl border border-emerald-500/40 transition-colors shadow-[0_0_12px_rgba(16,185,129,0.15)]">
                 <i class="fa-solid fa-network-wired text-emerald-400" id="header-icon-i"></i>
             </div>
             <div>
@@ -191,7 +206,7 @@
                 <span id="profile-name-label" class="text-[9px] text-gray-400 font-bold uppercase flex items-center"><i class="fa-solid fa-user-circle mr-1.5 text-slate-500"></i> ИГРОК</span>
                 <div class="w-px h-3 bg-slate-700 mx-1"></div>
                 <span id="global-rub-balance" class="text-[12px] font-mono text-emerald-400 font-extrabold">0 ₽</span>
-                <button onclick="openDepositModal()" class="ml-2 px-2 py-0.5 bg-amber-500 text-black text-[9px] font-black rounded-md hover:bg-amber-400 transition shadow-[0_0_10px_rgba(251,191,36,0.4)]">
+                <button onclick="openDepositModal()" class="ml-2 px-2 py-0.5 bg-gradient-to-r from-amber-500 to-amber-400 text-black text-[9px] font-black rounded-md hover:scale-105 transition shadow-[0_0_12px_rgba(251,191,36,0.5)]">
                     <i class="fa-solid fa-plus"></i>
                 </button>
             </div>
@@ -200,19 +215,19 @@
 
     <main class="w-full flex-1 relative overflow-hidden flex flex-col z-10">
         
-        <!-- P2P Lobby Hub View (Redesigned for Online Only) -->
+        <!-- P2P Lobby Hub View -->
         <div id="view-hub" class="app-view active flex-col w-full h-full overflow-y-auto p-4 md:p-6 max-w-6xl mx-auto space-y-6 pb-24">
             
-            <div class="w-full glass-panel rounded-3xl p-5 md:p-6 flex flex-col md:flex-row items-center justify-between gap-4 border-t-2 border-t-emerald-500/40 relative overflow-hidden">
-                <div class="absolute -right-10 -top-10 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl"></div>
+            <div class="w-full glass-panel rounded-3xl p-5 md:p-7 flex flex-col md:flex-row items-center justify-between gap-5 relative overflow-hidden">
+                <div class="absolute -right-10 -top-10 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl"></div>
                 <div class="flex flex-col relative z-10 w-full md:w-1/2">
-                    <h2 class="text-xl md:text-2xl title-font font-black text-white mb-1"><i class="fa-solid fa-satellite-dish text-emerald-400 mr-2 animate-pulse"></i>ONLINE СЕТЬ</h2>
-                    <p class="text-xs text-gray-400 mb-3">Играйте с реальными людьми напрямую через защищенное P2P соединение. Ваш уникальный идентификатор в сети:</p>
-                    <div class="bg-black/50 border border-slate-700/50 rounded-xl p-3 flex items-center justify-between">
+                    <h2 class="text-xl md:text-2xl title-font font-black text-white mb-2"><i class="fa-solid fa-satellite-dish text-emerald-400 mr-2 animate-pulse"></i>ONLINE СЕТЬ</h2>
+                    <p class="text-xs text-gray-400 mb-4 leading-relaxed">Играйте с реальными людьми напрямую через защищенное P2P соединение. Ваш уникальный идентификатор:</p>
+                    <div class="bg-black/60 border border-slate-700/60 rounded-xl p-3.5 flex items-center justify-between shadow-inner">
                         <span class="text-xs font-mono text-emerald-400 tracking-wider" id="local-peer-id">Инициализация узла...</span>
-                        <div class="flex items-center gap-1.5 px-2 py-1 rounded bg-slate-800/80 border border-slate-700">
+                        <div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded bg-slate-800/80 border border-slate-700">
                             <span id="global-peer-indicator" class="h-2 w-2 rounded-full bg-red-500 animate-pulse"></span>
-                            <span id="global-peer-text" class="text-[9px] text-gray-300 font-bold uppercase tracking-wider">Подключение</span>
+                            <span id="global-peer-text" class="text-[9px] text-gray-300 font-bold uppercase tracking-wider">ОЖИДАНИЕ</span>
                         </div>
                     </div>
                 </div>
@@ -221,22 +236,22 @@
                     <div class="grid grid-cols-2 gap-3">
                         <div class="col-span-2 md:col-span-1">
                             <label class="block text-[9px] text-gray-400 uppercase font-bold mb-1.5 ml-1">Имя в игре</label>
-                            <input type="text" id="player-nickname" class="w-full bg-black/40 border border-slate-600 rounded-xl px-4 py-2.5 text-sm text-white focus:border-emerald-400 outline-none transition" value="Игрок">
+                            <input type="text" id="player-nickname" class="w-full bg-black/50 border border-slate-600 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-400 outline-none transition shadow-inner" value="Игрок">
                         </div>
                         <div class="col-span-2 md:col-span-1">
                             <label class="block text-[9px] text-gray-400 uppercase font-bold mb-1.5 ml-1">Название комнаты</label>
-                            <input type="text" id="room-name" class="w-full bg-black/40 border border-slate-600 rounded-xl px-4 py-2.5 text-sm text-white focus:border-emerald-400 outline-none transition" value="Metro VIP">
+                            <input type="text" id="room-name" class="w-full bg-black/50 border border-slate-600 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-400 outline-none transition shadow-inner" value="Metro VIP">
                         </div>
                         <div class="col-span-2">
                             <label class="block text-[9px] text-gray-400 uppercase font-bold mb-1.5 ml-1">Режим Игры (Только Online)</label>
-                            <select id="game-mode-select" class="w-full bg-black/40 border border-slate-600 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-400 outline-none transition appearance-none cursor-pointer font-bold">
+                            <select id="game-mode-select" class="w-full bg-black/50 border border-slate-600 rounded-xl px-4 py-3.5 text-sm text-white focus:border-emerald-400 outline-none transition appearance-none cursor-pointer font-bold shadow-inner">
                                 <option value="DURAK">🃏 Дурак (Сетевая игра P2P)</option>
                                 <option value="BLACKJACK">🎰 Блэкджек (Вы играете за Дилера)</option>
                             </select>
                         </div>
                     </div>
-                    <button onclick="hostGame()" class="btn-neon-emerald w-full py-3.5 rounded-xl text-xs font-black uppercase tracking-widest mt-1 flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-server"></i> Создать Игровой Сервер
+                    <button onclick="hostGame()" class="btn-neon-emerald w-full py-4 rounded-xl text-xs font-black uppercase tracking-widest mt-2 flex items-center justify-center gap-2 shadow-lg">
+                        <i class="fa-solid fa-server text-sm"></i> Создать Игровой Сервер
                     </button>
                 </div>
             </div>
@@ -244,13 +259,12 @@
             <div class="flex-1 flex flex-col min-h-[350px]">
                 <div class="flex justify-between items-center mb-4 px-2 shrink-0">
                     <h2 class="text-sm font-bold text-white flex items-center gap-2 uppercase tracking-wider"><i class="fa-solid fa-globe text-blue-400"></i> Активные Игры</h2>
-                    <button onclick="fetchLobbies()" class="text-gray-300 hover:text-white transition flex items-center gap-2 bg-slate-800/80 border border-slate-700 rounded-lg px-3 py-1.5 text-[10px] font-bold uppercase active:scale-95">
+                    <button onclick="fetchLobbies()" class="text-gray-300 hover:text-white transition flex items-center gap-2 bg-slate-800/80 border border-slate-700 rounded-lg px-3 py-2 text-[10px] font-bold uppercase active:scale-95 shadow-md">
                         <i class="fa-solid fa-rotate-right" id="refresh-icon"></i> Обновить
                     </button>
                 </div>
                 
-                <div id="lobbies-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 overflow-y-auto pb-4 pr-1 content-start">
-                    <!-- Lobbies injected here -->
+                <div id="lobbies-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 overflow-y-auto pb-4 pr-1 content-start">
                     <div class="col-span-full text-center text-xs text-gray-500 py-10 glass-panel rounded-2xl">Сбор данных о серверах...</div>
                 </div>
             </div>
@@ -259,77 +273,74 @@
         <!-- Durak View -->
         <div id="view-durak" class="app-view flex-col w-full h-full relative">
             <div id="dk-setup" class="flex-1 flex items-center justify-center p-4">
-                <div class="glass-panel rounded-3xl p-8 text-center max-w-sm w-full border-t-2 border-emerald-500/50 shadow-[0_0_40px_rgba(16,185,129,0.15)]">
-                    <i class="fa-solid fa-satellite-dish text-5xl text-emerald-500 mb-5 animate-pulse drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]"></i>
+                <div class="glass-panel rounded-3xl p-8 text-center max-w-sm w-full border-t-2 border-emerald-500/50 shadow-[0_0_50px_rgba(16,185,129,0.2)]">
+                    <i class="fa-solid fa-satellite-dish text-6xl text-emerald-500 mb-6 animate-pulse drop-shadow-[0_0_20px_rgba(16,185,129,0.5)]"></i>
                     <h2 class="text-xl title-font font-black text-white mb-2 tracking-wide">ОЖИДАНИЕ ИГРОКА</h2>
                     <p class="text-xs text-gray-400 mb-6 leading-relaxed">Сервер успешно запущен. Поделитесь ссылкой ниже, чтобы оппонент мог подключиться к вам напрямую.</p>
-                    <button id="dk-share-btn" onclick="shareInviteLink()" class="btn-neon-emerald px-4 py-3.5 rounded-xl text-xs uppercase font-bold mb-6 w-full flex items-center justify-center gap-2 shadow-lg">
-                        <i class="fa-solid fa-share-nodes"></i> Пригласить оппонента
+                    <button id="dk-share-btn" onclick="shareInviteLink()" class="btn-neon-emerald px-4 py-4 rounded-xl text-xs uppercase font-bold mb-6 w-full flex items-center justify-center gap-2 shadow-lg">
+                        <i class="fa-solid fa-share-nodes text-lg"></i> Пригласить оппонента
                     </button>
-                    <div class="w-full bg-slate-900 rounded-full h-1.5 mb-2 overflow-hidden border border-slate-800">
-                        <div class="bg-emerald-500 h-full w-1/2 rounded-full shadow-[0_0_10px_#10b981]" style="animation: moveX 1.5s infinite alternate ease-in-out;"></div>
+                    <div class="w-full bg-slate-900 rounded-full h-2 mb-2 overflow-hidden border border-slate-800">
+                        <div class="bg-emerald-500 h-full w-1/2 rounded-full shadow-[0_0_12px_#10b981]" style="animation: moveX 1.5s infinite alternate ease-in-out;"></div>
                     </div>
-                    <p class="text-[9px] text-gray-500 uppercase font-bold tracking-widest mt-4">Только P2P Online</p>
                 </div>
             </div>
 
             <!-- Active Durak Table -->
             <div id="dk-board" class="hidden flex flex-1 flex-col relative table-felt-durak w-full h-full select-none overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-12 flex justify-between items-center px-4 bg-black/60 border-b border-emerald-900/40 z-40 backdrop-blur-sm">
+                <div class="absolute top-0 left-0 w-full h-12 flex justify-between items-center px-4 bg-black/70 border-b border-emerald-900/50 z-40 backdrop-blur-md">
                     <div class="flex items-center gap-2">
-                        <button onclick="leaveGame()" class="px-2 py-1 text-[8px] font-bold uppercase rounded bg-red-950/70 text-red-400 border border-red-500/30 transition hover:bg-red-900">
+                        <button onclick="leaveGame()" class="px-2 py-1.5 text-[8px] font-bold uppercase rounded bg-red-950/80 text-red-400 border border-red-500/40 transition hover:bg-red-900">
                             <i class="fa-solid fa-right-from-bracket"></i> Выйти
                         </button>
                         <div class="flex flex-col ml-1">
                             <span id="dk-opp-name" class="text-[9px] font-bold text-white uppercase">Оппонент</span>
-                            <span class="text-[6px] text-emerald-400/80" id="dk-p2p-status">P2P Установлено</span>
+                            <span class="text-[6px] text-emerald-400/90 tracking-widest" id="dk-p2p-status">P2P СОЕДИНЕНИЕ</span>
                         </div>
                     </div>
 
-                    <div class="relative flex-1 max-w-[140px] h-full flex justify-center items-center overflow-visible" id="dk-opp-cards-container"></div>
+                    <div class="relative flex-1 max-w-[150px] h-full flex justify-center items-center overflow-visible" id="dk-opp-cards-container"></div>
 
                     <div class="flex items-center gap-2">
-                        <span id="dk-opp-count" class="bg-black/40 px-2 py-0.5 rounded text-[10px] text-emerald-400 font-bold border border-emerald-500/20 font-mono">0</span>
-                        <div class="flex items-center gap-1.5 px-2 py-1 rounded bg-black/30 border border-emerald-500/30">
-                            <span id="dk-game-rub-balance" class="text-[10px] font-mono text-emerald-400 font-black">0 ₽</span>
-                        </div>
+                        <span id="dk-opp-count" class="bg-black/50 px-2 py-0.5 rounded text-[10px] text-emerald-400 font-bold border border-emerald-500/30 font-mono shadow-inner">0</span>
                     </div>
                 </div>
 
-                <div class="flex-1 w-full relative z-10 flex flex-col justify-center">
-                    <div class="absolute left-2 top-1/2 -translate-y-1/2 scale-75 origin-left z-20 md:scale-90 md:left-4 flex flex-col gap-6">
+                <div class="flex-1 w-full relative z-10 flex flex-col justify-center mt-6">
+                    <div class="absolute left-2 top-1/2 -translate-y-1/2 scale-75 origin-left z-20 md:scale-90 md:left-6 flex flex-col gap-6">
                         <div class="relative w-[54px] h-[80px] md:w-[70px] md:h-[102px]">
-                            <div id="dk-trump-card" class="playing-card dk-card absolute shadow-lg" style="transform: rotate(90deg) translate(25px, -15px); z-index: 1;"></div>
-                            <div id="dk-deck-pile" class="playing-card dk-card card-back skin-emerald absolute shadow-xl" style="z-index: 2;"></div>
+                            <div id="dk-trump-card" class="playing-card dk-card absolute shadow-xl" style="transform: rotate(90deg) translate(25px, -15px); z-index: 1;"></div>
+                            <div id="dk-deck-pile" class="playing-card dk-card card-back skin-emerald absolute shadow-2xl" style="z-index: 2;"></div>
                         </div>
-                        <div class="text-center mt-3 text-[10px] font-black text-white bg-slate-900/90 px-3 py-1 rounded-md shadow-md border border-emerald-500/30" id="dk-trump-ind">♠ 36</div>
+                        <div class="text-center mt-4 text-[11px] font-black text-white bg-slate-900/95 px-3 py-1.5 rounded-lg shadow-lg border border-emerald-500/40" id="dk-trump-ind">♠ 36</div>
                         
-                        <div class="flex flex-col items-center">
-                            <div id="dk-discard-pile" class="w-[54px] h-[80px] md:w-[70px] md:h-[102px] rounded-lg discard-pile-slot border border-emerald-500/30 flex items-center justify-center relative">
-                                <div class="text-[8px] text-emerald-500/40 font-bold uppercase text-center select-none pointer-events-none">ОТБОЙ</div>
-                                <div id="dk-discard-visual" class="hidden playing-card dk-card card-back skin-emerald absolute top-0 left-0" style="transform: rotate(-10deg);"></div>
+                        <div class="flex flex-col items-center mt-2">
+                            <div id="dk-discard-pile" class="w-[54px] h-[80px] md:w-[70px] md:h-[102px] rounded-xl discard-pile-slot border border-emerald-500/30 flex items-center justify-center relative shadow-inner">
+                                <div class="text-[9px] text-emerald-500/40 font-bold uppercase tracking-widest text-center select-none pointer-events-none">ОТБОЙ</div>
+                                <div id="dk-discard-visual" class="hidden playing-card dk-card card-back skin-emerald absolute top-0 left-0 shadow-lg" style="transform: rotate(-10deg);"></div>
                             </div>
                         </div>
                     </div>
 
-                    <div id="dk-table" class="bg-black/25 rounded-[30px] mx-auto w-[85%] md:w-[68%] h-[55%] md:h-[65%] border border-emerald-500/10 shadow-[inset_0_0_30px_rgba(0,0,0,0.85)] transition-all flex flex-wrap items-center justify-center gap-2 md:gap-4 p-4 relative z-0 overflow-y-auto"></div>
+                    <!-- Улучшенный стол для выравнивания карт -->
+                    <div id="dk-table" class="bg-black/30 rounded-[35px] mx-auto w-[85%] md:w-[65%] h-[50%] md:h-[60%] border border-emerald-500/20 shadow-[inset_0_0_50px_rgba(0,0,0,0.85)] transition-all flex flex-wrap items-center justify-center gap-3 md:gap-5 p-5 relative z-0 overflow-y-auto content-center"></div>
                     
-                    <div id="dk-turn-ind" class="absolute top-16 left-1/2 -translate-x-1/2 bg-slate-900/90 px-4 py-1 rounded-full border border-emerald-500 text-emerald-400 text-[8px] font-bold uppercase tracking-widest z-30 transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)]">Ожидание хода...</div>
+                    <div id="dk-turn-ind" class="absolute top-14 left-1/2 -translate-x-1/2 bg-slate-900/95 px-5 py-2 rounded-full border border-emerald-500 text-emerald-400 text-[9px] font-bold uppercase tracking-widest z-30 transition-all shadow-[0_0_20px_rgba(16,185,129,0.4)]">Ожидание хода...</div>
                     
-                    <button id="dk-action-btn" onclick="dk_handleAction()" class="hidden absolute right-4 bottom-16 md:right-8 md:bottom-24 z-40 bg-slate-900/90 border border-emerald-500 text-emerald-500 font-bold py-2 px-5 rounded-xl shadow-lg uppercase text-[9px] tracking-widest active:scale-95 transition backdrop-blur hover:bg-emerald-950">
+                    <button id="dk-action-btn" onclick="dk_handleAction()" class="hidden absolute right-4 bottom-14 md:right-8 md:bottom-20 z-40 bg-slate-900/95 border border-emerald-500 text-emerald-500 font-bold py-3 px-6 rounded-xl shadow-2xl uppercase text-[10px] tracking-widest active:scale-95 transition backdrop-blur hover:bg-emerald-950">
                         Действие
                     </button>
                 </div>
 
-                <div class="absolute right-3 top-1/2 -translate-y-1/2 flex flex-col gap-1.5 z-40 bg-black/50 p-1.5 rounded-full border border-emerald-500/10">
-                    <button onclick="sendEmoji('👍')" class="hover:scale-125 transition text-base md:text-lg">👍</button>
-                    <button onclick="sendEmoji('🔥')" class="hover:scale-125 transition text-base md:text-lg">🔥</button>
-                    <button onclick="sendEmoji('😂')" class="hover:scale-125 transition text-base md:text-lg">😂</button>
-                    <button onclick="sendEmoji('🤬')" class="hover:scale-125 transition text-base md:text-lg">🤬</button>
+                <div class="absolute right-3 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-40 bg-black/60 p-2 rounded-full border border-emerald-500/20 backdrop-blur-md">
+                    <button onclick="sendEmoji('👍')" class="hover:scale-125 transition text-lg md:text-xl">👍</button>
+                    <button onclick="sendEmoji('🔥')" class="hover:scale-125 transition text-lg md:text-xl">🔥</button>
+                    <button onclick="sendEmoji('😂')" class="hover:scale-125 transition text-lg md:text-xl">😂</button>
+                    <button onclick="sendEmoji('🤬')" class="hover:scale-125 transition text-lg md:text-xl">🤬</button>
                 </div>
 
-                <div class="h-28 md:h-36 w-full shrink-0 relative z-30 flex justify-center items-end pb-3 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none">
-                    <div id="dk-hand" class="pointer-events-auto flex justify-center items-end relative h-full w-full max-w-xl"></div>
+                <div class="h-32 md:h-40 w-full shrink-0 relative z-30 flex justify-center items-end pb-4 bg-gradient-to-t from-black/90 via-black/60 to-transparent pointer-events-none">
+                    <div id="dk-hand" class="pointer-events-auto flex justify-center items-end relative h-full w-full max-w-2xl"></div>
                 </div>
             </div>
         </div>
@@ -337,108 +348,114 @@
         <!-- Blackjack View -->
         <div id="view-blackjack" class="app-view flex-col w-full h-full relative">
             <div id="bj-setup" class="flex-1 flex items-center justify-center p-4">
-                <div class="glass-panel rounded-3xl p-8 text-center max-w-sm w-full border-t-2 border-amber-500/50 shadow-[0_0_40px_rgba(251,191,36,0.15)]">
-                    <i class="fa-solid fa-coins text-5xl text-amber-500 mb-5 animate-pulse drop-shadow-[0_0_15px_rgba(251,191,36,0.6)]"></i>
-                    <h2 class="text-xl title-font font-black text-white mb-2">P2P КАЗИНО</h2>
+                <div class="glass-panel rounded-3xl p-8 text-center max-w-sm w-full border-t-2 border-amber-500/50 shadow-[0_0_50px_rgba(251,191,36,0.2)]">
+                    <i class="fa-solid fa-coins text-6xl text-amber-500 mb-6 animate-pulse drop-shadow-[0_0_20px_rgba(251,191,36,0.6)]"></i>
+                    <h2 class="text-xl title-font font-black text-white mb-2 tracking-wide">P2P КАЗИНО</h2>
                     <p class="text-xs text-gray-400 mb-6 leading-relaxed" id="bj-setup-desc">Вы играете за Дилера. Ожидание подключения реального игрока...</p>
-                    <button id="bj-share-btn" onclick="shareInviteLink()" class="btn-neon-gold px-4 py-3.5 rounded-xl text-xs uppercase font-bold mb-6 w-full flex items-center justify-center gap-2 shadow-lg">
-                        <i class="fa-solid fa-share-nodes"></i> Пригласить Игрока
+                    <button id="bj-share-btn" onclick="shareInviteLink()" class="btn-neon-gold px-4 py-4 rounded-xl text-xs uppercase font-bold mb-6 w-full flex items-center justify-center gap-2 shadow-lg">
+                        <i class="fa-solid fa-share-nodes text-lg"></i> Пригласить Игрока
                     </button>
-                    <div class="w-full bg-slate-900 rounded-full h-1.5 mb-2 overflow-hidden border border-slate-800">
-                        <div class="bg-amber-500 h-full w-1/2 rounded-full shadow-[0_0_10px_#fbbf24]" style="animation: moveX 1.5s infinite alternate ease-in-out;"></div>
+                    <div class="w-full bg-slate-900 rounded-full h-2 mb-2 overflow-hidden border border-slate-800">
+                        <div class="bg-amber-500 h-full w-1/2 rounded-full shadow-[0_0_12px_#fbbf24]" style="animation: moveX 1.5s infinite alternate ease-in-out;"></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Active Blackjack Table Board -->
+            <!-- Active Blackjack Table -->
             <div id="bj-board" class="hidden flex flex-1 flex-col justify-between w-full h-full table-felt-blackjack relative select-none overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-12 flex justify-between items-center px-4 bg-black/60 border-b border-amber-900/40 z-40 backdrop-blur-sm">
-                    <button onclick="leaveGame()" class="px-2 py-1 text-[8px] font-bold uppercase rounded bg-red-950/70 text-red-400 border border-red-500/30 transition hover:bg-red-900">
+                <div class="absolute top-0 left-0 w-full h-12 flex justify-between items-center px-4 bg-black/70 border-b border-amber-900/50 z-40 backdrop-blur-md">
+                    <button onclick="leaveGame()" class="px-2 py-1.5 text-[8px] font-bold uppercase rounded bg-red-950/80 text-red-400 border border-red-500/40 transition hover:bg-red-900">
                         <i class="fa-solid fa-right-from-bracket"></i> Выйти
                     </button>
                     
-                    <div id="bj-shoe-info" class="text-[8px] font-bold text-amber-500/60 uppercase tracking-widest">Шуз: 208 карт</div>
+                    <div id="bj-shoe-info" class="text-[9px] font-bold text-amber-500/70 uppercase tracking-widest">Шуз: 208 карт</div>
 
                     <div class="flex items-center gap-2">
-                        <div class="flex items-center gap-1.5 px-2 py-1 rounded bg-black/30 border border-amber-500/30">
-                            <span id="bj-game-rub-balance" class="text-[10px] font-mono text-amber-400 font-black">0 ₽</span>
+                        <div class="flex items-center gap-1.5 px-3 py-1 rounded bg-black/50 border border-amber-500/30 shadow-inner">
+                            <span id="bj-game-rub-balance" class="text-[11px] font-mono text-amber-400 font-black">0 ₽</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="flex flex-col items-center mt-14 relative z-10">
-                    <div class="text-[9px] uppercase font-bold text-gray-400 mb-2 flex items-center gap-2 bg-slate-950/80 px-3 py-1 rounded-full border border-amber-900/40 shadow-md">
+                <div class="flex flex-col items-center mt-16 relative z-10">
+                    <div class="text-[10px] uppercase font-bold text-gray-300 mb-3 flex items-center gap-2 bg-slate-950/90 px-4 py-1.5 rounded-full border border-amber-900/50 shadow-lg">
                         <i class="fa-solid fa-crown text-amber-500"></i> 
                         <span id="bj-dealer-label">Дилер (Хост)</span>
-                        <span id="bj-dealer-score" class="bg-black/80 px-2 py-0.5 rounded text-amber-400 border border-amber-500/30">?</span>
+                        <span id="bj-dealer-score" class="bg-black/90 px-2.5 py-0.5 rounded text-amber-400 border border-amber-500/40">?</span>
                     </div>
-                    <div id="bj-dealer-hand" class="flex justify-center relative min-h-[var(--card-height-bj)] gap-2"></div>
+                    <div id="bj-dealer-hand" class="flex justify-center relative min-h-[var(--card-height-bj)] gap-3"></div>
                 </div>
 
-                <div class="relative z-30 h-16 flex flex-col items-center justify-center my-1">
-                    <div id="bj-msg" class="text-center font-black title-font text-lg md:text-xl opacity-0 transition-all transform scale-90 duration-500 bg-black/85 px-5 py-2 rounded-2xl backdrop-blur-sm border border-transparent"></div>
+                <div class="relative z-30 h-16 flex flex-col items-center justify-center my-2">
+                    <div id="bj-msg" class="text-center font-black title-font text-lg md:text-xl opacity-0 transition-all transform scale-90 duration-500 bg-black/90 px-6 py-2.5 rounded-2xl backdrop-blur-md border border-transparent shadow-2xl tracking-wide"></div>
                 </div>
 
-                <!-- Betting overlay (For Client Only) -->
-                <div id="bj-bet-tray" class="hidden absolute inset-0 bg-black/85 z-40 flex flex-col items-center justify-center p-4">
-                    <div class="glass-panel rounded-3xl p-6 text-center max-w-sm w-full border-t-2 border-amber-500/50 shadow-[0_0_40px_rgba(251,191,36,0.15)]">
+                <!-- Betting overlay -->
+                <div id="bj-bet-tray" class="hidden absolute inset-0 bg-black/85 z-40 flex flex-col items-center justify-center p-4 backdrop-blur-sm">
+                    <div class="glass-panel rounded-3xl p-8 text-center max-w-sm w-full border-t-2 border-amber-500/50 shadow-[0_0_50px_rgba(251,191,36,0.2)]">
                         <div class="text-xs text-amber-400 uppercase tracking-widest font-bold mb-2">Ваш ход</div>
-                        <h2 class="text-xl font-black title-font text-white mb-6">СДЕЛАЙТЕ СТАВКУ</h2>
+                        <h2 class="text-2xl font-black title-font text-white mb-8">СДЕЛАЙТЕ СТАВКУ</h2>
                         
-                        <div class="flex justify-center gap-3 mb-6">
+                        <div class="flex justify-center gap-4 mb-8">
                             <div onclick="bj_selectBet(10)" id="chip-10" class="metro-chip bg-emerald-600 border-emerald-400 text-white">10₽</div>
                             <div onclick="bj_selectBet(50)" id="chip-50" class="metro-chip bg-blue-600 border-blue-400 text-white">50₽</div>
                             <div onclick="bj_selectBet(100)" id="chip-100" class="metro-chip bg-red-600 border-red-400 text-white">100₽</div>
                             <div onclick="bj_selectBet(500)" id="chip-500" class="metro-chip bg-purple-600 border-purple-400 text-white">500₽</div>
                         </div>
 
-                        <div class="text-[11px] text-gray-400 uppercase tracking-wider mb-2">Текущая ставка: <span id="bj-bet-preview" class="text-amber-400 font-bold">10 ₽</span></div>
-                        <div class="text-[11px] text-gray-400 uppercase tracking-wider mb-6">Ваш баланс: <span id="bj-balance-preview" class="text-emerald-400 font-bold">0 ₽</span></div>
+                        <div class="bg-black/40 rounded-xl p-4 mb-6 border border-slate-700/50">
+                            <div class="flex justify-between items-center text-[11px] text-gray-400 uppercase tracking-wider mb-2">
+                                <span>Ставка:</span> <span id="bj-bet-preview" class="text-amber-400 font-bold text-sm">10 ₽</span>
+                            </div>
+                            <div class="flex justify-between items-center text-[11px] text-gray-400 uppercase tracking-wider">
+                                <span>Баланс:</span> <span id="bj-balance-preview" class="text-emerald-400 font-bold text-sm">0 ₽</span>
+                            </div>
+                        </div>
                         
-                        <button onclick="bj_confirmBet()" class="w-full btn-neon-gold py-3.5 rounded-2xl uppercase text-[11px] font-bold tracking-wider shadow-lg">Подтвердить</button>
+                        <button onclick="bj_confirmBet()" class="w-full btn-neon-gold py-4 rounded-2xl uppercase text-xs font-bold tracking-widest shadow-xl">Подтвердить Ставку</button>
                     </div>
                 </div>
 
-                <div class="absolute right-3 top-1/2 -translate-y-1/2 flex flex-col gap-1.5 z-40 bg-black/50 p-1.5 rounded-full border border-amber-500/10">
-                    <button onclick="sendEmoji('👍')" class="hover:scale-125 transition text-base md:text-lg">👍</button>
-                    <button onclick="sendEmoji('🔥')" class="hover:scale-125 transition text-base md:text-lg">🔥</button>
-                    <button onclick="sendEmoji('😂')" class="hover:scale-125 transition text-base md:text-lg">😂</button>
-                    <button onclick="sendEmoji('🤬')" class="hover:scale-125 transition text-base md:text-lg">🤬</button>
+                <div class="absolute right-3 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-40 bg-black/60 p-2 rounded-full border border-amber-500/20 backdrop-blur-md">
+                    <button onclick="sendEmoji('👍')" class="hover:scale-125 transition text-lg md:text-xl">👍</button>
+                    <button onclick="sendEmoji('🔥')" class="hover:scale-125 transition text-lg md:text-xl">🔥</button>
+                    <button onclick="sendEmoji('😂')" class="hover:scale-125 transition text-lg md:text-xl">😂</button>
+                    <button onclick="sendEmoji('🤬')" class="hover:scale-125 transition text-lg md:text-xl">🤬</button>
                 </div>
 
                 <!-- Player Area -->
-                <div class="flex flex-col items-center mb-4 relative z-10">
-                    <div class="text-[9px] uppercase font-bold text-gray-300 mb-2 flex items-center gap-2 bg-slate-950/80 px-3 py-1 rounded-full border border-slate-700/60 shadow-md">
+                <div class="flex flex-col items-center mb-6 relative z-10 w-full px-4">
+                    <div class="text-[10px] uppercase font-bold text-gray-300 mb-3 flex items-center gap-2 bg-slate-950/90 px-4 py-1.5 rounded-full border border-slate-700/60 shadow-lg">
                         <i class="fa-solid fa-user text-gray-400"></i> 
                         <span id="bj-player-label">ИГРОК</span>
-                        <span id="bj-player-score" class="bg-black/80 px-2 py-0.5 rounded text-white border border-slate-600 font-mono">0</span>
+                        <span id="bj-player-score" class="bg-black/90 px-2.5 py-0.5 rounded text-white border border-slate-600 font-mono">0</span>
                     </div>
-                    <div id="bj-player-hand" class="flex justify-center relative min-h-[var(--card-height-bj)] mb-4 gap-2"></div>
+                    <div id="bj-player-hand" class="flex justify-center relative min-h-[var(--card-height-bj)] mb-5 gap-3"></div>
                     
-                    <div id="bj-controls" class="flex gap-2 w-full max-w-sm px-4">
-                        <button onclick="bj_hit()" id="bj-btn-hit" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl uppercase text-[9px] shadow-[0_0_15px_rgba(16,185,129,0.25)] active:scale-95 transition border border-emerald-400/30">
-                            <i class="fa-solid fa-plus mr-0.5"></i> Взять
+                    <div id="bj-controls" class="flex gap-3 w-full max-w-md">
+                        <button onclick="bj_hit()" id="bj-btn-hit" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl uppercase text-[10px] shadow-[0_0_20px_rgba(16,185,129,0.3)] active:scale-95 transition border border-emerald-400/40 tracking-wider">
+                            <i class="fa-solid fa-plus mr-1"></i> Взять
                         </button>
-                        <button onclick="bj_doubleDown()" id="bj-btn-double" class="flex-1 bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 rounded-xl uppercase text-[9px] shadow-[0_0_15px_rgba(245,158,11,0.25)] active:scale-95 transition border border-amber-400/30">
-                            <i class="fa-solid fa-bolt mr-0.5"></i> Дабл
+                        <button onclick="bj_doubleDown()" id="bj-btn-double" class="flex-1 bg-amber-600 hover:bg-amber-500 text-white font-bold py-3.5 rounded-xl uppercase text-[10px] shadow-[0_0_20px_rgba(245,158,11,0.3)] active:scale-95 transition border border-amber-400/40 tracking-wider">
+                            <i class="fa-solid fa-bolt mr-1"></i> Дабл
                         </button>
-                        <button onclick="bj_stand()" id="bj-btn-stand" class="flex-1 bg-red-600 hover:bg-red-500 text-white font-bold py-3 rounded-xl uppercase text-[9px] shadow-[0_0_15px_rgba(239,68,68,0.25)] active:scale-95 transition border border-red-400/30">
-                            <i class="fa-solid fa-hand mr-0.5"></i> Хватить
+                        <button onclick="bj_stand()" id="bj-btn-stand" class="flex-1 bg-red-600 hover:bg-red-500 text-white font-bold py-3.5 rounded-xl uppercase text-[10px] shadow-[0_0_20px_rgba(239,68,68,0.3)] active:scale-95 transition border border-red-400/40 tracking-wider">
+                            <i class="fa-solid fa-hand mr-1"></i> Хватит
                         </button>
                     </div>
 
-                    <div id="bj-waiting" class="hidden w-full max-w-sm text-center">
-                        <div class="text-[9px] text-amber-400 uppercase tracking-widest font-bold animate-pulse bg-amber-900/20 py-3 rounded-xl border border-amber-500/20" id="bj-wait-text">
+                    <div id="bj-waiting" class="hidden w-full max-w-md text-center">
+                        <div class="text-[10px] text-amber-400 uppercase tracking-widest font-bold animate-pulse bg-amber-900/30 py-3.5 rounded-xl border border-amber-500/30 shadow-inner" id="bj-wait-text">
                             Ожидание...
                         </div>
                     </div>
                     
-                    <div class="w-full max-w-sm mt-3 flex justify-between items-center px-4 py-2 bg-black/40 rounded-xl border border-amber-900/30 text-[9px] shadow-inner">
-                        <div>СТАВКА: <span id="bj-current-bet-display" class="text-amber-400 font-bold font-mono">0 ₽</span></div>
-                        <div>БАНК (Стол): <span id="bj-current-balance-display" class="text-emerald-400 font-bold font-mono">0 ₽</span></div>
+                    <div class="w-full max-w-md mt-4 flex justify-between items-center px-5 py-3 bg-black/60 rounded-xl border border-amber-900/40 text-[10px] shadow-inner">
+                        <div>СТАВКА: <span id="bj-current-bet-display" class="text-amber-400 font-bold font-mono text-xs ml-1">0 ₽</span></div>
+                        <div>БАНК: <span id="bj-current-balance-display" class="text-emerald-400 font-bold font-mono text-xs ml-1">0 ₽</span></div>
                     </div>
 
-                    <button id="bj-reset-btn" onclick="bj_resetGame()" class="hidden w-full max-w-sm btn-neon-gold font-bold py-3 rounded-xl uppercase text-[10px] mt-2 shadow-lg">
+                    <button id="bj-reset-btn" onclick="bj_resetGame()" class="hidden w-full max-w-md btn-neon-gold font-bold py-4 rounded-xl uppercase text-[11px] mt-3 shadow-xl tracking-widest">
                         Новая раздача
                     </button>
                 </div>
@@ -448,57 +465,55 @@
     </main>
 
     <!-- Deposit Modal -->
-    <div id="deposit-modal" class="hidden fixed inset-0 bg-black/85 z-[99999] flex items-center justify-center p-4 backdrop-blur-md">
-        <div class="glass-panel rounded-3xl p-1 text-center max-w-sm w-full shadow-[0_0_60px_rgba(251,191,36,0.15)] relative overflow-hidden">
-            <div class="absolute -top-20 -left-20 w-40 h-40 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div id="deposit-modal" class="hidden fixed inset-0 bg-black/85 z-[99999] flex items-center justify-center p-4 backdrop-blur-xl">
+        <div class="glass-panel rounded-3xl p-1 text-center max-w-sm w-full shadow-[0_0_80px_rgba(251,191,36,0.2)] relative overflow-hidden">
+            <div class="absolute -top-20 -left-20 w-48 h-48 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-20 -right-20 w-48 h-48 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none"></div>
 
-            <div class="bg-slate-950/90 rounded-[22px] p-6 relative z-10 border border-slate-700/50">
-                <div class="flex justify-between items-center mb-5 border-b border-slate-800 pb-3">
-                    <span class="text-[10px] text-amber-400 uppercase tracking-widest font-extrabold flex items-center gap-1.5">
-                        <i class="fa-solid fa-wallet text-amber-500"></i> Metro Wallet
+            <div class="bg-slate-950/90 rounded-[26px] p-6 relative z-10 border border-slate-700/50">
+                <div class="flex justify-between items-center mb-5 border-b border-slate-800 pb-4">
+                    <span class="text-[11px] text-amber-400 uppercase tracking-widest font-extrabold flex items-center gap-2">
+                        <i class="fa-solid fa-wallet text-amber-500 text-sm"></i> Metro Wallet
                     </span>
-                    <button onclick="closeDepositModal()" class="text-gray-400 hover:text-white transition w-7 h-7 flex items-center justify-center bg-slate-900 rounded-full border border-slate-700">
-                        <i class="fa-solid fa-xmark text-xs"></i>
+                    <button onclick="closeDepositModal()" class="text-gray-400 hover:text-white transition w-8 h-8 flex items-center justify-center bg-slate-900 rounded-full border border-slate-700 hover:bg-slate-800">
+                        <i class="fa-solid fa-xmark text-sm"></i>
                     </button>
                 </div>
                 
-                <h2 class="text-sm font-extrabold text-white mb-1 uppercase tracking-wide">Пополнение баланса</h2>
-                <p class="text-[9px] text-gray-400 mb-6">Заявка будет отправлена верифицированному оператору.</p>
+                <h2 class="text-sm font-extrabold text-white mb-2 uppercase tracking-wide">Пополнение баланса</h2>
+                <p class="text-[10px] text-gray-400 mb-6 leading-relaxed">Прямая заявка верифицированному оператору.</p>
                 
                 <div class="relative mb-6 flex justify-center">
-                    <div class="flex items-center justify-center bg-black/50 border border-amber-500/30 rounded-2xl p-3 w-full max-w-[200px] shadow-[inset_0_0_15px_rgba(0,0,0,0.8)]">
+                    <div class="flex items-center justify-center bg-black/60 border border-amber-500/40 rounded-2xl p-4 w-full max-w-[220px] shadow-[inset_0_0_20px_rgba(0,0,0,0.8)]">
                         <input type="number" id="custom-deposit-amount" 
-                            class="bg-transparent w-full text-center text-3xl font-black title-font text-amber-400 focus:outline-none placeholder-amber-900/50" 
+                            class="bg-transparent w-full text-center text-4xl font-black title-font text-amber-400 focus:outline-none placeholder-amber-900/50" 
                             value="500" min="50" step="50" oninput="updateDepositTemplate()">
-                        <span class="text-xl text-amber-600 font-black title-font ml-1">₽</span>
+                        <span class="text-2xl text-amber-600 font-black title-font ml-2">₽</span>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-4 gap-2 mb-6">
-                    <button onclick="setDepositAmount(100)" class="py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-[10px] font-mono font-bold text-gray-300 hover:text-amber-400 hover:border-amber-500/50 transition active:scale-95 shadow-sm">+100</button>
-                    <button onclick="setDepositAmount(500)" class="py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-[10px] font-mono font-bold text-gray-300 hover:text-amber-400 hover:border-amber-500/50 transition active:scale-95 shadow-sm">+500</button>
-                    <button onclick="setDepositAmount(1000)" class="py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-[10px] font-mono font-bold text-gray-300 hover:text-amber-400 hover:border-amber-500/50 transition active:scale-95 shadow-sm">+1K</button>
-                    <button onclick="setDepositAmount(5000)" class="py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-[10px] font-mono font-bold text-gray-300 hover:text-amber-400 hover:border-amber-500/50 transition active:scale-95 shadow-sm">+5K</button>
+                    <button onclick="setDepositAmount(100)" class="py-3 bg-slate-900 border border-slate-700 rounded-xl text-[11px] font-mono font-bold text-gray-300 hover:text-amber-400 hover:border-amber-500/60 transition active:scale-95 shadow-md">+100</button>
+                    <button onclick="setDepositAmount(500)" class="py-3 bg-slate-900 border border-slate-700 rounded-xl text-[11px] font-mono font-bold text-gray-300 hover:text-amber-400 hover:border-amber-500/60 transition active:scale-95 shadow-md">+500</button>
+                    <button onclick="setDepositAmount(1000)" class="py-3 bg-slate-900 border border-slate-700 rounded-xl text-[11px] font-mono font-bold text-gray-300 hover:text-amber-400 hover:border-amber-500/60 transition active:scale-95 shadow-md">+1K</button>
+                    <button onclick="setDepositAmount(5000)" class="py-3 bg-slate-900 border border-slate-700 rounded-xl text-[11px] font-mono font-bold text-gray-300 hover:text-amber-400 hover:border-amber-500/60 transition active:scale-95 shadow-md">+5K</button>
                 </div>
 
                 <p id="deposit-message-template" class="hidden"></p>
 
-                <button onclick="processDeposit()" class="w-full relative overflow-hidden group bg-gradient-to-r from-amber-600 to-amber-500 text-black py-4 rounded-xl text-[11px] font-extrabold uppercase tracking-widest shadow-[0_0_20px_rgba(251,191,36,0.3)] transition active:scale-95">
+                <button onclick="processDeposit()" class="w-full relative overflow-hidden group bg-gradient-to-r from-amber-600 to-amber-500 text-black py-4 rounded-xl text-xs font-extrabold uppercase tracking-widest shadow-[0_0_25px_rgba(251,191,36,0.4)] transition active:scale-95 mt-2">
                     <span class="relative z-10 flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-paper-plane"></i> Создать заявку
+                        <i class="fa-solid fa-paper-plane text-sm"></i> Создать заявку
                     </span>
-                    <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-500"></div>
+                    <div class="absolute inset-0 bg-white/30 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-500"></div>
                 </button>
             </div>
         </div>
     </div>
 
-    <div id="toast-box" class="fixed top-16 left-1/2 -translate-x-1/2 flex flex-col gap-2 z-[9999] pointer-events-none w-[90%] max-w-sm"></div>
+    <div id="toast-box" class="fixed top-20 left-1/2 -translate-x-1/2 flex flex-col gap-3 z-[9999] pointer-events-none w-[90%] max-w-sm"></div>
 
-    <!-- Загрузка настроек с панели администратора и инициализация БД -->
     <script>
-        // Загружаем конфиг, установленный в admin_host.html (если он есть)
         const savedConfig = JSON.parse(localStorage.getItem('metro_admin_config') || '{}');
         const TG_BOT_TOKEN = savedConfig.botToken || "8575086263:AAG74PmRjUT8ExtDkC_kOxfYfmss2BG0C_A"; 
         const TG_CHANNEL_NAME = savedConfig.lobbyChannel || "@metrocash_p2p_lobbies";
@@ -514,7 +529,7 @@
                         if(typeof window.updateRUBBalancesUI === 'function') window.updateRUBBalancesUI();
                     });
                     loaded = true;
-                } catch(e) { console.warn("CloudStorage error", e); }
+                } catch(e) {}
             }
             if (!loaded) {
                 window.rubBalance = parseFloat(localStorage.getItem('metro_rub_balance')) || 1000.00;
@@ -547,7 +562,6 @@
         document.addEventListener('DOMContentLoaded', loadProfileBalance);
     </script>
 
-    <!-- Основная логика P2P -->
     <script>
         let myPeer, myPeerId, p2pConn;
         let isHost = false, currentGameMode = null;
@@ -581,9 +595,7 @@
                 const dummy = document.createElement('input');
                 document.body.appendChild(dummy);
                 dummy.value = window.location.origin + window.location.pathname + '?join=' + myPeerId + '&mode=' + currentGameMode;
-                dummy.select();
-                document.execCommand('copy');
-                document.body.removeChild(dummy);
+                dummy.select(); document.execCommand('copy'); document.body.removeChild(dummy);
                 toast("Ссылка на комнату скопирована!");
             }
         }
@@ -598,7 +610,7 @@
             bubble.className = 'reaction-bubble'; bubble.innerText = emoji;
             bubble.style.left = `${Math.floor(Math.random() * 60 + 20)}%`; bubble.style.bottom = '15%';
             document.body.appendChild(bubble);
-            setTimeout(() => { bubble.remove(); }, 1250);
+            setTimeout(() => { bubble.remove(); }, 1400);
         }
 
         window.updateRUBBalancesUI = function() {
@@ -632,7 +644,7 @@
             const txt = document.getElementById('deposit-message-template').innerText;
             const dummy = document.createElement('textarea'); document.body.appendChild(dummy);
             dummy.value = txt; dummy.select(); document.execCommand('copy'); document.body.removeChild(dummy);
-            toast("Заявка создана! Перенаправление...");
+            toast("Заявка создана! Открываем чат...");
             setTimeout(() => {
                 const exUrl = "https://t.me/BALAMUTDEL";
                 if (window.Telegram && window.Telegram.WebApp) window.Telegram.WebApp.openTelegramLink(exUrl);
@@ -654,13 +666,12 @@
 
         function toast(msg, err=false) {
             if (err) triggerHaptic('error'); else triggerHaptic('light');
-            const box = document.getElementById('toast-box');
-            const el = document.createElement('div');
-            const colors = err ? 'bg-red-950/90 border-red-500/50 text-red-200 shadow-red-950/35' : 'bg-slate-900/95 border-emerald-500/50 text-emerald-200 shadow-[0_5px_15px_rgba(16,185,129,0.3)]';
-            el.className = `p-3 rounded-2xl border ${colors} text-center text-[11px] font-bold backdrop-blur-xl transition-all duration-300 transform -translate-y-4 opacity-0`;
+            const box = document.getElementById('toast-box'); const el = document.createElement('div');
+            const colors = err ? 'bg-red-950/95 border-red-500/60 text-red-200 shadow-[0_5px_20px_rgba(239,68,68,0.4)]' : 'bg-slate-900/95 border-emerald-500/60 text-emerald-200 shadow-[0_5px_20px_rgba(16,185,129,0.4)]';
+            el.className = `p-3.5 rounded-2xl border ${colors} text-center text-[12px] font-bold backdrop-blur-xl transition-all duration-300 transform -translate-y-6 opacity-0 tracking-wide`;
             el.innerText = msg; box.appendChild(el);
-            requestAnimationFrame(() => { el.classList.remove('-translate-y-4', 'opacity-0'); });
-            setTimeout(() => { el.classList.add('opacity-0', '-translate-y-4'); setTimeout(()=>el.remove(), 300); }, 2800);
+            requestAnimationFrame(() => { el.classList.remove('-translate-y-6', 'opacity-0'); });
+            setTimeout(() => { el.classList.add('opacity-0', '-translate-y-6'); setTimeout(()=>el.remove(), 300); }, 3000);
         }
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -800,7 +811,7 @@
         async function fetchLobbies() {
             const grid = document.getElementById('lobbies-grid');
             const icon = document.getElementById('refresh-icon'); icon.classList.add('animate-spin');
-            grid.innerHTML = '<div class="col-span-full text-center text-xs text-gray-500 py-10 glass-panel rounded-2xl">Загрузка сети...</div>';
+            grid.innerHTML = '<div class="col-span-full text-center text-xs text-gray-500 py-10 glass-panel rounded-3xl">Загрузка сети...</div>';
             
             try {
                 const res = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent('https://t.me/s/' + TG_CHANNEL_NAME.replace('@',''))}`);
@@ -822,20 +833,20 @@
                                 const btnCls = isDk ? 'text-emerald-400 border-emerald-500/30 hover:bg-emerald-900/50' : 'text-amber-400 border-amber-500/30 hover:bg-amber-900/50';
                                 
                                 grid.innerHTML += `
-                                    <div class="glass-panel p-4 rounded-2xl flex flex-col justify-between transition hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(0,0,0,0.5)]">
-                                        <div class="flex flex-col mb-4">
-                                            <div class="text-[13px] font-black title-font text-white flex items-center gap-2">${cIcon} ${room}</div>
-                                            <div class="text-[9px] text-gray-400 font-mono mt-1.5 uppercase opacity-80">Режим: ${mode}</div>
+                                    <div class="glass-panel p-5 rounded-3xl flex flex-col justify-between transition hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(0,0,0,0.6)]">
+                                        <div class="flex flex-col mb-5">
+                                            <div class="text-sm font-black title-font text-white flex items-center gap-2">${cIcon} ${room}</div>
+                                            <div class="text-[10px] text-gray-400 font-mono mt-1.5 uppercase opacity-80">Режим: ${mode}</div>
                                         </div>
-                                        <button onclick="joinLobby('${pid}', '${mode}')" class="w-full bg-black/40 border ${btnCls} text-[10px] font-bold uppercase py-2.5 rounded-xl transition active:scale-95 shadow-inner">Подключиться</button>
+                                        <button onclick="joinLobby('${pid}', '${mode}')" class="w-full bg-black/50 border ${btnCls} text-[10px] font-bold uppercase py-3 rounded-xl transition active:scale-95 shadow-inner">Подключиться</button>
                                     </div>
                                 `;
                             }
                         }
                     }
                 });
-                if(found===0) grid.innerHTML = '<div class="col-span-full text-center text-xs text-gray-500 py-10 glass-panel rounded-2xl">Нет активных серверов</div>';
-            } catch(e) { grid.innerHTML = '<div class="col-span-full text-center text-red-400/70 text-xs py-10 glass-panel rounded-2xl">Ошибка сети. Сервер недоступен.</div>'; }
+                if(found===0) grid.innerHTML = '<div class="col-span-full text-center text-xs text-gray-500 py-10 glass-panel rounded-3xl">Нет активных серверов</div>';
+            } catch(e) { grid.innerHTML = '<div class="col-span-full text-center text-red-400/70 text-xs py-10 glass-panel rounded-3xl">Ошибка сети. Сервер недоступен.</div>'; }
             setTimeout(()=>icon.classList.remove('animate-spin'), 500);
         }
 
@@ -911,26 +922,26 @@
                 const rect = card.getBoundingClientRect(); const clone = card.cloneNode(true);
                 clone.style.position = 'fixed'; clone.style.top = `${rect.top}px`; clone.style.left = `${rect.left}px`; clone.style.width = `${rect.width}px`; clone.style.height = `${rect.height}px`; clone.style.margin = '0'; clone.classList.add('card-flying-to-discard');
                 document.body.appendChild(clone);
-                setTimeout(() => { clone.style.top = `${discardRect.top}px`; clone.style.left = `${discardRect.left}px`; clone.style.transform = 'scale(0.5) rotate(-35deg)'; clone.style.opacity = '0'; }, 20);
-                setTimeout(() => clone.remove(), 750);
+                setTimeout(() => { clone.style.top = `${discardRect.top}px`; clone.style.left = `${discardRect.left}px`; clone.style.transform = 'scale(0.4) rotate(-35deg)'; clone.style.opacity = '0'; }, 20);
+                setTimeout(() => clone.remove(), 600);
             });
-            setTimeout(() => { document.getElementById('dk-discard-visual').classList.remove('hidden'); dk_hasDiscarded = true; callback(); }, 800);
+            setTimeout(() => { document.getElementById('dk-discard-visual').classList.remove('hidden'); dk_hasDiscarded = true; callback(); }, 650);
         }
 
         function renderOpponentHandVisuals(count) {
             const oppHandDiv = document.getElementById('dk-opp-cards-container'); if(!oppHandDiv) return; oppHandDiv.innerHTML = '';
             const maxVisible = Math.min(count, 12); 
             for (let i = 0; i < maxVisible; i++) {
-                const el = document.createElement('div'); el.className = 'playing-card dk-card card-back skin-emerald absolute border border-emerald-500/35';
-                const offset = (i - (maxVisible - 1) / 2) * 8, angle = (i - (maxVisible - 1) / 2) * 2.5;
-                el.style.left = `calc(50% + ${offset}px)`; el.style.transform = `translateX(-50%) translateY(${Math.abs(offset/4)}px) rotate(${angle}deg) scale(0.65)`; el.style.transformOrigin = 'bottom center'; el.style.zIndex = i;
+                const el = document.createElement('div'); el.className = 'playing-card dk-card card-back skin-emerald absolute border border-emerald-500/40 shadow-md';
+                const offset = (i - (maxVisible - 1) / 2) * 9, angle = (i - (maxVisible - 1) / 2) * 3;
+                el.style.left = `calc(50% + ${offset}px)`; el.style.transform = `translateX(-50%) translateY(${Math.abs(offset/3)}px) rotate(${angle}deg) scale(0.65)`; el.style.transformOrigin = 'bottom center'; el.style.zIndex = i;
                 oppHandDiv.appendChild(el);
             }
         }
 
         function dk_renderUI() {
             updateRUBBalancesUI();
-            const tEl = document.getElementById('dk-trump-card'); tEl.className = `playing-card dk-card ${dk_trumpCard.color} absolute shadow-lg`;
+            const tEl = document.getElementById('dk-trump-card'); tEl.className = `playing-card dk-card ${dk_trumpCard.color} absolute shadow-xl`;
             tEl.innerHTML = `<div class="top-left">${dk_trumpCard.value}<br>${dk_trumpCard.suit}</div><div class="center-suit">${dk_trumpCard.suit}</div><div class="bottom-right">${dk_trumpCard.value}<br>${dk_trumpCard.suit}</div>`;
             document.getElementById('dk-trump-ind').innerHTML = `${dk_trumpSuit} ${dk_deck.length}`; document.getElementById('dk-deck-pile').style.display = dk_deck.length ? 'block' : 'none';
 
@@ -939,13 +950,14 @@
 
             const hCont = document.getElementById('dk-hand'); hCont.innerHTML = '';
             dk_myHand.sort((a,b) => a.weight() - b.weight());
-            const total = dk_myHand.length; const spacing = window.innerWidth < 400 ? (total > 6 ? -30 : -22) : -18; hCont.style.gap = `${spacing}px`;
+            const total = dk_myHand.length; const spacing = window.innerWidth < 400 ? (total > 6 ? -32 : -24) : -18; hCont.style.gap = `${spacing}px`;
 
             dk_myHand.forEach((c, i) => {
-                const el = document.createElement('div'); el.className = `playing-card dk-card ${c.color} card-in-hand card-dealing`; el.dataset.id = c.id; el.style.animationDelay = `${i * 0.05}s`;
+                const el = document.createElement('div'); el.className = `playing-card dk-card ${c.color} card-in-hand`; el.dataset.id = c.id; 
                 el.innerHTML = `<div class="top-left">${c.value}<br>${c.suit}</div><div class="center-suit">${c.suit}</div><div class="bottom-right">${c.value}<br>${c.suit}</div>`;
+                
                 let angle = 0, transY = 0;
-                if(total > 1) { const off = i - (total-1)/2; angle = off * 3.5; transY = Math.abs(off)*Math.abs(off)*1.2; }
+                if(total > 1) { const off = i - (total-1)/2; angle = off * 4; transY = Math.abs(off)*Math.abs(off)*1.5; }
                 el.style.transform = `rotate(${angle}deg) translateY(${transY}px)`; el.dataset.origTr = el.style.transform; el.style.zIndex = i;
                 
                 el.onclick = () => dk_playCard(c); el.addEventListener('touchstart', dk_touchStart, {passive:false}); el.addEventListener('touchmove', dk_touchMove, {passive:false}); el.addEventListener('touchend', dk_touchEnd);
@@ -956,31 +968,31 @@
             dk_table.forEach(pair => {
                 const w = document.createElement('div'); w.className = "relative shrink-0 transition-all"; w.style.width="var(--card-width-dk)"; w.style.height="var(--card-height-dk)";
                 if(pair.atk) {
-                    const elA = document.createElement('div'); elA.className = `playing-card dk-card ${pair.atk.color} absolute top-0 left-0 shadow-md`; elA.style.transform=`rotate(${Math.random()*6-3}deg)`;
+                    const elA = document.createElement('div'); elA.className = `playing-card dk-card ${pair.atk.color} absolute top-0 left-0 shadow-lg`; elA.style.transform=`rotate(${Math.random()*4-2}deg)`;
                     elA.innerHTML = `<div class="top-left">${pair.atk.value}<br>${pair.atk.suit}</div><div class="center-suit">${pair.atk.suit}</div><div class="bottom-right">${pair.atk.value}<br>${pair.atk.suit}</div>`; w.appendChild(elA);
                 }
                 if(pair.def) {
-                    const elD = document.createElement('div'); elD.className = `playing-card dk-card ${pair.def.color} absolute top-2 left-3 shadow-xl z-10`; elD.style.transform=`rotate(${Math.random()*6-3}deg)`;
+                    const elD = document.createElement('div'); elD.className = `playing-card dk-card ${pair.def.color} absolute top-3 left-4 shadow-2xl z-10`; elD.style.transform=`rotate(${Math.random()*6-3}deg)`;
                     elD.innerHTML = `<div class="top-left">${pair.def.value}<br>${pair.def.suit}</div><div class="center-suit">${pair.def.suit}</div><div class="bottom-right">${pair.def.value}<br>${pair.def.suit}</div>`; w.appendChild(elD);
                 }
                 tCont.appendChild(w);
             });
 
             const ind = document.getElementById('dk-turn-ind'); const btn = document.getElementById('dk-action-btn');
-            if(dk_myTurn) { ind.innerText = "Ваш ход"; ind.className = "absolute top-16 left-1/2 -translate-x-1/2 bg-slate-900/90 px-4 py-1.5 rounded-full border border-emerald-500 text-emerald-400 text-[9px] font-bold uppercase tracking-widest z-30 animate-pulse shadow-[0_0_15px_rgba(16,185,129,0.3)] opacity-100 transition-opacity"; } 
-            else { ind.className = "opacity-0 absolute top-16 pointer-events-none"; }
+            if(dk_myTurn) { ind.innerText = "Ваш ход"; ind.className = "absolute top-14 left-1/2 -translate-x-1/2 bg-slate-900/95 px-5 py-2 rounded-full border border-emerald-500 text-emerald-400 text-[9px] font-bold uppercase tracking-widest z-30 animate-pulse shadow-[0_0_20px_rgba(16,185,129,0.4)] opacity-100 transition-opacity"; } 
+            else { ind.className = "opacity-0 absolute top-14 pointer-events-none"; }
 
             if(!dk_table.length) { btn.classList.add('hidden'); }
             else {
                 btn.classList.remove('hidden');
-                if(dk_myTurn) { btn.innerText = dk_table.every(p=>p.def) ? "Бито" : "Хватит"; btn.className = "absolute right-4 bottom-16 md:right-8 md:bottom-24 z-40 bg-slate-900 border border-emerald-500 text-emerald-500 font-bold py-3 px-6 rounded-xl shadow-[0_0_15px_rgba(16,185,129,0.3)] uppercase text-[10px] tracking-widest active:scale-95 transition backdrop-blur"; } 
-                else { btn.innerText = "Взять"; btn.className = "absolute right-4 bottom-16 md:right-8 md:bottom-24 z-40 bg-slate-900 border border-red-500 text-red-500 font-bold py-3 px-6 rounded-xl shadow-[0_0_15px_rgba(239,68,68,0.3)] uppercase text-[10px] tracking-widest active:scale-95 transition backdrop-blur"; }
+                if(dk_myTurn) { btn.innerText = dk_table.every(p=>p.def) ? "Бито" : "Хватит"; btn.className = "absolute right-4 bottom-14 md:right-8 md:bottom-20 z-40 bg-slate-900/95 border border-emerald-500 text-emerald-500 font-bold py-3.5 px-7 rounded-xl shadow-[0_0_20px_rgba(16,185,129,0.4)] uppercase text-[10px] tracking-widest active:scale-95 transition backdrop-blur hover:bg-emerald-950"; } 
+                else { btn.innerText = "Взять"; btn.className = "absolute right-4 bottom-14 md:right-8 md:bottom-20 z-40 bg-slate-900/95 border border-red-500 text-red-500 font-bold py-3.5 px-7 rounded-xl shadow-[0_0_20px_rgba(239,68,68,0.4)] uppercase text-[10px] tracking-widest active:scale-95 transition backdrop-blur hover:bg-red-950"; }
             }
         }
 
         let dk_dragCard, dk_dragEl, dk_tX, dk_tY;
         function dk_touchStart(e) { if(dk_locked || !dk_active) return; dk_dragCard = dk_myHand.find(c=>c.id === this.dataset.id); dk_dragEl = this; dk_dragEl.classList.add('dragging'); dk_tX = e.touches[0].clientX; dk_tY = e.touches[0].clientY; playSnd('click'); }
-        function dk_touchMove(e) { if(!dk_dragEl) return; e.preventDefault(); dk_dragEl.style.transform = `translate(${e.touches[0].clientX-dk_tX}px, ${e.touches[0].clientY-dk_tY}px) scale(1.1) rotate(0)`; dk_dragEl.style.pointerEvents = 'none'; const elem = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY); if(elem && elem.closest('#dk-table')) document.getElementById('dk-table').classList.add('drag-target-active'); else document.getElementById('dk-table').classList.remove('drag-target-active'); }
+        function dk_touchMove(e) { if(!dk_dragEl) return; e.preventDefault(); dk_dragEl.style.transform = `translate(${e.touches[0].clientX-dk_tX}px, ${e.touches[0].clientY-dk_tY}px) scale(1.15) rotate(0)`; dk_dragEl.style.pointerEvents = 'none'; const elem = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY); if(elem && elem.closest('#dk-table')) document.getElementById('dk-table').classList.add('drag-target-active'); else document.getElementById('dk-table').classList.remove('drag-target-active'); }
         function dk_touchEnd(e) {
             if(!dk_dragEl) return; dk_dragEl.style.pointerEvents = 'auto'; const elem = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY); document.getElementById('dk-table').classList.remove('drag-target-active');
             if(elem && elem.closest('#dk-table')) { const c = dk_dragCard; dk_dragEl.classList.remove('dragging'); dk_dragEl=null; dk_dragCard=null; dk_playCard(c); } 
@@ -989,8 +1001,14 @@
 
         function dk_playCard(c) {
             if(!dk_active || dk_locked || !dk_myTurn) return;
-            if(isHost) { if(dk_processMove(c, 'ATK', true)) dk_sync(); } 
-            else { p2pConn.send({type:'DK_MOVE', cardId:c.id, action: dk_table.every(p=>p.def) ? 'ATK' : 'DEF'}); }
+            dk_locked = true;
+            if(isHost) { 
+                if(dk_processMove(c, 'ATK', true)) dk_sync(); 
+                else dk_locked = false;
+            } 
+            else { 
+                p2pConn.send({type:'DK_MOVE', cardId:c.id, action: dk_table.every(p=>p.def) ? 'ATK' : 'DEF'}); 
+            }
         }
 
         function dk_processMove(c, mode, isHostMove) {
@@ -1027,7 +1045,8 @@
         }
 
         window.dk_handleAction = function() {
-            if(dk_locked || !dk_active) return; playSnd('click');
+            if(dk_locked || !dk_active || !dk_myTurn) return; 
+            playSnd('click'); dk_locked = true;
             if(isHost) { dk_processAction(true); dk_sync(); } 
             else { p2pConn.send({type:'DK_ACTION', action: dk_myTurn ? 'END_TURN' : 'TAKE'}); }
         }
@@ -1053,6 +1072,7 @@
 
         function dk_sync() {
             if(!isHost || !p2pConn) return;
+            dk_locked = false; // хост разблокирует себя после синхронизации
             const state = { deckLen: dk_deck.length, tCard: dk_trumpCard, tSuit: dk_trumpSuit, table: dk_table, clientHand: dk_oppHand, hostHandLen: dk_myHand.length, clientTurn: !dk_myTurn, hasDiscarded: dk_hasDiscarded };
             p2pConn.send({type:'DK_STATE', state: state}); dk_renderUI();
         }
@@ -1062,6 +1082,7 @@
             dk_deck = new Array(s.deckLen).fill(null); dk_trumpCard = s.tCard; dk_trumpSuit = s.tSuit; 
             dk_table = s.table; dk_myHand = s.clientHand; dk_oppHand = { length: s.hostHandLen }; dk_myTurn = s.clientTurn; dk_hasDiscarded = s.hasDiscarded;
             if(dk_hasDiscarded) document.getElementById('dk-discard-visual').classList.remove('hidden'); else document.getElementById('dk-discard-visual').classList.add('hidden');
+            dk_locked = false; // Клиент разблокирует себя при получении нового стейта
             dk_renderUI();
             if(!dk_active){ dk_active=true; toast("Игра началась!"); playSnd('card'); }
             dk_checkWin();
@@ -1077,8 +1098,9 @@
 
         // --- BLACKJACK ONLINE P2P ENGINE (Host is Dealer) ---
         let bj_deck = [], bj_pHand = [], bj_dHand = [];
-        let bj_active = false, bj_turn = 'NONE', bj_msg = '';
+        let bj_active = false, bj_turn = 'NONE', bj_last_turn = 'NONE', bj_msg = '';
         let bj_bet = 10, bj_current_bet_placed = 0;
+        let bj_pLen = 0, bj_dLen = 0;
 
         function bj_createDeck() {
             bj_deck = [];
@@ -1091,8 +1113,8 @@
         function bj_shuffle() { toast("Перемешивание шуза..."); for(let i=bj_deck.length-1; i>0; i--) { const j=Math.floor(Math.random()*(i+1)); [bj_deck[i], bj_deck[j]]=[bj_deck[j], bj_deck[i]]; } }
         function bj_calcScore(hand) { let score = 0, aces = 0; hand.forEach(c => { score += c.weight; if(c.value==='A') aces++; }); while(score > 21 && aces > 0) { score -= 10; aces--; } return score; }
 
-        function bj_renderCard(c, hidden = false, delay = 0) {
-            const el = document.createElement('div'); el.className = `playing-card bj-card card-animate ${hidden ? 'card-back skin-gold' : c.color}`; el.style.animationDelay = `${delay}s`;
+        function bj_renderCard(c, hidden = false, isNew = false) {
+            const el = document.createElement('div'); el.className = `playing-card bj-card ${isNew ? 'card-animate' : ''} ${hidden ? 'card-back skin-gold' : c.color}`;
             if(!hidden) el.innerHTML = `<div class="top-left">${c.value}<br>${c.suit}</div><div class="center-suit">${c.suit}</div><div class="bottom-right">${c.value}<br>${c.suit}</div>`; return el;
         }
 
@@ -1105,7 +1127,7 @@
         }
 
         function bj_confirmBet() {
-            if(isHost) return; // Client only
+            if(isHost) return; 
             triggerHaptic('medium');
             bj_current_bet_placed = bj_bet;
             window.rubBalance -= bj_current_bet_placed;
@@ -1129,12 +1151,13 @@
             document.getElementById('bj-shoe-info').innerText = `Шуз: ${bj_deck.length} карт`;
 
             const pH = document.getElementById('bj-player-hand'); pH.innerHTML = '';
-            bj_pHand.forEach((c, i) => pH.appendChild(bj_renderCard(c, false, i*0.1)));
-            document.getElementById('bj-player-score').innerText = bj_calcScore(bj_pHand);
+            bj_pHand.forEach((c, i) => pH.appendChild(bj_renderCard(c, false, i >= bj_pLen)));
+            bj_pLen = bj_pHand.length;
 
             const dH = document.getElementById('bj-dealer-hand'); dH.innerHTML = '';
             const hideDealer = (bj_turn === 'CLIENT') && bj_dHand.length > 1 && !isHost;
-            bj_dHand.forEach((c, i) => { dH.appendChild(bj_renderCard(c, (i===1 && hideDealer), i*0.1)); });
+            bj_dHand.forEach((c, i) => { dH.appendChild(bj_renderCard(c, (i===1 && hideDealer), i >= bj_dLen)); });
+            bj_dLen = bj_dHand.length;
             
             if (hideDealer) document.getElementById('bj-dealer-score').innerText = bj_dHand[0] ? bj_dHand[0].weight : '?';
             else document.getElementById('bj-dealer-score').innerText = bj_calcScore(bj_dHand);
@@ -1151,7 +1174,7 @@
                 resetBtn.classList.add('hidden'); msgEl.className = "text-center font-black title-font text-base md:text-lg opacity-0 transform scale-90";
             } else if(bj_turn === 'OVER') {
                 msgEl.innerText = bj_msg; 
-                msgEl.className = `text-center font-black title-font text-base md:text-lg transition-all duration-500 bg-black/85 px-5 py-2 rounded-2xl backdrop-blur-sm border shadow-2xl opacity-100 transform scale-100 ${bj_msg.includes('ИГРОК ПОБЕДИЛ') || bj_msg.includes('ВЫ ПОБЕДИЛИ') || bj_msg.includes('БЛЭКДЖЕК') ? 'text-emerald-400 border-emerald-500/50 shadow-emerald-500/20' : (bj_msg.includes('НИЧЬЯ') ? 'text-gray-300 border-gray-500/50' : 'text-red-500 border-red-500/50 shadow-red-500/20')}`;
+                msgEl.className = `text-center font-black title-font text-base md:text-lg transition-all duration-500 bg-black/90 px-6 py-2.5 rounded-2xl backdrop-blur-md border shadow-2xl tracking-wide opacity-100 transform scale-100 ${bj_msg.includes('ИГРОК ПОБЕДИЛ') || bj_msg.includes('ВЫ ПОБЕДИЛИ') || bj_msg.includes('БЛЭКДЖЕК') ? 'text-emerald-400 border-emerald-500/50 shadow-[0_0_20px_rgba(16,185,129,0.3)]' : (bj_msg.includes('НИЧЬЯ') ? 'text-gray-300 border-gray-500/50' : 'text-red-500 border-red-500/50 shadow-[0_0_20px_rgba(239,68,68,0.3)]')}`;
                 controls.classList.add('hidden'); waitEl.classList.add('hidden');
                 if (isHost) { resetBtn.classList.remove('hidden'); resetBtn.innerText = "Новая раздача"; resetBtn.disabled = false; resetBtn.classList.remove('opacity-50'); }
                 else { resetBtn.classList.remove('hidden'); resetBtn.innerText = "Ожидание дилера..."; resetBtn.disabled = true; resetBtn.classList.add('opacity-50'); }
@@ -1200,7 +1223,7 @@
 
         window.bj_resetGame = function() {
             if(!isHost) return; playSnd('click'); stopCoinsRain();
-            bj_turn = 'BETTING'; bj_pHand = []; bj_dHand = []; bj_current_bet_placed = 0; bj_sync();
+            bj_turn = 'BETTING'; bj_last_turn = 'BETTING'; bj_pHand = []; bj_dHand = []; bj_current_bet_placed = 0; bj_pLen = 0; bj_dLen = 0; bj_sync();
         }
 
         function bj_sync() {
@@ -1215,13 +1238,21 @@
             if(isHost) return;
             bj_pHand = s.pHand; bj_dHand = s.dHand; bj_turn = s.turn; bj_msg = s.msg; bj_current_bet_placed = s.placedBet;
             if(!bj_active && bj_turn !== 'BETTING'){ bj_active=true; toast("Раздача началась!"); }
-            if(bj_turn === 'OVER' && (bj_msg.includes('ИГРОК ПОБЕДИЛ') || bj_msg.includes('ВЫ ПОБЕДИЛИ') || bj_msg.includes('БЛЭКДЖЕК'))) { 
+            
+            // Защита от двойных выплат (Начисляем только если раунд ТОЛЬКО ЧТО завершился)
+            let justFinished = (bj_turn === 'OVER' && bj_last_turn !== 'OVER');
+            bj_last_turn = bj_turn;
+
+            if(justFinished) { 
                 if (bj_msg.includes('БЛЭКДЖЕК')) window.rubBalance += Math.floor(bj_current_bet_placed * 2.5);
-                else window.rubBalance += bj_current_bet_placed * 2;
-                updateRUBBalances(); playSnd('win'); startCoinsRain(); 
-            } else if (bj_turn === 'OVER' && bj_msg.includes('НИЧЬЯ')) {
-                window.rubBalance += bj_current_bet_placed; updateRUBBalances();
+                else if (bj_msg.includes('ИГРОК ПОБЕДИЛ') || bj_msg.includes('ВЫ ПОБЕДИЛИ')) window.rubBalance += bj_current_bet_placed * 2;
+                else if (bj_msg.includes('НИЧЬЯ')) window.rubBalance += bj_current_bet_placed;
+                
+                updateRUBBalances(); 
+                if(!bj_msg.includes('ДИЛЕР ВЫИГРАЛ') && !bj_msg.includes('ДИЛЕР ПОБЕДИЛ')) { playSnd('win'); startCoinsRain(); }
             }
+
+            if(bj_turn === 'BETTING') { bj_pLen = 0; bj_dLen = 0; }
             bj_renderUI();
         }
 
@@ -1243,12 +1274,12 @@
         // --- COIN RAIN ANIMATION ENGINE ---
         const canvas = document.getElementById("coin-canvas"); const ctx = canvas.getContext("2d"); let coins = []; let coinAnimId;
         class Coin {
-            constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * -canvas.height; this.size = Math.random() * 14 + 10; this.speedY = Math.random() * 3 + 2; this.speedX = Math.random() * 1.5 - 0.75; this.rotation = Math.random() * 360; this.spinSpeed = Math.random() * 10 - 5; }
+            constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * -canvas.height; this.size = Math.random() * 16 + 12; this.speedY = Math.random() * 4 + 2; this.speedX = Math.random() * 2 - 1; this.rotation = Math.random() * 360; this.spinSpeed = Math.random() * 12 - 6; }
             update() { this.y += this.speedY; this.x += this.speedX; this.rotation += this.spinSpeed; }
-            draw() { ctx.save(); ctx.translate(this.x, this.y); ctx.rotate((this.rotation * Math.PI) / 180); ctx.beginPath(); ctx.arc(0, 0, this.size, 0, Math.PI * 2); ctx.fillStyle = "#fbbf24"; ctx.shadowColor = "rgba(251, 191, 36, 0.6)"; ctx.shadowBlur = 8; ctx.fill(); ctx.beginPath(); ctx.arc(0, 0, this.size - 3, 0, Math.PI * 2); ctx.lineWidth = 1; ctx.strokeStyle = "#d97706"; ctx.stroke(); ctx.fillStyle = "#78350f"; ctx.font = `bold ${this.size * 0.9}px sans-serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText("₽", 0, 0); ctx.restore(); }
+            draw() { ctx.save(); ctx.translate(this.x, this.y); ctx.rotate((this.rotation * Math.PI) / 180); ctx.beginPath(); ctx.arc(0, 0, this.size, 0, Math.PI * 2); ctx.fillStyle = "#fbbf24"; ctx.shadowColor = "rgba(251, 191, 36, 0.7)"; ctx.shadowBlur = 10; ctx.fill(); ctx.beginPath(); ctx.arc(0, 0, this.size - 3, 0, Math.PI * 2); ctx.lineWidth = 1; ctx.strokeStyle = "#d97706"; ctx.stroke(); ctx.fillStyle = "#78350f"; ctx.font = `bold ${this.size * 0.9}px sans-serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText("₽", 0, 0); ctx.restore(); }
         }
         function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        function startCoinsRain() { resizeCanvas(); window.addEventListener('resize', resizeCanvas); canvas.style.display = 'block'; coins = []; for (let i = 0; i < 70; i++) { coins.push(new Coin()); } animateCoins(); }
+        function startCoinsRain() { resizeCanvas(); window.addEventListener('resize', resizeCanvas); canvas.style.display = 'block'; coins = []; for (let i = 0; i < 80; i++) { coins.push(new Coin()); } animateCoins(); }
         function animateCoins() { ctx.clearRect(0, 0, canvas.width, canvas.height); let stillOnScreen = false; coins.forEach(coin => { coin.update(); coin.draw(); if (coin.y < canvas.height + 50) stillOnScreen = true; }); if (stillOnScreen) coinAnimId = requestAnimationFrame(animateCoins); else stopCoinsRain(); }
         function stopCoinsRain() { cancelAnimationFrame(coinAnimId); canvas.style.display = 'none'; window.removeEventListener('resize', resizeCanvas); }
     </script>
