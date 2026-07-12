@@ -19,7 +19,6 @@
             --metro-gold-glow: rgba(251, 191, 36, 0.35);
             --metro-dark: #030712;
             
-            /* Sizing optimized for full mobile screen estate */
             --card-width-dk: clamp(48px, 11vw, 68px);
             --card-height-dk: clamp(72px, 16.5vw, 100px);
             --card-width-bj: clamp(54px, 12vw, 76px);
@@ -33,9 +32,9 @@
             -webkit-tap-highlight-color: transparent;
             background-color: var(--metro-dark);
             height: 100dvh;
+            background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, var(--metro-dark) 70%);
         }
 
-        /* Deep Static Premium Felt Layouts (No dizzying motion) */
         .table-felt-durak {
             background: radial-gradient(circle at center, #0f4d2a 0%, #062b16 65%, #021209 100%);
             box-shadow: inset 0 0 80px rgba(0,0,0,0.9);
@@ -48,13 +47,13 @@
         .title-font { font-family: 'Orbitron', sans-serif; }
 
         .glass-panel {
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.1);
         }
 
-        /* Playing Cards Styles */
         .playing-card {
             background: #ffffff;
             border-radius: 8px;
@@ -66,7 +65,7 @@
             transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.25s, opacity 0.25s;
             cursor: pointer; user-select: none;
             border: 1px solid rgba(255, 255, 255, 0.15);
-            touch-action: none; /* Prevents mobile drag and scroll glitches */
+            touch-action: none;
         }
         .playing-card.red { color: #ef4444; }
         .playing-card.black { color: #111827; }
@@ -75,7 +74,6 @@
         .playing-card .bottom-right { text-align: right; transform: rotate(180deg); line-height: 1; }
         .playing-card .center-suit { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 2.2em; opacity: 0.12; pointer-events: none; }
 
-        /* Card Back Coverings */
         .card-back { color: transparent !important; transition: all 0.3s ease; }
         .skin-emerald {
             background: radial-gradient(circle, #065f46 0%, #022c22 100%);
@@ -101,18 +99,13 @@
         }
 
         .dk-card { width: var(--card-width-dk); height: var(--card-height-dk); }
-        
-        .card-in-hand {
-            transform-origin: bottom center;
-            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), z-index 0.1s;
-        }
+        .card-in-hand { transform-origin: bottom center; transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), z-index 0.1s; }
         .card-in-hand:hover, .card-in-hand:active {
             transform: translateY(-24px) scale(1.22) rotate(0deg) !important;
             z-index: 250 !important;
             box-shadow: 0 12px 25px rgba(16, 185, 129, 0.5), 0 0 10px var(--metro-green);
             border-color: var(--metro-green);
         }
-        
         .dragging {
             opacity: 0.85; transform: scale(1.1) !important; z-index: 1000 !important;
             box-shadow: 0 12px 25px rgba(16, 185, 129, 0.6) !important;
@@ -121,45 +114,34 @@
             box-shadow: inset 0 0 35px rgba(16, 185, 129, 0.4) !important;
             border: 1px solid rgba(16, 185, 129, 0.8) !important;
         }
-
         .bj-card { width: var(--card-width-bj); height: var(--card-height-bj); font-size: clamp(12px, 2.8vw, 16px); padding: 7px; }
         .card-animate { animation: dropIn 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards; opacity: 0; }
         @keyframes dropIn { from { transform: translateY(-50px) scale(0.75) rotate(15deg); opacity: 0; } to { transform: translateY(0) scale(1) rotate(0); opacity: 1; } }
+        .card-dealing { animation: dealFromDeck 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+        @keyframes dealFromDeck { from { transform: translate(-100px, -50px) scale(0.3) rotate(45deg); opacity: 0; } to { opacity: 1; } }
 
-        /* Dynamic fly animation for dealt cards */
-        .card-dealing {
-            animation: dealFromDeck 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-        }
-        @keyframes dealFromDeck {
-            from { transform: translate(-100px, -50px) scale(0.3) rotate(45deg); opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Neon Buttons */
         .btn-neon-emerald {
-            background: rgba(16, 185, 129, 0.08); border: 1px solid var(--metro-green); color: var(--metro-green);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
+            border: 1px solid var(--metro-green); color: var(--metro-green);
             transition: all 0.25s ease;
         }
-        .btn-neon-emerald:hover { background: var(--metro-green); color: var(--metro-dark); box-shadow: 0 0 15px var(--metro-green); }
+        .btn-neon-emerald:hover { background: var(--metro-green); color: var(--metro-dark); box-shadow: 0 0 20px var(--metro-green-glow); }
         .btn-neon-emerald:active { transform: scale(0.96); }
 
         .btn-neon-gold {
-            background: rgba(251, 191, 36, 0.08); border: 1px solid var(--metro-gold); color: var(--metro-gold);
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(251, 191, 36, 0.05));
+            border: 1px solid var(--metro-gold); color: var(--metro-gold);
             transition: all 0.25s ease;
         }
-        .btn-neon-gold:hover { background: var(--metro-gold); color: var(--metro-dark); box-shadow: 0 0 15px var(--metro-gold); }
+        .btn-neon-gold:hover { background: var(--metro-gold); color: var(--metro-dark); box-shadow: 0 0 20px var(--metro-gold-glow); }
         .btn-neon-gold:active { transform: scale(0.96); }
 
         .app-view { display: none; }
         .app-view.active { display: flex; animation: fadeIn 0.3s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Floating Reaction Emojis */
         .reaction-bubble {
-            position: absolute;
-            font-size: 2.8rem;
-            pointer-events: none;
-            z-index: 999;
+            position: absolute; font-size: 2.8rem; pointer-events: none; z-index: 999;
             animation: floatUpAndFade 1.2s cubic-bezier(0.18, 0.89, 0.32, 1.2) forwards;
         }
         @keyframes floatUpAndFade {
@@ -168,12 +150,9 @@
             100% { transform: translateY(-300px) scale(1.5) rotate(25deg); opacity: 0; }
         }
 
-        /* Chips Betting Elements */
         .metro-chip {
-            width: clamp(44px, 10vw, 58px);
-            height: clamp(44px, 10vw, 58px);
-            border-radius: 50%;
-            border: 4px dashed #ffffff;
+            width: clamp(44px, 10vw, 58px); height: clamp(44px, 10vw, 58px);
+            border-radius: 50%; border: 4px dashed #ffffff;
             box-shadow: 0 4px 8px rgba(0,0,0,0.5), inset 0 0 6px rgba(0,0,0,0.4);
             display: flex; align-items: center; justify-content: center;
             font-weight: 800; font-size: 11px; cursor: pointer;
@@ -182,34 +161,11 @@
         .metro-chip:active { transform: scale(0.85) rotate(-15deg); }
 
         .discard-pile-slot {
-            border: 2px dashed rgba(255, 255, 255, 0.12);
-            background: rgba(0, 0, 0, 0.25);
-            transition: all 0.3s;
+            border: 2px dashed rgba(255, 255, 255, 0.12); background: rgba(0, 0, 0, 0.25); transition: all 0.3s;
         }
-        .card-flying-to-discard {
-            position: fixed;
-            z-index: 500;
-            transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1);
-            pointer-events: none;
-        }
-
-        /* Coin rain canvas full screen overlay */
-        #coin-canvas {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 100;
-            display: none;
-        }
-
-        /* Custom Input Styling for Deposit */
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { 
-            -webkit-appearance: none; 
-            margin: 0; 
-        }
-
+        .card-flying-to-discard { position: fixed; z-index: 500; transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1); pointer-events: none; }
+        #coin-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100; display: none; }
+        input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
         ::-webkit-scrollbar { width: 4px; height: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 4px; }
@@ -217,153 +173,130 @@
 </head>
 <body class="flex flex-col relative w-full h-[100dvh] overflow-hidden">
     
-    <!-- Gold coin particle rain overlay for wins -->
     <canvas id="coin-canvas"></canvas>
 
-    <!-- Global Header (Lobby Only, auto-hidden/optimized in-game) -->
-    <header class="w-full p-3 flex flex-row justify-between items-center gap-2 border-b border-slate-800/60 bg-black/60 backdrop-blur-md shrink-0 z-50 transition-all duration-300" id="main-header">
+    <!-- Global Header -->
+    <header class="w-full p-3 flex flex-row justify-between items-center gap-2 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-xl shrink-0 z-50 transition-all duration-300" id="main-header">
         <div class="flex items-center gap-2">
-            <div id="header-icon" class="p-1.5 bg-emerald-500/10 rounded-lg border border-emerald-500/20 transition-colors">
-                <i class="fa-solid fa-bolt text-emerald-400 animate-pulse" id="header-icon-i"></i>
+            <div id="header-icon" class="p-1.5 bg-emerald-500/10 rounded-xl border border-emerald-500/30 transition-colors shadow-[0_0_10px_rgba(16,185,129,0.1)]">
+                <i class="fa-solid fa-network-wired text-emerald-400" id="header-icon-i"></i>
             </div>
             <div>
-                <h1 class="text-sm title-font font-black tracking-wider text-white">METRO CASH SUITE</h1>
-                <p id="header-subtitle" class="text-[8px] text-emerald-400 uppercase tracking-widest font-bold">Lobby Hub</p>
+                <h1 class="text-[13px] title-font font-black tracking-widest text-white drop-shadow-md">METRO<span class="text-emerald-500">P2P</span></h1>
+                <p id="header-subtitle" class="text-[7px] text-gray-400 uppercase tracking-widest font-bold">Multiplayer Hub</p>
             </div>
         </div>
         <div class="flex items-center gap-2">
-            <!-- Global persistent ruble profile balance -->
-            <div class="flex items-center gap-1.5 px-2 py-1 rounded bg-slate-900 border border-emerald-500/30">
-                <span id="profile-name-label" class="text-[8px] text-gray-400 font-bold uppercase"><i class="fa-solid fa-user-circle mr-1"></i> ПРОФИЛЬ</span>
-                <span id="global-rub-balance" class="text-[11px] font-mono text-emerald-400 font-extrabold">0.00 ₽</span>
-                <button onclick="openDepositModal()" class="ml-1 px-1.5 py-0.5 bg-amber-500 text-black text-[8px] font-black rounded hover:bg-amber-400 transition shadow-[0_0_8px_rgba(251,191,36,0.5)]">
-                    + ПОПОЛНИТЬ
+            <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700/50 shadow-inner">
+                <span id="profile-name-label" class="text-[9px] text-gray-400 font-bold uppercase flex items-center"><i class="fa-solid fa-user-circle mr-1.5 text-slate-500"></i> ИГРОК</span>
+                <div class="w-px h-3 bg-slate-700 mx-1"></div>
+                <span id="global-rub-balance" class="text-[12px] font-mono text-emerald-400 font-extrabold">0 ₽</span>
+                <button onclick="openDepositModal()" class="ml-2 px-2 py-0.5 bg-amber-500 text-black text-[9px] font-black rounded-md hover:bg-amber-400 transition shadow-[0_0_10px_rgba(251,191,36,0.4)]">
+                    <i class="fa-solid fa-plus"></i>
                 </button>
-            </div>
-            <div class="hidden sm:flex items-center gap-1.5 px-2 py-1 rounded bg-slate-900 border border-slate-800">
-                <span id="global-peer-indicator" class="h-1.5 w-1.5 rounded-full bg-red-500"></span>
-                <span id="global-peer-text" class="text-[8px] text-gray-400 font-mono">ОТКЛЮЧЕНО</span>
             </div>
         </div>
     </header>
 
     <main class="w-full flex-1 relative overflow-hidden flex flex-col z-10">
         
-        <!-- Lobby Hub View -->
-        <div id="view-hub" class="app-view active flex-col w-full h-full overflow-y-auto p-4 max-w-5xl mx-auto space-y-4 pb-20">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
-                
-                <!-- Create Lobby Card -->
-                <div class="lg:col-span-4 space-y-3">
-                    <div class="glass-panel rounded-2xl p-4 shadow-lg border-t border-emerald-500/30">
-                        <h3 class="text-[11px] font-bold text-emerald-400 uppercase tracking-wider mb-4 flex items-center gap-2">
-                            <i class="fa-solid fa-server"></i> Создать сервер
-                        </h3>
-                        
-                        <div class="space-y-3">
-                            <div>
-                                <label class="block text-[8px] text-gray-400 uppercase font-bold mb-1">Никнейм</label>
-                                <input type="text" id="player-nickname" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-emerald-500 outline-none transition" value="Игрок">
-                            </div>
-                            <div>
-                                <label class="block text-[8px] text-gray-400 uppercase font-bold mb-1">Имя комнаты</label>
-                                <input type="text" id="room-name" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-emerald-500 outline-none transition" value="Metro Room">
-                            </div>
-                            <div>
-                                <label class="block text-[8px] text-gray-400 uppercase font-bold mb-1">Режим Игры</label>
-                                <select id="game-mode-select" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-emerald-500 outline-none transition">
-                                    <option value="DURAK">🃏 Дурак (Классика + Физика)</option>
-                                    <option value="BLACKJACK">🎰 Блэкджек (Ставки + Double)</option>
-                                </select>
-                            </div>
-
-                            <button onclick="hostGame()" class="btn-neon-emerald w-full py-3 rounded-lg text-[10px] font-bold uppercase tracking-wider mt-2 shadow-lg">
-                                <i class="fa-brands fa-telegram mr-1"></i> Опубликовать
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Quick Play (Singleplayer) -->
-                    <div class="glass-panel rounded-2xl p-4 shadow-lg flex flex-col gap-2">
-                        <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Одиночная игра (ИИ)</h3>
-                        <div class="flex gap-2">
-                            <button onclick="startSingleplayer('DURAK')" class="flex-1 bg-slate-800 hover:bg-emerald-900 text-emerald-400 py-2 rounded-lg text-[9px] font-bold uppercase border border-emerald-500/20 transition">
-                                <i class="fa-solid fa-cards mr-1"></i> Дурак
-                            </button>
-                            <button onclick="startSingleplayer('BLACKJACK')" class="flex-1 bg-slate-800 hover:bg-amber-900 text-amber-400 py-2 rounded-lg text-[9px] font-bold uppercase border border-amber-500/20 transition">
-                                <i class="fa-solid fa-coins mr-1"></i> Блэкджек
-                            </button>
+        <!-- P2P Lobby Hub View (Redesigned for Online Only) -->
+        <div id="view-hub" class="app-view active flex-col w-full h-full overflow-y-auto p-4 md:p-6 max-w-6xl mx-auto space-y-6 pb-24">
+            
+            <div class="w-full glass-panel rounded-3xl p-5 md:p-6 flex flex-col md:flex-row items-center justify-between gap-4 border-t-2 border-t-emerald-500/40 relative overflow-hidden">
+                <div class="absolute -right-10 -top-10 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl"></div>
+                <div class="flex flex-col relative z-10 w-full md:w-1/2">
+                    <h2 class="text-xl md:text-2xl title-font font-black text-white mb-1"><i class="fa-solid fa-satellite-dish text-emerald-400 mr-2 animate-pulse"></i>ONLINE СЕТЬ</h2>
+                    <p class="text-xs text-gray-400 mb-3">Играйте с реальными людьми напрямую через защищенное P2P соединение. Ваш уникальный идентификатор в сети:</p>
+                    <div class="bg-black/50 border border-slate-700/50 rounded-xl p-3 flex items-center justify-between">
+                        <span class="text-xs font-mono text-emerald-400 tracking-wider" id="local-peer-id">Инициализация узла...</span>
+                        <div class="flex items-center gap-1.5 px-2 py-1 rounded bg-slate-800/80 border border-slate-700">
+                            <span id="global-peer-indicator" class="h-2 w-2 rounded-full bg-red-500 animate-pulse"></span>
+                            <span id="global-peer-text" class="text-[9px] text-gray-300 font-bold uppercase tracking-wider">Подключение</span>
                         </div>
                     </div>
                 </div>
-
-                <!-- Server List Card -->
-                <div class="lg:col-span-8 flex flex-col">
-                    <div class="glass-panel rounded-2xl p-4 shadow-lg flex-1 flex flex-col min-h-[400px]">
-                        <div class="flex justify-between items-center mb-3 border-b border-slate-800 pb-2 shrink-0">
-                            <h2 class="text-xs font-bold text-white flex items-center gap-2"><i class="fa-solid fa-globe text-emerald-400"></i> Глобальные Лобби</h2>
-                            <button onclick="fetchLobbies()" class="text-gray-400 hover:text-white transition p-1 bg-slate-800 rounded-md px-2"><i class="fa-solid fa-rotate-right" id="refresh-icon"></i></button>
+                
+                <div class="w-full md:w-1/2 flex flex-col gap-3 relative z-10">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="col-span-2 md:col-span-1">
+                            <label class="block text-[9px] text-gray-400 uppercase font-bold mb-1.5 ml-1">Имя в игре</label>
+                            <input type="text" id="player-nickname" class="w-full bg-black/40 border border-slate-600 rounded-xl px-4 py-2.5 text-sm text-white focus:border-emerald-400 outline-none transition" value="Игрок">
                         </div>
-                        <div id="lobbies-grid" class="grid grid-cols-1 md:grid-cols-2 gap-2 overflow-y-auto pr-1 flex-1 content-start">
-                            <!-- Lobbies injected here -->
+                        <div class="col-span-2 md:col-span-1">
+                            <label class="block text-[9px] text-gray-400 uppercase font-bold mb-1.5 ml-1">Название комнаты</label>
+                            <input type="text" id="room-name" class="w-full bg-black/40 border border-slate-600 rounded-xl px-4 py-2.5 text-sm text-white focus:border-emerald-400 outline-none transition" value="Metro VIP">
                         </div>
-                        <div class="mt-3 text-center text-[8px] text-gray-500 font-mono shrink-0">
-                            Ваш P2P ID: <span id="local-peer-id" class="text-gray-400">Загрузка сети...</span>
+                        <div class="col-span-2">
+                            <label class="block text-[9px] text-gray-400 uppercase font-bold mb-1.5 ml-1">Режим Игры (Только Online)</label>
+                            <select id="game-mode-select" class="w-full bg-black/40 border border-slate-600 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-400 outline-none transition appearance-none cursor-pointer font-bold">
+                                <option value="DURAK">🃏 Дурак (Сетевая игра P2P)</option>
+                                <option value="BLACKJACK">🎰 Блэкджек (Вы играете за Дилера)</option>
+                            </select>
                         </div>
                     </div>
+                    <button onclick="hostGame()" class="btn-neon-emerald w-full py-3.5 rounded-xl text-xs font-black uppercase tracking-widest mt-1 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-server"></i> Создать Игровой Сервер
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex-1 flex flex-col min-h-[350px]">
+                <div class="flex justify-between items-center mb-4 px-2 shrink-0">
+                    <h2 class="text-sm font-bold text-white flex items-center gap-2 uppercase tracking-wider"><i class="fa-solid fa-globe text-blue-400"></i> Активные Игры</h2>
+                    <button onclick="fetchLobbies()" class="text-gray-300 hover:text-white transition flex items-center gap-2 bg-slate-800/80 border border-slate-700 rounded-lg px-3 py-1.5 text-[10px] font-bold uppercase active:scale-95">
+                        <i class="fa-solid fa-rotate-right" id="refresh-icon"></i> Обновить
+                    </button>
+                </div>
+                
+                <div id="lobbies-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 overflow-y-auto pb-4 pr-1 content-start">
+                    <!-- Lobbies injected here -->
+                    <div class="col-span-full text-center text-xs text-gray-500 py-10 glass-panel rounded-2xl">Сбор данных о серверах...</div>
                 </div>
             </div>
         </div>
 
         <!-- Durak View -->
         <div id="view-durak" class="app-view flex-col w-full h-full relative">
-            <!-- Setup (Waiting for player) -->
             <div id="dk-setup" class="flex-1 flex items-center justify-center p-4">
-                <div class="glass-panel rounded-2xl p-8 text-center max-w-sm w-full border border-emerald-500/30 shadow-[0_0_30px_rgba(16,185,129,0.1)]">
-                    <i class="fa-solid fa-satellite-dish text-4xl text-emerald-500 mb-4 animate-pulse"></i>
-                    <h2 class="text-lg title-font font-black text-white mb-2">ОЖИДАНИЕ ИГРОКА</h2>
-                    <p class="text-xs text-gray-400 mb-6">Лобби опубликовано. Поделитесь ссылкой ниже, чтобы начать напрямую:</p>
-                    <button id="dk-share-btn" onclick="shareInviteLink()" class="btn-neon-emerald px-4 py-2 rounded-xl text-xs uppercase font-bold mb-6 w-full flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-share-nodes"></i> Поделиться комнатой
+                <div class="glass-panel rounded-3xl p-8 text-center max-w-sm w-full border-t-2 border-emerald-500/50 shadow-[0_0_40px_rgba(16,185,129,0.15)]">
+                    <i class="fa-solid fa-satellite-dish text-5xl text-emerald-500 mb-5 animate-pulse drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]"></i>
+                    <h2 class="text-xl title-font font-black text-white mb-2 tracking-wide">ОЖИДАНИЕ ИГРОКА</h2>
+                    <p class="text-xs text-gray-400 mb-6 leading-relaxed">Сервер успешно запущен. Поделитесь ссылкой ниже, чтобы оппонент мог подключиться к вам напрямую.</p>
+                    <button id="dk-share-btn" onclick="shareInviteLink()" class="btn-neon-emerald px-4 py-3.5 rounded-xl text-xs uppercase font-bold mb-6 w-full flex items-center justify-center gap-2 shadow-lg">
+                        <i class="fa-solid fa-share-nodes"></i> Пригласить оппонента
                     </button>
-                    <div class="w-full bg-slate-900 rounded-full h-1 mb-2 overflow-hidden">
-                        <div class="bg-emerald-500 h-full w-1/2 rounded-full animate-bounce" style="animation: moveX 2s infinite alternate;"></div>
+                    <div class="w-full bg-slate-900 rounded-full h-1.5 mb-2 overflow-hidden border border-slate-800">
+                        <div class="bg-emerald-500 h-full w-1/2 rounded-full shadow-[0_0_10px_#10b981]" style="animation: moveX 1.5s infinite alternate ease-in-out;"></div>
                     </div>
+                    <p class="text-[9px] text-gray-500 uppercase font-bold tracking-widest mt-4">Только P2P Online</p>
                 </div>
             </div>
 
-            <!-- Active Durak Table Board -->
+            <!-- Active Durak Table -->
             <div id="dk-board" class="hidden flex flex-1 flex-col relative table-felt-durak w-full h-full select-none overflow-hidden">
-                <!-- Floating Slim Game Header -->
                 <div class="absolute top-0 left-0 w-full h-12 flex justify-between items-center px-4 bg-black/60 border-b border-emerald-900/40 z-40 backdrop-blur-sm">
                     <div class="flex items-center gap-2">
-                        <button onclick="leaveGame()" class="px-2 py-1 text-[8px] font-bold uppercase rounded bg-red-950/70 text-red-400 border border-red-500/30">
+                        <button onclick="leaveGame()" class="px-2 py-1 text-[8px] font-bold uppercase rounded bg-red-950/70 text-red-400 border border-red-500/30 transition hover:bg-red-900">
                             <i class="fa-solid fa-right-from-bracket"></i> Выйти
                         </button>
                         <div class="flex flex-col ml-1">
                             <span id="dk-opp-name" class="text-[9px] font-bold text-white uppercase">Оппонент</span>
-                            <span class="text-[6px] text-emerald-400/80" id="dk-p2p-status">Соединение установлено</span>
+                            <span class="text-[6px] text-emerald-400/80" id="dk-p2p-status">P2P Установлено</span>
                         </div>
                     </div>
 
-                    <!-- Fanned Opponent Hand Container -->
-                    <div class="relative flex-1 max-w-[140px] h-full flex justify-center items-center overflow-visible" id="dk-opp-cards-container">
-                    </div>
+                    <div class="relative flex-1 max-w-[140px] h-full flex justify-center items-center overflow-visible" id="dk-opp-cards-container"></div>
 
                     <div class="flex items-center gap-2">
                         <span id="dk-opp-count" class="bg-black/40 px-2 py-0.5 rounded text-[10px] text-emerald-400 font-bold border border-emerald-500/20 font-mono">0</span>
                         <div class="flex items-center gap-1.5 px-2 py-1 rounded bg-black/30 border border-emerald-500/30">
                             <span id="dk-game-rub-balance" class="text-[10px] font-mono text-emerald-400 font-black">0 ₽</span>
-                            <button onclick="openDepositModal()" class="px-1 bg-amber-500 text-black text-[7px] font-black rounded hover:bg-amber-400 transition">
-                                +
-                            </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Middle Table Area -->
                 <div class="flex-1 w-full relative z-10 flex flex-col justify-center">
-                    <!-- Deck & Discard -->
                     <div class="absolute left-2 top-1/2 -translate-y-1/2 scale-75 origin-left z-20 md:scale-90 md:left-4 flex flex-col gap-6">
                         <div class="relative w-[54px] h-[80px] md:w-[70px] md:h-[102px]">
                             <div id="dk-trump-card" class="playing-card dk-card absolute shadow-lg" style="transform: rotate(90deg) translate(25px, -15px); z-index: 1;"></div>
@@ -379,56 +312,48 @@
                         </div>
                     </div>
 
-                    <!-- Action Zone -->
-                    <div id="dk-table" class="bg-black/25 rounded-[30px] mx-auto w-[85%] md:w-[68%] h-[55%] md:h-[65%] border border-emerald-500/10 shadow-[inset_0_0_30px_rgba(0,0,0,0.85)] transition-all flex flex-wrap items-center justify-center gap-2 md:gap-4 p-4 relative z-0 overflow-y-auto">
-                    </div>
+                    <div id="dk-table" class="bg-black/25 rounded-[30px] mx-auto w-[85%] md:w-[68%] h-[55%] md:h-[65%] border border-emerald-500/10 shadow-[inset_0_0_30px_rgba(0,0,0,0.85)] transition-all flex flex-wrap items-center justify-center gap-2 md:gap-4 p-4 relative z-0 overflow-y-auto"></div>
                     
-                    <div id="dk-turn-ind" class="absolute top-16 left-1/2 -translate-x-1/2 bg-slate-900/90 px-4 py-1 rounded-full border border-emerald-500 text-emerald-400 text-[8px] font-bold uppercase tracking-widest z-30 transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)]">Ваш ход</div>
+                    <div id="dk-turn-ind" class="absolute top-16 left-1/2 -translate-x-1/2 bg-slate-900/90 px-4 py-1 rounded-full border border-emerald-500 text-emerald-400 text-[8px] font-bold uppercase tracking-widest z-30 transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)]">Ожидание хода...</div>
                     
                     <button id="dk-action-btn" onclick="dk_handleAction()" class="hidden absolute right-4 bottom-16 md:right-8 md:bottom-24 z-40 bg-slate-900/90 border border-emerald-500 text-emerald-500 font-bold py-2 px-5 rounded-xl shadow-lg uppercase text-[9px] tracking-widest active:scale-95 transition backdrop-blur hover:bg-emerald-950">
-                        Бито
+                        Действие
                     </button>
                 </div>
 
-                <!-- Quick Emoji -->
                 <div class="absolute right-3 top-1/2 -translate-y-1/2 flex flex-col gap-1.5 z-40 bg-black/50 p-1.5 rounded-full border border-emerald-500/10">
                     <button onclick="sendEmoji('👍')" class="hover:scale-125 transition text-base md:text-lg">👍</button>
                     <button onclick="sendEmoji('🔥')" class="hover:scale-125 transition text-base md:text-lg">🔥</button>
                     <button onclick="sendEmoji('😂')" class="hover:scale-125 transition text-base md:text-lg">😂</button>
-                    <button onclick="sendEmoji('🤡')" class="hover:scale-125 transition text-base md:text-lg">🤡</button>
                     <button onclick="sendEmoji('🤬')" class="hover:scale-125 transition text-base md:text-lg">🤬</button>
                 </div>
 
-                <!-- Player Hand Area -->
                 <div class="h-28 md:h-36 w-full shrink-0 relative z-30 flex justify-center items-end pb-3 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none">
-                    <div id="dk-hand" class="pointer-events-auto flex justify-center items-end relative h-full w-full max-w-xl">
-                    </div>
+                    <div id="dk-hand" class="pointer-events-auto flex justify-center items-end relative h-full w-full max-w-xl"></div>
                 </div>
             </div>
         </div>
 
         <!-- Blackjack View -->
         <div id="view-blackjack" class="app-view flex-col w-full h-full relative">
-            <!-- Setup -->
             <div id="bj-setup" class="flex-1 flex items-center justify-center p-4">
-                <div class="glass-panel rounded-2xl p-8 text-center max-w-sm w-full border border-amber-500/30 shadow-[0_0_30px_rgba(251,191,36,0.1)]">
-                    <i class="fa-solid fa-coins text-4xl text-amber-500 mb-4 animate-pulse drop-shadow-[0_0_10px_rgba(251,191,36,0.6)]"></i>
-                    <h2 class="text-lg title-font font-black text-white mb-2">КАЗИНО ПУЛЬС</h2>
-                    <p class="text-xs text-gray-400 mb-6" id="bj-setup-desc">Ожидание подключения игрока...</p>
-                    <button id="bj-share-btn" onclick="shareInviteLink()" class="btn-neon-gold px-4 py-2 rounded-xl text-xs uppercase font-bold mb-6 w-full flex items-center justify-center gap-2">
+                <div class="glass-panel rounded-3xl p-8 text-center max-w-sm w-full border-t-2 border-amber-500/50 shadow-[0_0_40px_rgba(251,191,36,0.15)]">
+                    <i class="fa-solid fa-coins text-5xl text-amber-500 mb-5 animate-pulse drop-shadow-[0_0_15px_rgba(251,191,36,0.6)]"></i>
+                    <h2 class="text-xl title-font font-black text-white mb-2">P2P КАЗИНО</h2>
+                    <p class="text-xs text-gray-400 mb-6 leading-relaxed" id="bj-setup-desc">Вы играете за Дилера. Ожидание подключения реального игрока...</p>
+                    <button id="bj-share-btn" onclick="shareInviteLink()" class="btn-neon-gold px-4 py-3.5 rounded-xl text-xs uppercase font-bold mb-6 w-full flex items-center justify-center gap-2 shadow-lg">
                         <i class="fa-solid fa-share-nodes"></i> Пригласить Игрока
                     </button>
-                    <div class="w-full bg-slate-900 rounded-full h-1 mb-2 overflow-hidden">
-                        <div class="bg-amber-500 h-full w-1/2 rounded-full animate-bounce" style="animation: moveX 2s infinite alternate;"></div>
+                    <div class="w-full bg-slate-900 rounded-full h-1.5 mb-2 overflow-hidden border border-slate-800">
+                        <div class="bg-amber-500 h-full w-1/2 rounded-full shadow-[0_0_10px_#fbbf24]" style="animation: moveX 1.5s infinite alternate ease-in-out;"></div>
                     </div>
                 </div>
             </div>
 
             <!-- Active Blackjack Table Board -->
             <div id="bj-board" class="hidden flex flex-1 flex-col justify-between w-full h-full table-felt-blackjack relative select-none overflow-hidden">
-                <!-- Floating Slim BJ Header -->
                 <div class="absolute top-0 left-0 w-full h-12 flex justify-between items-center px-4 bg-black/60 border-b border-amber-900/40 z-40 backdrop-blur-sm">
-                    <button onclick="leaveGame()" class="px-2 py-1 text-[8px] font-bold uppercase rounded bg-red-950/70 text-red-400 border border-red-500/30">
+                    <button onclick="leaveGame()" class="px-2 py-1 text-[8px] font-bold uppercase rounded bg-red-950/70 text-red-400 border border-red-500/30 transition hover:bg-red-900">
                         <i class="fa-solid fa-right-from-bracket"></i> Выйти
                     </button>
                     
@@ -437,33 +362,27 @@
                     <div class="flex items-center gap-2">
                         <div class="flex items-center gap-1.5 px-2 py-1 rounded bg-black/30 border border-amber-500/30">
                             <span id="bj-game-rub-balance" class="text-[10px] font-mono text-amber-400 font-black">0 ₽</span>
-                            <button onclick="openDepositModal()" class="px-1 bg-amber-500 text-black text-[7px] font-black rounded hover:bg-amber-400 transition">
-                                +
-                            </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Dealer Area -->
                 <div class="flex flex-col items-center mt-14 relative z-10">
                     <div class="text-[9px] uppercase font-bold text-gray-400 mb-2 flex items-center gap-2 bg-slate-950/80 px-3 py-1 rounded-full border border-amber-900/40 shadow-md">
                         <i class="fa-solid fa-crown text-amber-500"></i> 
-                        <span id="bj-dealer-label">Дилер (ИИ)</span>
+                        <span id="bj-dealer-label">Дилер (Хост)</span>
                         <span id="bj-dealer-score" class="bg-black/80 px-2 py-0.5 rounded text-amber-400 border border-amber-500/30">?</span>
                     </div>
                     <div id="bj-dealer-hand" class="flex justify-center relative min-h-[var(--card-height-bj)] gap-2"></div>
                 </div>
 
                 <div class="relative z-30 h-16 flex flex-col items-center justify-center my-1">
-                    <div id="bj-msg" class="text-center font-black title-font text-lg md:text-xl opacity-0 transition-all transform scale-90 duration-500 bg-black/85 px-5 py-2 rounded-2xl backdrop-blur-sm border border-transparent">
-                        ПОБЕДА
-                    </div>
+                    <div id="bj-msg" class="text-center font-black title-font text-lg md:text-xl opacity-0 transition-all transform scale-90 duration-500 bg-black/85 px-5 py-2 rounded-2xl backdrop-blur-sm border border-transparent"></div>
                 </div>
 
-                <!-- Betting overlay -->
+                <!-- Betting overlay (For Client Only) -->
                 <div id="bj-bet-tray" class="hidden absolute inset-0 bg-black/85 z-40 flex flex-col items-center justify-center p-4">
-                    <div class="glass-panel rounded-3xl p-6 text-center max-w-sm w-full border border-amber-500/40 shadow-[0_0_40px_rgba(251,191,36,0.15)]">
-                        <div class="text-xs text-amber-400 uppercase tracking-widest font-bold mb-2">Metro Casino Suite</div>
+                    <div class="glass-panel rounded-3xl p-6 text-center max-w-sm w-full border-t-2 border-amber-500/50 shadow-[0_0_40px_rgba(251,191,36,0.15)]">
+                        <div class="text-xs text-amber-400 uppercase tracking-widest font-bold mb-2">Ваш ход</div>
                         <h2 class="text-xl font-black title-font text-white mb-6">СДЕЛАЙТЕ СТАВКУ</h2>
                         
                         <div class="flex justify-center gap-3 mb-6">
@@ -474,18 +393,16 @@
                         </div>
 
                         <div class="text-[11px] text-gray-400 uppercase tracking-wider mb-2">Текущая ставка: <span id="bj-bet-preview" class="text-amber-400 font-bold">10 ₽</span></div>
-                        <div class="text-[11px] text-gray-400 uppercase tracking-wider mb-6">Ваш баланс: <span id="bj-balance-preview" class="text-emerald-400 font-bold">1000 ₽</span></div>
+                        <div class="text-[11px] text-gray-400 uppercase tracking-wider mb-6">Ваш баланс: <span id="bj-balance-preview" class="text-emerald-400 font-bold">0 ₽</span></div>
                         
-                        <button onclick="bj_confirmBet()" class="w-full btn-neon-gold py-3 rounded-2xl uppercase text-[11px] font-bold tracking-wider">Подтвердить</button>
+                        <button onclick="bj_confirmBet()" class="w-full btn-neon-gold py-3.5 rounded-2xl uppercase text-[11px] font-bold tracking-wider shadow-lg">Подтвердить</button>
                     </div>
                 </div>
 
-                <!-- Interactive Emojis overlay -->
                 <div class="absolute right-3 top-1/2 -translate-y-1/2 flex flex-col gap-1.5 z-40 bg-black/50 p-1.5 rounded-full border border-amber-500/10">
                     <button onclick="sendEmoji('👍')" class="hover:scale-125 transition text-base md:text-lg">👍</button>
                     <button onclick="sendEmoji('🔥')" class="hover:scale-125 transition text-base md:text-lg">🔥</button>
                     <button onclick="sendEmoji('😂')" class="hover:scale-125 transition text-base md:text-lg">😂</button>
-                    <button onclick="sendEmoji('🤡')" class="hover:scale-125 transition text-base md:text-lg">🤡</button>
                     <button onclick="sendEmoji('🤬')" class="hover:scale-125 transition text-base md:text-lg">🤬</button>
                 </div>
 
@@ -499,30 +416,30 @@
                     <div id="bj-player-hand" class="flex justify-center relative min-h-[var(--card-height-bj)] mb-4 gap-2"></div>
                     
                     <div id="bj-controls" class="flex gap-2 w-full max-w-sm px-4">
-                        <button onclick="bj_hit()" id="bj-btn-hit" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl uppercase text-[9px] shadow-[0_0_15px_rgba(16,185,129,0.25)] active:scale-95 transition border border-emerald-400/30">
+                        <button onclick="bj_hit()" id="bj-btn-hit" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl uppercase text-[9px] shadow-[0_0_15px_rgba(16,185,129,0.25)] active:scale-95 transition border border-emerald-400/30">
                             <i class="fa-solid fa-plus mr-0.5"></i> Взять
                         </button>
-                        <button onclick="bj_doubleDown()" id="bj-btn-double" class="flex-1 bg-amber-600 hover:bg-amber-500 text-white font-bold py-2.5 rounded-xl uppercase text-[9px] shadow-[0_0_15px_rgba(245,158,11,0.25)] active:scale-95 transition border border-amber-400/30">
+                        <button onclick="bj_doubleDown()" id="bj-btn-double" class="flex-1 bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 rounded-xl uppercase text-[9px] shadow-[0_0_15px_rgba(245,158,11,0.25)] active:scale-95 transition border border-amber-400/30">
                             <i class="fa-solid fa-bolt mr-0.5"></i> Дабл
                         </button>
-                        <button onclick="bj_stand()" id="bj-btn-stand" class="flex-1 bg-red-600 hover:bg-red-500 text-white font-bold py-2.5 rounded-xl uppercase text-[9px] shadow-[0_0_15px_rgba(239,68,68,0.25)] active:scale-95 transition border border-red-400/30">
+                        <button onclick="bj_stand()" id="bj-btn-stand" class="flex-1 bg-red-600 hover:bg-red-500 text-white font-bold py-3 rounded-xl uppercase text-[9px] shadow-[0_0_15px_rgba(239,68,68,0.25)] active:scale-95 transition border border-red-400/30">
                             <i class="fa-solid fa-hand mr-0.5"></i> Хватить
                         </button>
                     </div>
 
                     <div id="bj-waiting" class="hidden w-full max-w-sm text-center">
-                        <div class="text-[9px] text-amber-400 uppercase tracking-widest font-bold animate-pulse bg-amber-900/20 py-2.5 rounded-xl border border-amber-500/20" id="bj-wait-text">
-                            Ожидание хода дилера...
+                        <div class="text-[9px] text-amber-400 uppercase tracking-widest font-bold animate-pulse bg-amber-900/20 py-3 rounded-xl border border-amber-500/20" id="bj-wait-text">
+                            Ожидание...
                         </div>
                     </div>
                     
-                    <div class="w-full max-w-sm mt-3 flex justify-between items-center px-4 py-1.5 bg-black/40 rounded-xl border border-amber-900/30 text-[9px]">
-                        <div>СТАВКА: <span id="bj-current-bet-display" class="text-amber-400 font-bold font-mono">10 ₽</span></div>
-                        <div>БАЛАНС: <span id="bj-current-balance-display" class="text-emerald-400 font-bold font-mono">1000 ₽</span></div>
+                    <div class="w-full max-w-sm mt-3 flex justify-between items-center px-4 py-2 bg-black/40 rounded-xl border border-amber-900/30 text-[9px] shadow-inner">
+                        <div>СТАВКА: <span id="bj-current-bet-display" class="text-amber-400 font-bold font-mono">0 ₽</span></div>
+                        <div>БАНК (Стол): <span id="bj-current-balance-display" class="text-emerald-400 font-bold font-mono">0 ₽</span></div>
                     </div>
 
-                    <button id="bj-reset-btn" onclick="bj_resetGame()" class="hidden w-full max-w-sm btn-neon-gold font-bold py-2.5 rounded-xl uppercase text-[10px] mt-2 shadow-[0_0_15px_rgba(251,191,36,0.2)]">
-                        Сыграть еще раз
+                    <button id="bj-reset-btn" onclick="bj_resetGame()" class="hidden w-full max-w-sm btn-neon-gold font-bold py-3 rounded-xl uppercase text-[10px] mt-2 shadow-lg">
+                        Новая раздача
                     </button>
                 </div>
             </div>
@@ -530,30 +447,27 @@
 
     </main>
 
-    <!-- ИЗМЕНЕННЫЙ: Улучшенный Ruble Deposit Modal -->
-    <div id="deposit-modal" class="hidden fixed inset-0 bg-black/85 z-[99999] flex items-center justify-center p-4 backdrop-blur-sm">
+    <!-- Deposit Modal -->
+    <div id="deposit-modal" class="hidden fixed inset-0 bg-black/85 z-[99999] flex items-center justify-center p-4 backdrop-blur-md">
         <div class="glass-panel rounded-3xl p-1 text-center max-w-sm w-full shadow-[0_0_60px_rgba(251,191,36,0.15)] relative overflow-hidden">
-            
-            <!-- Декоративные свечения -->
             <div class="absolute -top-20 -left-20 w-40 h-40 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
             <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none"></div>
 
-            <div class="bg-slate-950/80 rounded-[22px] p-5 relative z-10 border border-slate-700/50">
-                <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
+            <div class="bg-slate-950/90 rounded-[22px] p-6 relative z-10 border border-slate-700/50">
+                <div class="flex justify-between items-center mb-5 border-b border-slate-800 pb-3">
                     <span class="text-[10px] text-amber-400 uppercase tracking-widest font-extrabold flex items-center gap-1.5">
                         <i class="fa-solid fa-wallet text-amber-500"></i> Metro Wallet
                     </span>
-                    <button onclick="closeDepositModal()" class="text-gray-400 hover:text-white transition w-6 h-6 flex items-center justify-center bg-slate-900 rounded-full border border-slate-700">
+                    <button onclick="closeDepositModal()" class="text-gray-400 hover:text-white transition w-7 h-7 flex items-center justify-center bg-slate-900 rounded-full border border-slate-700">
                         <i class="fa-solid fa-xmark text-xs"></i>
                     </button>
                 </div>
                 
-                <h2 class="text-sm font-extrabold text-white mb-1 uppercase tracking-wide">Сумма пополнения</h2>
-                <p class="text-[9px] text-gray-400 mb-5">Прямой обмен через верифицированного оператора</p>
+                <h2 class="text-sm font-extrabold text-white mb-1 uppercase tracking-wide">Пополнение баланса</h2>
+                <p class="text-[9px] text-gray-400 mb-6">Заявка будет отправлена верифицированному оператору.</p>
                 
-                <!-- Кастомный ввод суммы (Новый дизайн) -->
-                <div class="relative mb-5 flex justify-center">
-                    <div class="flex items-center justify-center bg-black/50 border border-amber-500/30 rounded-2xl p-2 w-full max-w-[200px] shadow-[inset_0_0_15px_rgba(0,0,0,0.8)]">
+                <div class="relative mb-6 flex justify-center">
+                    <div class="flex items-center justify-center bg-black/50 border border-amber-500/30 rounded-2xl p-3 w-full max-w-[200px] shadow-[inset_0_0_15px_rgba(0,0,0,0.8)]">
                         <input type="number" id="custom-deposit-amount" 
                             class="bg-transparent w-full text-center text-3xl font-black title-font text-amber-400 focus:outline-none placeholder-amber-900/50" 
                             value="500" min="50" step="50" oninput="updateDepositTemplate()">
@@ -561,127 +475,87 @@
                     </div>
                 </div>
 
-                <!-- Быстрые кнопки -->
-                <div class="grid grid-cols-4 gap-2 mb-5">
-                    <button onclick="setDepositAmount(100)" class="py-2 bg-slate-900 border border-slate-700 rounded-xl text-[10px] font-mono font-bold text-gray-300 hover:text-amber-400 hover:border-amber-500/50 transition active:scale-95 shadow-sm">+100</button>
-                    <button onclick="setDepositAmount(500)" class="py-2 bg-slate-900 border border-slate-700 rounded-xl text-[10px] font-mono font-bold text-gray-300 hover:text-amber-400 hover:border-amber-500/50 transition active:scale-95 shadow-sm">+500</button>
-                    <button onclick="setDepositAmount(1000)" class="py-2 bg-slate-900 border border-slate-700 rounded-xl text-[10px] font-mono font-bold text-gray-300 hover:text-amber-400 hover:border-amber-500/50 transition active:scale-95 shadow-sm">+1K</button>
-                    <button onclick="setDepositAmount(5000)" class="py-2 bg-slate-900 border border-slate-700 rounded-xl text-[10px] font-mono font-bold text-gray-300 hover:text-amber-400 hover:border-amber-500/50 transition active:scale-95 shadow-sm">+5K</button>
+                <div class="grid grid-cols-4 gap-2 mb-6">
+                    <button onclick="setDepositAmount(100)" class="py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-[10px] font-mono font-bold text-gray-300 hover:text-amber-400 hover:border-amber-500/50 transition active:scale-95 shadow-sm">+100</button>
+                    <button onclick="setDepositAmount(500)" class="py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-[10px] font-mono font-bold text-gray-300 hover:text-amber-400 hover:border-amber-500/50 transition active:scale-95 shadow-sm">+500</button>
+                    <button onclick="setDepositAmount(1000)" class="py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-[10px] font-mono font-bold text-gray-300 hover:text-amber-400 hover:border-amber-500/50 transition active:scale-95 shadow-sm">+1K</button>
+                    <button onclick="setDepositAmount(5000)" class="py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-[10px] font-mono font-bold text-gray-300 hover:text-amber-400 hover:border-amber-500/50 transition active:scale-95 shadow-sm">+5K</button>
                 </div>
 
-                <!-- Шаблон спрятан для пользователя, но используется кодом -->
                 <p id="deposit-message-template" class="hidden"></p>
 
-                <!-- Интерактивная One-Click Кнопка -->
                 <button onclick="processDeposit()" class="w-full relative overflow-hidden group bg-gradient-to-r from-amber-600 to-amber-500 text-black py-4 rounded-xl text-[11px] font-extrabold uppercase tracking-widest shadow-[0_0_20px_rgba(251,191,36,0.3)] transition active:scale-95">
                     <span class="relative z-10 flex items-center justify-center gap-2">
                         <i class="fa-solid fa-paper-plane"></i> Создать заявку
                     </span>
                     <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-500"></div>
                 </button>
-
-                <div class="text-[7.5px] text-gray-500 font-bold mt-4 uppercase flex items-center justify-center gap-1">
-                    <i class="fa-solid fa-lock text-slate-600"></i>
-                    Нажатие скопирует текст и откроет @BALAMUTDEL
-                </div>
             </div>
         </div>
     </div>
 
-    <!-- Global Notifications -->
     <div id="toast-box" class="fixed top-16 left-1/2 -translate-x-1/2 flex flex-col gap-2 z-[9999] pointer-events-none w-[90%] max-w-sm"></div>
 
-    <!-- ИНТЕГРАЦИЯ БАЗЫ ДАННЫХ (Telegram Cloud Storage + Логирование в Канал) -->
+    <!-- Загрузка настроек с панели администратора и инициализация БД -->
     <script>
-        const DB_CHANNEL_ID = "-1003734695647"; // Ваш канал-база данных
-        const TG_BOT_TOKEN_DB = "8575086263:AAG74PmRjUT8ExtDkC_kOxfYfmss2BG0C_A"; 
+        // Загружаем конфиг, установленный в admin_host.html (если он есть)
+        const savedConfig = JSON.parse(localStorage.getItem('metro_admin_config') || '{}');
+        const TG_BOT_TOKEN = savedConfig.botToken || "8575086263:AAG74PmRjUT8ExtDkC_kOxfYfmss2BG0C_A"; 
+        const TG_CHANNEL_NAME = savedConfig.lobbyChannel || "@metrocash_p2p_lobbies";
+        const DB_CHANNEL_ID = savedConfig.dbChannel || "-1003734695647";
         
-        // Загрузка баланса при входе
         async function loadProfileBalance() {
             let loaded = false;
-
-            // 1. Пытаемся прочитать из официального облака Telegram (лучший вариант для TWA)
             if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.CloudStorage) {
                 try {
                     window.Telegram.WebApp.CloudStorage.getItem('metro_balance', (err, value) => {
-                        if (!err && value) {
-                            window.rubBalance = parseFloat(value);
-                        } else {
-                            // Если пусто, берем из локального кэша или выдаем стартовые 1000
-                            window.rubBalance = parseFloat(localStorage.getItem('metro_rub_balance')) || 1000.00;
-                        }
+                        if (!err && value) { window.rubBalance = parseFloat(value); } 
+                        else { window.rubBalance = parseFloat(localStorage.getItem('metro_rub_balance')) || 1000.00; }
                         if(typeof window.updateRUBBalancesUI === 'function') window.updateRUBBalancesUI();
                     });
                     loaded = true;
                 } catch(e) { console.warn("CloudStorage error", e); }
             }
-
-            // Fallback если запущен не в Telegram
             if (!loaded) {
                 window.rubBalance = parseFloat(localStorage.getItem('metro_rub_balance')) || 1000.00;
                 if(typeof window.updateRUBBalancesUI === 'function') window.updateRUBBalancesUI();
             }
         }
 
-        // Синхронизация баланса после изменения
         window.syncBalanceToDB = async (newBalance) => {
-            let userId = "guest";
-            let userName = "Unknown";
-            
+            let userId = "guest"; let userName = "Unknown";
             if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe?.user) {
                 userId = window.Telegram.WebApp.initDataUnsafe.user.id.toString();
                 userName = window.Telegram.WebApp.initDataUnsafe.user.first_name || "Игрок";
             }
-
-            // 1. Сохраняем в Telegram Cloud Storage для самого игрока (моментально и надежно)
             if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.CloudStorage) {
-                try {
-                    window.Telegram.WebApp.CloudStorage.setItem('metro_balance', newBalance.toString());
-                } catch(e){}
+                try { window.Telegram.WebApp.CloudStorage.setItem('metro_balance', newBalance.toString()); } catch(e){}
             }
             localStorage.setItem('metro_rub_balance', newBalance.toString());
 
-            // 2. Отправляем ЛОГ в ваш приватный канал (Базу Данных)
             if (userId !== "guest") {
-                const text = `🗄 <b>ИЗМЕНЕНИЕ БАЛАНСА</b>\n👤 Участник: <a href="tg://user?id=${userId}">${userName}</a>\n🆔 ID: <code>${userId}</code>\n💰 Новый Баланс: <b>${newBalance.toFixed(2)} ₽</b>\n⏱ Время: ${new Date().toLocaleString('ru-RU')}`;
-                
+                const text = `🗄 <b>ТРАНЗАКЦИЯ P2P (Клиент)</b>\n👤 Участник: <a href="tg://user?id=${userId}">${userName}</a>\n💰 Баланс: <b>${newBalance.toFixed(2)} ₽</b>\n⏱ ${new Date().toLocaleString('ru-RU')}`;
                 try {
-                    fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN_DB}/sendMessage`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ 
-                            chat_id: DB_CHANNEL_ID, 
-                            text: text, 
-                            parse_mode: "HTML",
-                            disable_notification: true // Без звука, чтобы не спамить владельца
-                        })
+                    fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
+                        method: 'POST', headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ chat_id: DB_CHANNEL_ID, text: text, parse_mode: "HTML", disable_notification: true })
                     });
-                } catch(error) {
-                    console.error("Не удалось отправить лог в канал базы данных:", error);
-                }
+                } catch(error) {}
             }
         };
 
-        // Запускаем загрузку профиля при старте
         document.addEventListener('DOMContentLoaded', loadProfileBalance);
     </script>
 
+    <!-- Основная логика P2P -->
     <script>
-        // --- CONSTANTS & GLOBALS ---
-        const TG_BOT_TOKEN = "8575086263:AAG74PmRjUT8ExtDkC_kOxfYfmss2BG0C_A"; 
-        const TG_CHANNEL_NAME = "@metrocash_p2p_lobbies";
-        
         let myPeer, myPeerId, p2pConn;
-        let isHost = false, currentGameMode = null, isSingleplayer = false;
+        let isHost = false, currentGameMode = null;
         let tgLobbyPostId = null;
-
-        // Core RUB Balance system persistent
-        window.rubBalance = parseFloat(localStorage.getItem('metro_rub_balance')) || 1000.00;
-
-        // WebApp Heartbeat Keep-Alive
         let pingInterval, pongTimeout;
 
-        // --- TWA INTEGRATION & HAPTICS ---
+        window.rubBalance = parseFloat(localStorage.getItem('metro_rub_balance')) || 1000.00;
+
         function triggerHaptic(type) {
             try {
                 if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.HapticFeedback) {
@@ -690,17 +564,15 @@
                     else if (type === 'medium') haptic.impactOccurred('medium');
                     else if (type === 'heavy') haptic.impactOccurred('heavy');
                     else if (type === 'success') haptic.notificationOccurred('success');
-                    else if (type === 'warning') haptic.notificationOccurred('warning');
                     else if (type === 'error') haptic.notificationOccurred('error');
                 }
-            } catch (e) { console.log("Haptic failed:", e); }
+            } catch (e) {}
         }
 
-        // Generate Invite Telegram Link
         function shareInviteLink() {
             triggerHaptic('light');
             const modeName = currentGameMode === 'DURAK' ? 'Дурак' : 'Блэкджек';
-            const textMsg = `Присоединяйся к игре в Metro Cash Suite!\nРежим: ${modeName}\nP2P ID комнаты: ${myPeerId}`;
+            const textMsg = `Присоединяйся к моей онлайн игре!\nРежим: ${modeName}\nP2P ID комнаты: ${myPeerId}`;
             const inviteUrl = `https://t.me/share/url?url=${encodeURIComponent(window.location.origin + window.location.pathname + '?join=' + myPeerId + '&mode=' + currentGameMode)}&text=${encodeURIComponent(textMsg)}`;
             
             if (window.Telegram && window.Telegram.WebApp) {
@@ -712,229 +584,128 @@
                 dummy.select();
                 document.execCommand('copy');
                 document.body.removeChild(dummy);
-                toast("Ссылка на комнату скопирована в буфер обмена!");
+                toast("Ссылка на комнату скопирована!");
             }
         }
 
-        // Floating Reaction Spawner
         function sendEmoji(emoji) {
-            triggerHaptic('light');
-            spawnEmoji(emoji);
-            if (p2pConn && p2pConn.open) {
-                p2pConn.send({ type: 'EMOJI', emoji: emoji });
-            }
+            triggerHaptic('light'); spawnEmoji(emoji);
+            if (p2pConn && p2pConn.open) p2pConn.send({ type: 'EMOJI', emoji: emoji });
         }
 
         function spawnEmoji(emoji) {
             const bubble = document.createElement('div');
-            bubble.className = 'reaction-bubble';
-            bubble.innerText = emoji;
-            bubble.style.left = `${Math.floor(Math.random() * 60 + 20)}%`;
-            bubble.style.bottom = '15%';
+            bubble.className = 'reaction-bubble'; bubble.innerText = emoji;
+            bubble.style.left = `${Math.floor(Math.random() * 60 + 20)}%`; bubble.style.bottom = '15%';
             document.body.appendChild(bubble);
             setTimeout(() => { bubble.remove(); }, 1250);
         }
 
-        // --- RUB BALANCE CONTROLLER ---
         window.updateRUBBalancesUI = function() {
             document.getElementById('global-rub-balance').innerText = `${window.rubBalance.toLocaleString('ru-RU')} ₽`;
-            
-            const dkBal = document.getElementById('dk-game-rub-balance');
-            if(dkBal) dkBal.innerText = `${window.rubBalance.toLocaleString('ru-RU')} ₽`;
-            
-            const bjBal = document.getElementById('bj-game-rub-balance');
-            if(bjBal) bjBal.innerText = `${window.rubBalance.toLocaleString('ru-RU')} ₽`;
-            
-            document.getElementById('bj-balance-preview').innerText = `${window.rubBalance.toLocaleString('ru-RU')} ₽`;
-            document.getElementById('bj-current-balance-display').innerText = `${window.rubBalance.toLocaleString('ru-RU')} ₽`;
+            const dkBal = document.getElementById('dk-game-rub-balance'); if(dkBal) dkBal.innerText = `${window.rubBalance.toLocaleString('ru-RU')} ₽`;
+            const bjBal = document.getElementById('bj-game-rub-balance'); if(bjBal) bjBal.innerText = `${window.rubBalance.toLocaleString('ru-RU')} ₽`;
+            const bjPrev = document.getElementById('bj-balance-preview'); if(bjPrev) bjPrev.innerText = `${window.rubBalance.toLocaleString('ru-RU')} ₽`;
+            const bjDisp = document.getElementById('bj-current-balance-display'); if(bjDisp) bjDisp.innerText = `${window.rubBalance.toLocaleString('ru-RU')} ₽`;
         }
 
         function updateRUBBalances() {
-            if(typeof window.syncBalanceToDB === 'function') {
-                window.syncBalanceToDB(window.rubBalance); 
-            }
+            if(typeof window.syncBalanceToDB === 'function') window.syncBalanceToDB(window.rubBalance); 
             window.updateRUBBalancesUI();
         }
 
-        // --- ИЗМЕНЕННАЯ ЛОГИКА ПОПОЛНЕНИЯ (DEPOSIT) ---
-        function openDepositModal() {
-            triggerHaptic('light');
-            document.getElementById('deposit-modal').classList.remove('hidden');
-            updateDepositTemplate();
-        }
-
-        function closeDepositModal() {
-            document.getElementById('deposit-modal').classList.add('hidden');
-        }
-
-        function setDepositAmount(amount) {
-            triggerHaptic('light');
-            document.getElementById('custom-deposit-amount').value = amount;
-            updateDepositTemplate();
-        }
+        function openDepositModal() { triggerHaptic('light'); document.getElementById('deposit-modal').classList.remove('hidden'); updateDepositTemplate(); }
+        function closeDepositModal() { document.getElementById('deposit-modal').classList.add('hidden'); }
+        function setDepositAmount(amount) { triggerHaptic('light'); document.getElementById('custom-deposit-amount').value = amount; updateDepositTemplate(); }
 
         function updateDepositTemplate() {
             const amount = document.getElementById('custom-deposit-amount').value || 0;
             let myIdText = myPeerId || "[Ожидание сети]";
-            try {
-                if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe?.user) {
-                    myIdText = window.Telegram.WebApp.initDataUnsafe.user.id.toString(); 
-                }
-            } catch(e) {}
-            
+            try { if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe?.user) myIdText = window.Telegram.WebApp.initDataUnsafe.user.id.toString(); } catch(e) {}
             document.getElementById('deposit-message-template').innerText = `Привет! Хочу пополнить баланс в Metro Cash. Мой ID: ${myIdText}. Сумма: ${amount} рублей.`;
         }
 
-        // One-click процесс депозита
         function processDeposit() {
             const amount = document.getElementById('custom-deposit-amount').value;
-            if(!amount || amount <= 0) {
-                toast("Укажите корректную сумму", true);
-                return;
-            }
-
-            triggerHaptic('heavy');
-            updateDepositTemplate(); 
-            
-            // Копируем текст
+            if(!amount || amount <= 0) { toast("Укажите корректную сумму", true); return; }
+            triggerHaptic('heavy'); updateDepositTemplate(); 
             const txt = document.getElementById('deposit-message-template').innerText;
-            const dummy = document.createElement('textarea');
-            document.body.appendChild(dummy);
-            dummy.value = txt;
-            dummy.select();
-            document.execCommand('copy');
-            document.body.removeChild(dummy);
-            
-            toast("Текст заявки скопирован! Открываем обменник...");
-            
-            // Ждем секунду и перенаправляем
+            const dummy = document.createElement('textarea'); document.body.appendChild(dummy);
+            dummy.value = txt; dummy.select(); document.execCommand('copy'); document.body.removeChild(dummy);
+            toast("Заявка создана! Перенаправление...");
             setTimeout(() => {
                 const exUrl = "https://t.me/BALAMUTDEL";
-                if (window.Telegram && window.Telegram.WebApp) {
-                    window.Telegram.WebApp.openTelegramLink(exUrl);
-                } else {
-                    window.open(exUrl, '_blank');
-                }
+                if (window.Telegram && window.Telegram.WebApp) window.Telegram.WebApp.openTelegramLink(exUrl);
+                else window.open(exUrl, '_blank');
                 closeDepositModal();
             }, 1200);
         }
 
-        // --- UTILITIES ---
         function playSnd(type) {
             try {
                 const ctx = new (window.AudioContext || window.webkitAudioContext)();
                 const osc = ctx.createOscillator(), gain = ctx.createGain();
                 osc.connect(gain); gain.connect(ctx.destination);
-                if(type === 'card') { 
-                    osc.type = 'square'; osc.frequency.setValueAtTime(200, ctx.currentTime); 
-                    osc.frequency.exponentialRampToValueAtTime(50, ctx.currentTime+0.1); 
-                    gain.gain.setValueAtTime(0.05, ctx.currentTime); gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime+0.1); 
-                    osc.start(); osc.stop(ctx.currentTime+0.1); 
-                }
-                if(type === 'click') { 
-                    osc.frequency.setValueAtTime(600, ctx.currentTime); gain.gain.setValueAtTime(0.03, ctx.currentTime); 
-                    osc.start(); gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime+0.1); osc.stop(ctx.currentTime+0.1); 
-                }
-                if(type === 'win') {
-                    osc.type = 'sine'; osc.frequency.setValueAtTime(400, ctx.currentTime);
-                    osc.frequency.setValueAtTime(600, ctx.currentTime+0.1); osc.frequency.setValueAtTime(800, ctx.currentTime+0.2);
-                    gain.gain.setValueAtTime(0.05, ctx.currentTime); gain.gain.linearRampToValueAtTime(0, ctx.currentTime+0.4);
-                    osc.start(); osc.stop(ctx.currentTime+0.4);
-                }
+                if(type === 'card') { osc.type = 'square'; osc.frequency.setValueAtTime(200, ctx.currentTime); osc.frequency.exponentialRampToValueAtTime(50, ctx.currentTime+0.1); gain.gain.setValueAtTime(0.05, ctx.currentTime); gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime+0.1); osc.start(); osc.stop(ctx.currentTime+0.1); }
+                if(type === 'click') { osc.frequency.setValueAtTime(600, ctx.currentTime); gain.gain.setValueAtTime(0.03, ctx.currentTime); osc.start(); gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime+0.1); osc.stop(ctx.currentTime+0.1); }
+                if(type === 'win') { osc.type = 'sine'; osc.frequency.setValueAtTime(400, ctx.currentTime); osc.frequency.setValueAtTime(600, ctx.currentTime+0.1); osc.frequency.setValueAtTime(800, ctx.currentTime+0.2); gain.gain.setValueAtTime(0.05, ctx.currentTime); gain.gain.linearRampToValueAtTime(0, ctx.currentTime+0.4); osc.start(); osc.stop(ctx.currentTime+0.4); }
             } catch(e){}
         }
 
         function toast(msg, err=false) {
-            if (err) triggerHaptic('error');
-            else triggerHaptic('light');
-
+            if (err) triggerHaptic('error'); else triggerHaptic('light');
             const box = document.getElementById('toast-box');
             const el = document.createElement('div');
-            const colors = err ? 'bg-red-950/90 border-red-500/50 text-red-200 shadow-red-950/35' : 'bg-slate-900/90 border-emerald-500/50 text-emerald-200 shadow-emerald-950/35';
-            el.className = `p-3 rounded-xl shadow-xl border ${colors} text-center text-[11px] font-bold backdrop-blur-md transition-all duration-300 transform -translate-y-4 opacity-0`;
+            const colors = err ? 'bg-red-950/90 border-red-500/50 text-red-200 shadow-red-950/35' : 'bg-slate-900/95 border-emerald-500/50 text-emerald-200 shadow-[0_5px_15px_rgba(16,185,129,0.3)]';
+            el.className = `p-3 rounded-2xl border ${colors} text-center text-[11px] font-bold backdrop-blur-xl transition-all duration-300 transform -translate-y-4 opacity-0`;
             el.innerText = msg; box.appendChild(el);
             requestAnimationFrame(() => { el.classList.remove('-translate-y-4', 'opacity-0'); });
             setTimeout(() => { el.classList.add('opacity-0', '-translate-y-4'); setTimeout(()=>el.remove(), 300); }, 2800);
         }
 
-        // --- VIEWS ROUTER ---
         window.addEventListener('DOMContentLoaded', () => {
             if (window.Telegram && window.Telegram.WebApp) {
-                const tg = window.Telegram.WebApp;
-                tg.ready(); tg.expand();
+                const tg = window.Telegram.WebApp; tg.ready(); tg.expand();
                 if (tg.initDataUnsafe?.user) {
                     const tgName = tg.initDataUnsafe.user.first_name || 'Игрок TG';
                     document.getElementById('player-nickname').value = tgName;
-                    
-                    const profileLabel = document.getElementById('profile-name-label');
-                    if (profileLabel) {
-                        profileLabel.innerHTML = `<i class="fa-solid fa-user-circle mr-1"></i> ${tgName.toUpperCase()}`;
-                    }
+                    document.getElementById('profile-name-label').innerHTML = `<i class="fa-solid fa-user-circle mr-1.5 text-slate-500"></i> ${tgName.toUpperCase()}`;
                 }
             }
-            initPeer();
-            switchTab('hub');
-
+            initPeer(); switchTab('hub');
             const urlParams = new URLSearchParams(window.location.search);
-            const joinId = urlParams.get('join');
-            const rMode = urlParams.get('mode');
-            if (joinId) {
-                setTimeout(() => {
-                    currentGameMode = rMode || 'DURAK';
-                    joinLobby(joinId, currentGameMode);
-                }, 1000);
-            }
+            if (urlParams.get('join')) setTimeout(() => { currentGameMode = urlParams.get('mode') || 'DURAK'; joinLobby(urlParams.get('join'), currentGameMode); }, 1000);
         });
 
         function switchTab(tab) {
             document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
-            const header = document.getElementById('main-header');
-            
-            if(tab === 'hub') {
-                header.style.display = 'flex'; 
-                document.getElementById('view-hub').classList.add('active');
-            } else if (tab === 'game') {
-                header.style.display = 'none'; 
-                if (currentGameMode === 'BLACKJACK') {
-                    document.getElementById('view-blackjack').classList.add('active');
-                } else {
-                    document.getElementById('view-durak').classList.add('active');
-                }
+            document.getElementById('main-header').style.display = tab === 'hub' ? 'flex' : 'none';
+            if(tab === 'hub') document.getElementById('view-hub').classList.add('active');
+            else if (tab === 'game') {
+                if (currentGameMode === 'BLACKJACK') document.getElementById('view-blackjack').classList.add('active');
+                else document.getElementById('view-durak').classList.add('active');
             }
         }
 
         window.leaveGame = function() {
-            playSnd('click');
-            stopHeartbeat();
-            stopCoinsRain();
+            playSnd('click'); stopHeartbeat(); stopCoinsRain();
             if(p2pConn) { p2pConn.close(); p2pConn = null; }
             dk_active = false; bj_active = false;
-            removeLobby();
-            switchTab('hub');
+            removeLobby(); switchTab('hub');
         }
 
-        // STUN & TURN network options
         function initPeer() {
-            myPeer = new Peer('', { 
-                config: { 
-                    iceServers: [
-                        { urls: 'stun:stun.l.google.com:19302' },
-                        { urls: 'stun:stun1.l.google.com:19302' },
-                        { urls: 'stun:stun2.l.google.com:19302' },
-                        {
-                            urls: 'turn:openrelay.metered.ca:443',
-                            username: 'openrelayproject',
-                            credential: 'openrelayproject'
-                        }
-                    ] 
-                }
-            });
+            const iceServers = savedConfig.iceServers ? JSON.parse(savedConfig.iceServers) : [
+                { urls: 'stun:stun.l.google.com:19302' },
+                { urls: 'turn:openrelay.metered.ca:443', username: 'openrelayproject', credential: 'openrelayproject' }
+            ];
+            myPeer = new Peer('', { config: { iceServers: iceServers } });
 
             myPeer.on('open', id => {
                 myPeerId = id;
-                document.getElementById('global-peer-indicator').className = "h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]";
+                document.getElementById('global-peer-indicator').className = "h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]";
                 document.getElementById('global-peer-text').innerText = "ОНЛАЙН";
-                document.getElementById('global-peer-text').classList.replace('text-gray-400', 'text-emerald-400');
+                document.getElementById('global-peer-text').classList.replace('text-gray-300', 'text-emerald-400');
                 document.getElementById('local-peer-id').innerText = id;
             });
             myPeer.on('connection', conn => {
@@ -948,20 +719,14 @@
             pingInterval = setInterval(() => {
                 if (p2pConn && p2pConn.open) {
                     p2pConn.send({ type: 'PING' });
-                    pongTimeout = setTimeout(() => {
-                        toast("Слабый сигнал сети...", true);
-                    }, 2800);
+                    pongTimeout = setTimeout(() => { toast("Слабый сигнал сети...", true); }, 2800);
                 }
             }, 4000);
         }
-
-        function stopHeartbeat() {
-            if (pingInterval) clearInterval(pingInterval);
-            if (pongTimeout) clearTimeout(pongTimeout);
-        }
+        function stopHeartbeat() { if (pingInterval) clearInterval(pingInterval); if (pongTimeout) clearTimeout(pongTimeout); }
 
         function setupConnection(conn, hostRole) {
-            p2pConn = conn; isHost = hostRole; isSingleplayer = false;
+            p2pConn = conn; isHost = hostRole; 
             
             conn.on('open', () => {
                 conn.send({ type: 'HELLO', nick: document.getElementById('player-nickname').value, mode: currentGameMode });
@@ -969,36 +734,22 @@
             });
             
             conn.on('data', data => {
-                if (data.type === 'PING') {
-                    if (p2pConn && p2pConn.open) p2pConn.send({ type: 'PONG' });
-                    return;
-                }
-                if (data.type === 'PONG') {
-                    clearTimeout(pongTimeout);
-                    return;
-                }
-
-                if (data.type === 'EMOJI') {
-                    spawnEmoji(data.emoji);
-                    return;
-                }
+                if (data.type === 'PING') { if (p2pConn && p2pConn.open) p2pConn.send({ type: 'PONG' }); return; }
+                if (data.type === 'PONG') { clearTimeout(pongTimeout); return; }
+                if (data.type === 'EMOJI') { spawnEmoji(data.emoji); return; }
 
                 if (data.type === 'HELLO') {
-                    toast(`${data.nick || 'Игрок'} в игре!`);
+                    toast(`${data.nick || 'Игрок'} подключился!`);
+                    currentGameMode = data.mode || currentGameMode;
+                    showGameBoard();
                     
-                    if (!isHost) {
-                        currentGameMode = data.mode || currentGameMode;
-                        showGameBoard();
-                    } else {
+                    if (isHost) {
                         removeLobby();
-                        showGameBoard();
-                        if (currentGameMode === 'DURAK') {
-                            document.getElementById('dk-opp-name').innerText = data.nick || 'Игрок';
-                            dk_startMulti();
-                        } else {
-                            document.getElementById('bj-player-label').innerText = data.nick || 'ИГРОК';
-                            bj_startMulti();
-                        }
+                        if (currentGameMode === 'DURAK') { document.getElementById('dk-opp-name').innerText = data.nick; dk_startMulti(); } 
+                        else { document.getElementById('bj-player-label').innerText = data.nick; bj_startMulti(); }
+                    } else {
+                        if (currentGameMode === 'DURAK') { document.getElementById('dk-opp-name').innerText = data.nick; } 
+                        else { document.getElementById('bj-dealer-label').innerText = `Дилер (${data.nick})`; }
                     }
                 }
                 
@@ -1008,34 +759,29 @@
                     if (data.type === 'DK_ACTION' && isHost) dk_handleClientAction(data.action);
                 } else if (currentGameMode === 'BLACKJACK') {
                     if (data.type === 'BJ_STATE') bj_applyState(data.state);
+                    if (data.type === 'BJ_BET' && isHost) { bj_current_bet_placed = data.amount; bj_dealInitialCardsMulti(); }
                     if (data.type === 'BJ_ACTION' && isHost) bj_handleClientAction(data.action);
                 }
             });
             
-            conn.on('close', () => { 
-                toast("Оппонент отключился", true); 
-                leaveGame(); 
-            });
+            conn.on('close', () => { toast("Оппонент отключился", true); leaveGame(); });
         }
 
         function showGameBoard() {
             if (currentGameMode === 'DURAK') {
-                document.getElementById('dk-setup').classList.add('hidden');
-                document.getElementById('dk-board').classList.remove('hidden');
+                document.getElementById('dk-setup').classList.add('hidden'); document.getElementById('dk-board').classList.remove('hidden');
             } else {
-                document.getElementById('bj-setup').classList.add('hidden');
-                document.getElementById('bj-board').classList.remove('hidden');
+                document.getElementById('bj-setup').classList.add('hidden'); document.getElementById('bj-board').classList.remove('hidden');
             }
         }
 
         window.hostGame = async function() {
             playSnd('click');
             currentGameMode = document.getElementById('game-mode-select').value;
-            const room = document.getElementById('room-name').value || "Metro Room";
+            const room = document.getElementById('room-name').value || "Metro VIP";
             
             const icon = currentGameMode === 'DURAK' ? '🃏' : '🎰';
-            const typeName = currentGameMode === 'DURAK' ? 'Дурак' : 'Блэкджек';
-            const text = `${icon} <b>METRO CASH P2P</b>\nРежим: ${typeName}\nКомната: ${room}\n\nLOBBY_ACTIVE|${currentGameMode}|${room}|${myPeerId}|${Date.now()}`;
+            const text = `${icon} <b>METRO CASH P2P</b>\nРежим: ${currentGameMode}\nКомната: ${room}\n\nLOBBY_ACTIVE|${currentGameMode}|${room}|${myPeerId}|${Date.now()}`;
             
             try {
                 const res = await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
@@ -1043,208 +789,113 @@
                     body: JSON.stringify({ chat_id: TG_CHANNEL_NAME, text: text, parse_mode: "HTML" })
                 });
                 const data = await res.json();
-                if(data.ok) { tgLobbyPostId = data.result.message_id; toast("Сервер опубликован в Telegram!"); }
+                if(data.ok) { tgLobbyPostId = data.result.message_id; toast("Сервер опубликован в сеть!"); }
             } catch(e) { toast("Локальный запуск сервера", true); }
             
-            isHost = true; isSingleplayer = false;
-            switchTab('game');
-            
-            if(currentGameMode === 'DURAK') {
-                document.getElementById('dk-setup').classList.remove('hidden');
-                document.getElementById('dk-board').classList.add('hidden');
-            } else {
-                document.getElementById('bj-setup').classList.remove('hidden');
-                document.getElementById('bj-board').classList.add('hidden');
-                document.getElementById('bj-setup-desc').innerText = "Ожидание подключения игрока. Вы будете играть за Дилера...";
-            }
+            isHost = true; switchTab('game');
+            if(currentGameMode === 'DURAK') { document.getElementById('dk-setup').classList.remove('hidden'); document.getElementById('dk-board').classList.add('hidden'); } 
+            else { document.getElementById('bj-setup').classList.remove('hidden'); document.getElementById('bj-board').classList.add('hidden'); }
         }
 
         async function fetchLobbies() {
             const grid = document.getElementById('lobbies-grid');
-            const icon = document.getElementById('refresh-icon');
-            icon.classList.add('animate-spin');
-            grid.innerHTML = '<div class="col-span-1 md:col-span-2 text-center text-[10px] text-gray-500 py-6">Загрузка сети...</div>';
+            const icon = document.getElementById('refresh-icon'); icon.classList.add('animate-spin');
+            grid.innerHTML = '<div class="col-span-full text-center text-xs text-gray-500 py-10 glass-panel rounded-2xl">Загрузка сети...</div>';
             
             try {
-                const res = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent('https://t.me/s/metrocash_p2p_lobbies')}`);
+                const res = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent('https://t.me/s/' + TG_CHANNEL_NAME.replace('@',''))}`);
                 const html = await res.text();
                 const doc = new DOMParser().parseFromString(html, 'text/html');
                 const msgs = doc.querySelectorAll('.tgme_widget_message_text');
-                grid.innerHTML = '';
-                let found = 0;
+                grid.innerHTML = ''; let found = 0;
 
                 msgs.forEach(msg => {
                     const txt = msg.innerText || "";
                     if(txt.includes('LOBBY_ACTIVE|')) {
                         const parts = txt.split('LOBBY_ACTIVE|')[1].split('|');
                         if (parts.length >= 4) {
-                            const mode = parts[0];
-                            const room = parts[1];
-                            const pid = parts[2];
-                            const ts = parseInt(parts[3]);
-                            
+                            const mode = parts[0], room = parts[1], pid = parts[2], ts = parseInt(parts[3]);
                             if (Date.now() - ts < 7200000 && pid !== myPeerId) {
                                 found++;
                                 const isDk = mode === 'DURAK';
                                 const cIcon = isDk ? '<i class="fa-solid fa-cards text-emerald-400"></i>' : '<i class="fa-solid fa-coins text-amber-400"></i>';
-                                const cName = isDk ? 'Дурак' : 'Блэкджек';
                                 const btnCls = isDk ? 'text-emerald-400 border-emerald-500/30 hover:bg-emerald-900/50' : 'text-amber-400 border-amber-500/30 hover:bg-amber-900/50';
                                 
                                 grid.innerHTML += `
-                                    <div class="bg-slate-900/80 border border-slate-700/50 p-3 rounded-xl flex flex-col justify-between hover:border-slate-500 transition shadow-md backdrop-blur-sm">
-                                        <div class="flex justify-between items-start mb-3">
-                                            <div>
-                                                <div class="text-[11px] font-bold text-white flex items-center gap-1.5">${cIcon} ${room}</div>
-                                                <div class="text-[8px] text-gray-400 font-mono mt-1 opacity-70">Режим: ${cName}</div>
-                                            </div>
+                                    <div class="glass-panel p-4 rounded-2xl flex flex-col justify-between transition hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(0,0,0,0.5)]">
+                                        <div class="flex flex-col mb-4">
+                                            <div class="text-[13px] font-black title-font text-white flex items-center gap-2">${cIcon} ${room}</div>
+                                            <div class="text-[9px] text-gray-400 font-mono mt-1.5 uppercase opacity-80">Режим: ${mode}</div>
                                         </div>
-                                        <button onclick="joinLobby('${pid}', '${mode}')" class="w-full bg-slate-950 border ${btnCls} text-[9px] font-bold uppercase py-2 rounded-lg transition active:scale-95">Подключиться</button>
+                                        <button onclick="joinLobby('${pid}', '${mode}')" class="w-full bg-black/40 border ${btnCls} text-[10px] font-bold uppercase py-2.5 rounded-xl transition active:scale-95 shadow-inner">Подключиться</button>
                                     </div>
                                 `;
                             }
                         }
                     }
                 });
-                if(found===0) grid.innerHTML = '<div class="col-span-1 md:col-span-2 text-center text-[10px] text-gray-500 py-6">Нет active серверов</div>';
-            } catch(e) { grid.innerHTML = '<div class="col-span-1 md:col-span-2 text-center text-red-400/70 text-[10px] py-6">Ошибка сети. Создайте локальную игру.</div>'; }
+                if(found===0) grid.innerHTML = '<div class="col-span-full text-center text-xs text-gray-500 py-10 glass-panel rounded-2xl">Нет активных серверов</div>';
+            } catch(e) { grid.innerHTML = '<div class="col-span-full text-center text-red-400/70 text-xs py-10 glass-panel rounded-2xl">Ошибка сети. Сервер недоступен.</div>'; }
             setTimeout(()=>icon.classList.remove('animate-spin'), 500);
         }
 
         window.joinLobby = function(pid, mode) {
-            playSnd('click');
-            currentGameMode = mode;
-            switchTab('game');
-            toast("Соединение с хостом...");
-            
-            if(mode === 'DURAK') {
-                document.getElementById('dk-setup').classList.remove('hidden');
-                document.getElementById('dk-board').classList.add('hidden');
-                document.querySelector('#dk-setup h2').innerText = "СОЕДИНЕНИЕ...";
-                document.querySelector('#dk-setup p').innerText = "Установка прямого P2P подключения...";
-                document.getElementById('dk-share-btn').classList.add('hidden');
-            } else {
-                document.getElementById('bj-setup').classList.remove('hidden');
-                document.getElementById('bj-board').classList.add('hidden');
-                document.querySelector('#bj-setup h2').innerText = "СОЕДИНЕНИЕ...";
-                document.getElementById('bj-setup-desc').innerText = "Подключение к столу Дилера...";
-                document.getElementById('bj-share-btn').classList.add('hidden');
-            }
-            
+            playSnd('click'); currentGameMode = mode; switchTab('game'); toast("Соединение с хостом...");
+            if(mode === 'DURAK') { document.getElementById('dk-setup').classList.remove('hidden'); document.getElementById('dk-board').classList.add('hidden'); document.getElementById('dk-share-btn').classList.add('hidden'); } 
+            else { document.getElementById('bj-setup').classList.remove('hidden'); document.getElementById('bj-board').classList.add('hidden'); document.getElementById('bj-share-btn').classList.add('hidden'); document.getElementById('bj-setup-desc').innerText = "Подключение к столу Дилера..."; }
             const conn = myPeer.connect(pid, {reliable: true});
             setupConnection(conn, false);
         }
 
         async function removeLobby() {
             if(tgLobbyPostId) {
-                fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/deleteMessage?chat_id=${TG_CHANNEL_NAME}&message_id=${tgLobbyPostId}`, {method:'POST'}).catch(e=>console.log(e));
+                fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/deleteMessage?chat_id=${TG_CHANNEL_NAME}&message_id=${tgLobbyPostId}`, {method:'POST'}).catch(e=>{});
                 tgLobbyPostId = null;
             }
         }
 
-        window.startSingleplayer = function(mode) {
-            playSnd('click');
-            isSingleplayer = true; isHost = false;
-            currentGameMode = mode;
-            switchTab('game');
-            showGameBoard();
-            
-            if (mode === 'DURAK') {
-                document.getElementById('dk-opp-name').innerText = 'Бот-ИИ';
-                dk_startSingle();
-            } else {
-                document.getElementById('bj-dealer-label').innerText = 'Дилер (ИИ)';
-                document.getElementById('bj-player-label').innerText = 'ВЫ';
-                bj_startSingle();
-            }
-        }
-
-        // --- DURAK ENGINE ---
+        // --- DURAK ONLINE P2P ENGINE ---
         const DK_SUITS = ['♠', '♥', '♦', '♣'];
         const DK_COLORS = {'♠': 'black', '♣': 'black', '♥': 'red', '♦': 'red'};
         const DK_VALUES = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 
         class DkCard {
-            constructor(s, v) { 
-                this.suit = s; this.value = v; this.color = DK_COLORS[s]; 
-                this.id = Math.random().toString(36).substr(2, 9); 
-                this.power = DK_VALUES.indexOf(v); 
-            }
+            constructor(s, v) { this.suit = s; this.value = v; this.color = DK_COLORS[s]; this.id = Math.random().toString(36).substr(2, 9); this.power = DK_VALUES.indexOf(v); }
             weight() { return this.power + (this.suit === dk_trumpSuit ? 100 : 0); }
         }
 
         let dk_deck = [], dk_myHand = [], dk_oppHand = [], dk_table = [];
-        let dk_trumpSuit = '', dk_trumpCard = null;
-        let dk_myTurn = true, dk_active = false, dk_locked = false;
-        let dk_hasDiscarded = false;
+        let dk_trumpSuit = '', dk_trumpCard = null, dk_myTurn = true, dk_active = false, dk_locked = false, dk_hasDiscarded = false;
 
         function dk_createDeck() {
-            dk_deck = [];
-            DK_SUITS.forEach(s => DK_VALUES.forEach(v => dk_deck.push(new DkCard(s, v))));
+            dk_deck = []; DK_SUITS.forEach(s => DK_VALUES.forEach(v => dk_deck.push(new DkCard(s, v))));
             for(let i=dk_deck.length-1; i>0; i--) { const j=Math.floor(Math.random()*(i+1)); [dk_deck[i], dk_deck[j]]=[dk_deck[j], dk_deck[i]]; }
         }
 
         function dk_determineFirstMove() {
-            let lowestPlayerTrump = 999;
-            let lowestOpponentTrump = 999;
-
-            dk_myHand.forEach(c => {
-                if (c.suit === dk_trumpSuit && c.power < lowestPlayerTrump) lowestPlayerTrump = c.power;
-            });
-            dk_oppHand.forEach(c => {
-                if (c.suit === dk_trumpSuit && c.power < lowestOpponentTrump) lowestOpponentTrump = c.power;
-            });
-
-            if (lowestPlayerTrump === 999 && lowestOpponentTrump === 999) {
-                dk_myTurn = Math.random() > 0.5; 
-                toast("Козырей на раздаче нет. Ход случайный!");
-            } else if (lowestPlayerTrump < lowestOpponentTrump) {
-                dk_myTurn = true;
-                toast("Ваш ход! У вас младший козырь.");
-            } else {
-                dk_myTurn = false;
-                toast("Ход соперника! У него младший козырь.");
-            }
-        }
-
-        function dk_startSingle() {
-            dk_createDeck();
-            dk_trumpCard = dk_deck.pop(); dk_deck.unshift(dk_trumpCard); dk_trumpSuit = dk_trumpCard.suit;
-            dk_myHand = []; dk_oppHand = []; dk_table = [];
-            dk_hasDiscarded = false;
-            document.getElementById('dk-discard-visual').classList.add('hidden');
-
-            while(dk_myHand.length < 6 && dk_deck.length > 0) dk_myHand.push(dk_deck.pop());
-            while(dk_oppHand.length < 6 && dk_deck.length > 0) dk_oppHand.push(dk_deck.pop());
-
-            dk_determineFirstMove();
-            dk_active = true; dk_locked = false;
-            
-            dk_renderUI(); playSnd('card');
-            if(!dk_myTurn) setTimeout(dk_botAttack, 1000);
+            let pLow = 999, oLow = 999;
+            dk_myHand.forEach(c => { if (c.suit === dk_trumpSuit && c.power < pLow) pLow = c.power; });
+            dk_oppHand.forEach(c => { if (c.suit === dk_trumpSuit && c.power < oLow) oLow = c.power; });
+            if (pLow === 999 && oLow === 999) dk_myTurn = Math.random() > 0.5;
+            else if (pLow < oLow) dk_myTurn = true;
+            else dk_myTurn = false;
         }
 
         function dk_startMulti() {
-            dk_createDeck();
-            dk_trumpCard = dk_deck.pop(); dk_deck.unshift(dk_trumpCard); dk_trumpSuit = dk_trumpCard.suit;
-            dk_myHand = []; dk_oppHand = []; dk_table = [];
-            dk_hasDiscarded = false;
+            if(!isHost) return;
+            dk_createDeck(); dk_trumpCard = dk_deck.pop(); dk_deck.unshift(dk_trumpCard); dk_trumpSuit = dk_trumpCard.suit;
+            dk_myHand = []; dk_oppHand = []; dk_table = []; dk_hasDiscarded = false;
             document.getElementById('dk-discard-visual').classList.add('hidden');
             
             while(dk_oppHand.length < 6 && dk_deck.length > 0) dk_oppHand.push(dk_deck.pop());
             while(dk_myHand.length < 6 && dk_deck.length > 0) dk_myHand.push(dk_deck.pop());
 
-            dk_determineFirstMove();
-            dk_active = true; dk_locked = false;
-            
-            dk_renderUI(); dk_sync(); 
-            toast("Сетевая игра началась!"); playSnd('card');
+            dk_determineFirstMove(); dk_active = true; dk_locked = false;
+            dk_renderUI(); dk_sync(); toast("Сетевая игра началась!"); playSnd('card');
         }
 
         function dk_deal() {
-            if (isSingleplayer) {
-                while(dk_myHand.length < 6 && dk_deck.length > 0) dk_myHand.push(dk_deck.pop());
-                while(dk_oppHand.length < 6 && dk_deck.length > 0) dk_oppHand.push(dk_deck.pop());
-            } else if (isHost) {
+            if (isHost) {
                 while(dk_oppHand.length < 6 && dk_deck.length > 0) dk_oppHand.push(dk_deck.pop());
                 while(dk_myHand.length < 6 && dk_deck.length > 0) dk_myHand.push(dk_deck.pop());
             }
@@ -1252,232 +903,94 @@
         }
 
         function dk_animateDiscardPile(callback) {
-            triggerHaptic('medium');
-            const tableEl = document.getElementById('dk-table');
-            const discardEl = document.getElementById('dk-discard-pile');
-            const cards = tableEl.querySelectorAll('.playing-card');
-            
-            if (cards.length === 0) {
-                callback();
-                return;
-            }
-
+            triggerHaptic('medium'); const tableEl = document.getElementById('dk-table'); const discardEl = document.getElementById('dk-discard-pile');
+            const cards = tableEl.querySelectorAll('.playing-card'); if (cards.length === 0) { callback(); return; }
             const discardRect = discardEl.getBoundingClientRect();
             
             cards.forEach(card => {
-                const rect = card.getBoundingClientRect();
-                const clone = card.cloneNode(true);
-                clone.style.position = 'fixed';
-                clone.style.top = `${rect.top}px`;
-                clone.style.left = `${rect.left}px`;
-                clone.style.width = `${rect.width}px`;
-                clone.style.height = `${rect.height}px`;
-                clone.style.margin = '0';
-                clone.classList.add('card-flying-to-discard');
-                
+                const rect = card.getBoundingClientRect(); const clone = card.cloneNode(true);
+                clone.style.position = 'fixed'; clone.style.top = `${rect.top}px`; clone.style.left = `${rect.left}px`; clone.style.width = `${rect.width}px`; clone.style.height = `${rect.height}px`; clone.style.margin = '0'; clone.classList.add('card-flying-to-discard');
                 document.body.appendChild(clone);
-                
-                setTimeout(() => {
-                    clone.style.top = `${discardRect.top}px`;
-                    clone.style.left = `${discardRect.left}px`;
-                    clone.style.transform = 'scale(0.5) rotate(-35deg)';
-                    clone.style.opacity = '0';
-                }, 20);
-
+                setTimeout(() => { clone.style.top = `${discardRect.top}px`; clone.style.left = `${discardRect.left}px`; clone.style.transform = 'scale(0.5) rotate(-35deg)'; clone.style.opacity = '0'; }, 20);
                 setTimeout(() => clone.remove(), 750);
             });
-
-            setTimeout(() => {
-                document.getElementById('dk-discard-visual').classList.remove('hidden');
-                dk_hasDiscarded = true;
-                callback();
-            }, 800);
+            setTimeout(() => { document.getElementById('dk-discard-visual').classList.remove('hidden'); dk_hasDiscarded = true; callback(); }, 800);
         }
 
         function renderOpponentHandVisuals(count) {
-            const oppHandDiv = document.getElementById('dk-opp-cards-container');
-            if(!oppHandDiv) return;
-            oppHandDiv.innerHTML = '';
-            
+            const oppHandDiv = document.getElementById('dk-opp-cards-container'); if(!oppHandDiv) return; oppHandDiv.innerHTML = '';
             const maxVisible = Math.min(count, 12); 
             for (let i = 0; i < maxVisible; i++) {
-                const el = document.createElement('div');
-                el.className = 'playing-card dk-card card-back skin-emerald absolute border border-emerald-500/35';
-                
-                const offset = (i - (maxVisible - 1) / 2) * 8; 
-                const angle = (i - (maxVisible - 1) / 2) * 2.5;
-                el.style.left = `calc(50% + ${offset}px)`;
-                el.style.transform = `translateX(-50%) translateY(${Math.abs(offset/4)}px) rotate(${angle}deg) scale(0.65)`;
-                el.style.transformOrigin = 'bottom center';
-                el.style.zIndex = i;
-                
+                const el = document.createElement('div'); el.className = 'playing-card dk-card card-back skin-emerald absolute border border-emerald-500/35';
+                const offset = (i - (maxVisible - 1) / 2) * 8, angle = (i - (maxVisible - 1) / 2) * 2.5;
+                el.style.left = `calc(50% + ${offset}px)`; el.style.transform = `translateX(-50%) translateY(${Math.abs(offset/4)}px) rotate(${angle}deg) scale(0.65)`; el.style.transformOrigin = 'bottom center'; el.style.zIndex = i;
                 oppHandDiv.appendChild(el);
             }
         }
 
         function dk_renderUI() {
             updateRUBBalancesUI();
-
-            const tEl = document.getElementById('dk-trump-card');
-            tEl.className = `playing-card dk-card ${dk_trumpCard.color} absolute shadow-lg`;
+            const tEl = document.getElementById('dk-trump-card'); tEl.className = `playing-card dk-card ${dk_trumpCard.color} absolute shadow-lg`;
             tEl.innerHTML = `<div class="top-left">${dk_trumpCard.value}<br>${dk_trumpCard.suit}</div><div class="center-suit">${dk_trumpCard.suit}</div><div class="bottom-right">${dk_trumpCard.value}<br>${dk_trumpCard.suit}</div>`;
-            document.getElementById('dk-trump-ind').innerHTML = `${dk_trumpSuit} ${dk_deck.length}`;
-            document.getElementById('dk-deck-pile').style.display = dk_deck.length ? 'block' : 'none';
+            document.getElementById('dk-trump-ind').innerHTML = `${dk_trumpSuit} ${dk_deck.length}`; document.getElementById('dk-deck-pile').style.display = dk_deck.length ? 'block' : 'none';
 
-            const oppCount = isSingleplayer ? dk_oppHand.length : (isHost ? dk_oppHand.length : (dk_oppHand.length || 0));
-            document.getElementById('dk-opp-count').innerText = oppCount;
-            
-            renderOpponentHandVisuals(oppCount);
+            const oppCount = isHost ? dk_oppHand.length : (dk_oppHand.length || 0);
+            document.getElementById('dk-opp-count').innerText = oppCount; renderOpponentHandVisuals(oppCount);
 
-            const hCont = document.getElementById('dk-hand');
-            hCont.innerHTML = '';
+            const hCont = document.getElementById('dk-hand'); hCont.innerHTML = '';
             dk_myHand.sort((a,b) => a.weight() - b.weight());
-            
-            const total = dk_myHand.length;
-            const spacing = window.innerWidth < 400 ? (total > 6 ? -30 : -22) : -18;
-            hCont.style.gap = `${spacing}px`;
+            const total = dk_myHand.length; const spacing = window.innerWidth < 400 ? (total > 6 ? -30 : -22) : -18; hCont.style.gap = `${spacing}px`;
 
             dk_myHand.forEach((c, i) => {
-                const el = document.createElement('div');
-                el.className = `playing-card dk-card ${c.color} card-in-hand card-dealing`; el.dataset.id = c.id;
-                el.style.animationDelay = `${i * 0.05}s`;
+                const el = document.createElement('div'); el.className = `playing-card dk-card ${c.color} card-in-hand card-dealing`; el.dataset.id = c.id; el.style.animationDelay = `${i * 0.05}s`;
                 el.innerHTML = `<div class="top-left">${c.value}<br>${c.suit}</div><div class="center-suit">${c.suit}</div><div class="bottom-right">${c.value}<br>${c.suit}</div>`;
-                
                 let angle = 0, transY = 0;
-                if(total > 1) {
-                    const off = i - (total-1)/2;
-                    angle = off * 3.5; transY = Math.abs(off)*Math.abs(off)*1.2;
-                }
-                el.style.transform = `rotate(${angle}deg) translateY(${transY}px)`;
-                el.dataset.origTr = el.style.transform;
-                el.style.zIndex = i;
+                if(total > 1) { const off = i - (total-1)/2; angle = off * 3.5; transY = Math.abs(off)*Math.abs(off)*1.2; }
+                el.style.transform = `rotate(${angle}deg) translateY(${transY}px)`; el.dataset.origTr = el.style.transform; el.style.zIndex = i;
                 
-                el.onclick = () => dk_playCard(c);
-                el.addEventListener('touchstart', dk_touchStart, {passive:false});
-                el.addEventListener('touchmove', dk_touchMove, {passive:false});
-                el.addEventListener('touchend', dk_touchEnd);
-                
+                el.onclick = () => dk_playCard(c); el.addEventListener('touchstart', dk_touchStart, {passive:false}); el.addEventListener('touchmove', dk_touchMove, {passive:false}); el.addEventListener('touchend', dk_touchEnd);
                 hCont.appendChild(el);
             });
 
-            const tCont = document.getElementById('dk-table');
-            tCont.innerHTML = '';
+            const tCont = document.getElementById('dk-table'); tCont.innerHTML = '';
             dk_table.forEach(pair => {
-                const w = document.createElement('div'); 
-                w.className = "relative shrink-0 transition-all"; 
-                w.style.width="var(--card-width-dk)"; w.style.height="var(--card-height-dk)";
-                
+                const w = document.createElement('div'); w.className = "relative shrink-0 transition-all"; w.style.width="var(--card-width-dk)"; w.style.height="var(--card-height-dk)";
                 if(pair.atk) {
-                    const elA = document.createElement('div'); elA.className = `playing-card dk-card ${pair.atk.color} absolute top-0 left-0 shadow-md`; 
-                    elA.style.transform=`rotate(${Math.random()*6-3}deg)`;
-                    elA.innerHTML = `<div class="top-left">${pair.atk.value}<br>${pair.atk.suit}</div><div class="center-suit">${pair.atk.suit}</div><div class="bottom-right">${pair.atk.value}<br>${pair.atk.suit}</div>`;
-                    w.appendChild(elA);
+                    const elA = document.createElement('div'); elA.className = `playing-card dk-card ${pair.atk.color} absolute top-0 left-0 shadow-md`; elA.style.transform=`rotate(${Math.random()*6-3}deg)`;
+                    elA.innerHTML = `<div class="top-left">${pair.atk.value}<br>${pair.atk.suit}</div><div class="center-suit">${pair.atk.suit}</div><div class="bottom-right">${pair.atk.value}<br>${pair.atk.suit}</div>`; w.appendChild(elA);
                 }
                 if(pair.def) {
-                    const elD = document.createElement('div'); elD.className = `playing-card dk-card ${pair.def.color} absolute top-2 left-3 shadow-xl z-10`; 
-                    elD.style.transform=`rotate(${Math.random()*6-3}deg)`;
-                    elD.innerHTML = `<div class="top-left">${pair.def.value}<br>${pair.def.suit}</div><div class="center-suit">${pair.def.suit}</div><div class="bottom-right">${pair.def.value}<br>${pair.def.suit}</div>`;
-                    w.appendChild(elD);
+                    const elD = document.createElement('div'); elD.className = `playing-card dk-card ${pair.def.color} absolute top-2 left-3 shadow-xl z-10`; elD.style.transform=`rotate(${Math.random()*6-3}deg)`;
+                    elD.innerHTML = `<div class="top-left">${pair.def.value}<br>${pair.def.suit}</div><div class="center-suit">${pair.def.suit}</div><div class="bottom-right">${pair.def.value}<br>${pair.def.suit}</div>`; w.appendChild(elD);
                 }
                 tCont.appendChild(w);
             });
 
-            const ind = document.getElementById('dk-turn-ind');
-            const btn = document.getElementById('dk-action-btn');
-            
-            if(dk_myTurn) {
-                ind.innerText = "Ваш ход";
-                ind.className = "absolute top-16 left-1/2 -translate-x-1/2 bg-slate-900/90 px-4 py-1 rounded-full border border-emerald-500 text-emerald-400 text-[8px] font-bold uppercase tracking-widest z-30 animate-pulse shadow-[0_0_15px_rgba(16,185,129,0.3)] opacity-100 transition-opacity";
-            } else {
-                ind.className = "opacity-0 absolute top-16 pointer-events-none";
-            }
+            const ind = document.getElementById('dk-turn-ind'); const btn = document.getElementById('dk-action-btn');
+            if(dk_myTurn) { ind.innerText = "Ваш ход"; ind.className = "absolute top-16 left-1/2 -translate-x-1/2 bg-slate-900/90 px-4 py-1.5 rounded-full border border-emerald-500 text-emerald-400 text-[9px] font-bold uppercase tracking-widest z-30 animate-pulse shadow-[0_0_15px_rgba(16,185,129,0.3)] opacity-100 transition-opacity"; } 
+            else { ind.className = "opacity-0 absolute top-16 pointer-events-none"; }
 
             if(!dk_table.length) { btn.classList.add('hidden'); }
             else {
                 btn.classList.remove('hidden');
-                if(dk_myTurn) { 
-                    btn.innerText = dk_table.every(p=>p.def) ? "Бито" : "Хватит"; 
-                    btn.className = "absolute right-4 bottom-16 md:right-8 md:bottom-24 z-40 bg-slate-900 border border-emerald-500 text-emerald-500 font-bold py-2 px-5 rounded-xl shadow-[0_0_15px_rgba(16,185,129,0.3)] uppercase text-[9px] tracking-widest active:scale-95 transition backdrop-blur"; 
-                } else { 
-                    btn.innerText = "Взять"; 
-                    btn.className = "absolute right-4 bottom-16 md:right-8 md:bottom-24 z-40 bg-slate-900 border border-red-500 text-red-500 font-bold py-2 px-5 rounded-xl shadow-[0_0_15px_rgba(239,68,68,0.3)] uppercase text-[9px] tracking-widest active:scale-95 transition backdrop-blur"; 
-                }
+                if(dk_myTurn) { btn.innerText = dk_table.every(p=>p.def) ? "Бито" : "Хватит"; btn.className = "absolute right-4 bottom-16 md:right-8 md:bottom-24 z-40 bg-slate-900 border border-emerald-500 text-emerald-500 font-bold py-3 px-6 rounded-xl shadow-[0_0_15px_rgba(16,185,129,0.3)] uppercase text-[10px] tracking-widest active:scale-95 transition backdrop-blur"; } 
+                else { btn.innerText = "Взять"; btn.className = "absolute right-4 bottom-16 md:right-8 md:bottom-24 z-40 bg-slate-900 border border-red-500 text-red-500 font-bold py-3 px-6 rounded-xl shadow-[0_0_15px_rgba(239,68,68,0.3)] uppercase text-[10px] tracking-widest active:scale-95 transition backdrop-blur"; }
             }
         }
 
         let dk_dragCard, dk_dragEl, dk_tX, dk_tY;
-        function dk_touchStart(e) { 
-            if(dk_locked || !dk_active) return; 
-            dk_dragCard = dk_myHand.find(c=>c.id === this.dataset.id); 
-            dk_dragEl = this; dk_dragEl.classList.add('dragging'); 
-            dk_tX = e.touches[0].clientX; dk_tY = e.touches[0].clientY; 
-            playSnd('click'); 
-        }
-        function dk_touchMove(e) { 
-            if(!dk_dragEl) return; 
-            e.preventDefault(); 
-            dk_dragEl.style.transform = `translate(${e.touches[0].clientX-dk_tX}px, ${e.touches[0].clientY-dk_tY}px) scale(1.1) rotate(0)`;
-            dk_dragEl.style.pointerEvents = 'none';
-            const elem = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY);
-            if(elem && elem.closest('#dk-table')) document.getElementById('dk-table').classList.add('drag-target-active');
-            else document.getElementById('dk-table').classList.remove('drag-target-active');
-        }
+        function dk_touchStart(e) { if(dk_locked || !dk_active) return; dk_dragCard = dk_myHand.find(c=>c.id === this.dataset.id); dk_dragEl = this; dk_dragEl.classList.add('dragging'); dk_tX = e.touches[0].clientX; dk_tY = e.touches[0].clientY; playSnd('click'); }
+        function dk_touchMove(e) { if(!dk_dragEl) return; e.preventDefault(); dk_dragEl.style.transform = `translate(${e.touches[0].clientX-dk_tX}px, ${e.touches[0].clientY-dk_tY}px) scale(1.1) rotate(0)`; dk_dragEl.style.pointerEvents = 'none'; const elem = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY); if(elem && elem.closest('#dk-table')) document.getElementById('dk-table').classList.add('drag-target-active'); else document.getElementById('dk-table').classList.remove('drag-target-active'); }
         function dk_touchEnd(e) {
-            if(!dk_dragEl) return; 
-            dk_dragEl.style.pointerEvents = 'auto';
-            const elem = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
-            document.getElementById('dk-table').classList.remove('drag-target-active');
-            
-            if(elem && elem.closest('#dk-table')) { 
-                const c = dk_dragCard; dk_dragEl.classList.remove('dragging'); dk_dragEl=null; dk_dragCard=null; 
-                dk_playCard(c); 
-            } else { 
-                dk_dragEl.classList.remove('dragging'); dk_dragEl.style.transform = dk_dragEl.dataset.origTr; dk_dragEl=null; dk_dragCard=null; 
-            }
+            if(!dk_dragEl) return; dk_dragEl.style.pointerEvents = 'auto'; const elem = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY); document.getElementById('dk-table').classList.remove('drag-target-active');
+            if(elem && elem.closest('#dk-table')) { const c = dk_dragCard; dk_dragEl.classList.remove('dragging'); dk_dragEl=null; dk_dragCard=null; dk_playCard(c); } 
+            else { dk_dragEl.classList.remove('dragging'); dk_dragEl.style.transform = dk_dragEl.dataset.origTr; dk_dragEl=null; dk_dragCard=null; }
         }
 
         function dk_playCard(c) {
-            if(!dk_active || dk_locked) return;
-            
-            if(isSingleplayer) {
-                if(dk_myTurn) { 
-                    let can = !dk_table.length;
-                    if(!can) dk_table.forEach(p => { if(p.atk?.value===c.value || p.def?.value===c.value) can=true; });
-                    if(can && dk_table.filter(p=>!p.def).length >= dk_oppHand.length && dk_table.length) return toast("У бота не хватит карт!", true);
-                    if(can && dk_table.length >= 6) return toast("Лимит 6 карт на столе!", true);
-                    
-                    if(can) {
-                        dk_locked=true; playSnd('card'); triggerHaptic('light');
-                        dk_myHand = dk_myHand.filter(x=>x.id!==c.id); 
-                        dk_table.push({atk:c, def:null}); 
-                        dk_renderUI();
-                        setTimeout(() => { dk_botDefend(); dk_locked=false; }, 800);
-                    } else toast("Нельзя подкинуть!", true);
-                } else { 
-                    const cur = dk_table.find(p=>!p.def);
-                    if(cur) {
-                        const a = cur.atk; let beats = false;
-                        if(c.suit===a.suit && c.power>a.power) beats=true;
-                        if(c.suit===dk_trumpSuit && a.suit!==dk_trumpSuit) beats=true;
-                        if(beats) {
-                            dk_locked=true; playSnd('card'); triggerHaptic('light');
-                            dk_myHand = dk_myHand.filter(x=>x.id!==c.id); 
-                            cur.def = c; 
-                            dk_renderUI();
-                            setTimeout(() => { dk_botAttack(); dk_locked=false; }, 800);
-                        } else {
-                            triggerHaptic('error');
-                            toast("Карта не бьет!", true);
-                        }
-                    }
-                }
-            } else {
-                if(isHost) {
-                    if(dk_processMove(c, dk_myTurn ? 'ATK' : 'DEF', true)) dk_sync();
-                } else {
-                    p2pConn.send({type:'DK_MOVE', cardId:c.id, action: dk_myTurn ? 'ATK' : 'DEF'});
-                }
-            }
+            if(!dk_active || dk_locked || !dk_myTurn) return;
+            if(isHost) { if(dk_processMove(c, 'ATK', true)) dk_sync(); } 
+            else { p2pConn.send({type:'DK_MOVE', cardId:c.id, action: dk_table.every(p=>p.def) ? 'ATK' : 'DEF'}); }
         }
 
         function dk_processMove(c, mode, isHostMove) {
@@ -1491,10 +1004,8 @@
                 if(can && dk_table.length >= 6) { toast("Лимит на столе", true); return false; }
                 if(can) {
                     playSnd('card'); triggerHaptic('light');
-                    if(isHostMove) dk_myHand = dk_myHand.filter(x=>x.id!==c.id);
-                    else dk_oppHand = dk_oppHand.filter(x=>x.id!==c.id);
-                    dk_table.push({atk:c, def:null});
-                    dk_myTurn = !isHostMove; 
+                    if(isHostMove) dk_myHand = dk_myHand.filter(x=>x.id!==c.id); else dk_oppHand = dk_oppHand.filter(x=>x.id!==c.id);
+                    dk_table.push({atk:c, def:null}); dk_myTurn = !isHostMove; 
                     return true;
                 }
                 return false;
@@ -1506,10 +1017,8 @@
                     if(c.suit===dk_trumpSuit && a.suit!==dk_trumpSuit) beats=true;
                     if(beats) {
                         playSnd('card'); triggerHaptic('light');
-                        if(isHostMove) dk_myHand = dk_myHand.filter(x=>x.id!==c.id);
-                        else dk_oppHand = dk_oppHand.filter(x=>x.id!==c.id);
-                        cur.def = c;
-                        dk_myTurn = isHostMove; 
+                        if(isHostMove) dk_myHand = dk_myHand.filter(x=>x.id!==c.id); else dk_oppHand = dk_oppHand.filter(x=>x.id!==c.id);
+                        cur.def = c; dk_myTurn = isHostMove; 
                         return true;
                     }
                 }
@@ -1517,151 +1026,44 @@
             }
         }
 
-        function dk_botDefend() {
-            if(!dk_active) return;
-            const tgt = dk_table.find(p=>!p.def); if(!tgt) return;
-            const valid = dk_oppHand.filter(c => (c.suit===tgt.atk.suit && c.power>tgt.atk.power) || (c.suit===dk_trumpSuit && tgt.atk.suit!==dk_trumpSuit));
-            
-            if(!valid.length) { 
-                toast("Бот берет"); 
-                document.getElementById('dk-action-btn').classList.remove('hidden'); 
-                document.getElementById('dk-action-btn').innerText="Бито (Дать взять)"; 
-                return; 
-            }
-            
-            valid.sort((a,b)=>a.weight()-b.weight());
-            const c = valid[0]; 
-            dk_oppHand = dk_oppHand.filter(x=>x.id!==c.id); 
-            tgt.def = c; 
-            playSnd('card'); dk_renderUI();
-        }
-
-        function dk_botAttack() {
-            if(!dk_active) return;
-            let c = null;
-            if(!dk_table.length) {
-                const nonTrump = dk_oppHand.filter(x=>x.suit !== dk_trumpSuit).sort((a,b)=>a.weight()-b.weight());
-                c = nonTrump.length ? nonTrump[0] : [...dk_oppHand].sort((a,b)=>a.weight()-b.weight())[0];
-            } else {
-                const vals = []; dk_table.forEach(p=>{ if(p.atk)vals.push(p.atk.value); if(p.def)vals.push(p.def.value); });
-                const m = dk_oppHand.filter(x=>vals.includes(x.value)).sort((a,b)=>a.weight()-b.weight());
-                if(m.length) c = m[0];
-            }
-            
-            if(c && dk_table.length < 6 && dk_table.length < dk_myHand.length) {
-                dk_oppHand = dk_oppHand.filter(x=>x.id!==c.id); 
-                dk_table.push({atk:c, def:null}); 
-                playSnd('card'); dk_renderUI();
-            } else if (dk_table.length) {
-                toast("Бот: Бито!"); playSnd('click');
-                dk_locked = true;
-                setTimeout(()=> { 
-                    dk_animateDiscardPile(() => {
-                        dk_table=[]; dk_deal(); dk_myTurn=true; dk_locked=false; dk_renderUI(); 
-                    });
-                }, 800);
-            }
-        }
-
         window.dk_handleAction = function() {
             if(dk_locked || !dk_active) return; playSnd('click');
-            
-            if(isSingleplayer) {
-                if(dk_myTurn) { 
-                    if(dk_table.every(p=>p.def)) { 
-                        toast("Бито!"); 
-                        dk_animateDiscardPile(() => {
-                            dk_table=[]; dk_deal(); dk_myTurn=false; dk_renderUI(); 
-                            setTimeout(dk_botAttack, 1000); 
-                        });
-                    } else { 
-                        toast("Бот забирает"); 
-                        dk_oppHand = dk_oppHand.concat(dk_table.flatMap(p=>[p.atk,p.def].filter(Boolean))); 
-                        dk_table=[]; dk_deal(); dk_myTurn=true; dk_renderUI(); 
-                    }
-                } else { 
-                    toast("Вы берете карты"); 
-                    dk_myHand = dk_myHand.concat(dk_table.flatMap(p=>[p.atk,p.def].filter(Boolean))); 
-                    dk_table=[]; dk_deal(); dk_myTurn=false; dk_renderUI(); 
-                    setTimeout(dk_botAttack, 1000);
-                }
-            } else {
-                if(isHost) {
-                    dk_processAction(true); dk_sync();
-                } else {
-                    p2pConn.send({type:'DK_ACTION', action: dk_myTurn ? 'END_TURN' : 'TAKE'});
-                }
-            }
+            if(isHost) { dk_processAction(true); dk_sync(); } 
+            else { p2pConn.send({type:'DK_ACTION', action: dk_myTurn ? 'END_TURN' : 'TAKE'}); }
         }
 
         function dk_processAction(isHostAction) {
             const actorTurn = isHostAction ? dk_myTurn : !dk_myTurn;
-            
             if (actorTurn) { 
-                if(dk_table.every(p=>p.def)) { 
-                    dk_animateDiscardPile(() => {
-                        dk_table=[]; dk_deal(); dk_myTurn = !isHostAction;
-                        dk_sync();
-                    });
-                } else { 
-                    if(isHostAction) dk_oppHand = dk_oppHand.concat(dk_table.flatMap(p=>[p.atk,p.def].filter(Boolean)));
-                    else dk_myHand = dk_myHand.concat(dk_table.flatMap(p=>[p.atk,p.def].filter(Boolean)));
-                    dk_table=[]; dk_deal(); dk_myTurn = isHostAction; 
-                }
+                if(dk_table.every(p=>p.def)) { dk_animateDiscardPile(() => { dk_table=[]; dk_deal(); dk_myTurn = !isHostAction; dk_sync(); }); } 
+                else { if(isHostAction) dk_oppHand = dk_oppHand.concat(dk_table.flatMap(p=>[p.atk,p.def].filter(Boolean))); else dk_myHand = dk_myHand.concat(dk_table.flatMap(p=>[p.atk,p.def].filter(Boolean))); dk_table=[]; dk_deal(); dk_myTurn = isHostAction; }
             } else { 
-                if(isHostAction) dk_myHand = dk_myHand.concat(dk_table.flatMap(p=>[p.atk,p.def].filter(Boolean)));
-                else dk_oppHand = dk_oppHand.concat(dk_table.flatMap(p=>[p.atk,p.def].filter(Boolean)));
+                if(isHostAction) dk_myHand = dk_myHand.concat(dk_table.flatMap(p=>[p.atk,p.def].filter(Boolean))); else dk_oppHand = dk_oppHand.concat(dk_table.flatMap(p=>[p.atk,p.def].filter(Boolean)));
                 dk_table=[]; dk_deal(); dk_myTurn = !isHostAction; 
             }
         }
 
         function dk_checkWin() {
             if(!dk_deck.length && dk_active) {
-                if(!dk_myHand.length && !dk_oppHand.length) {
-                    triggerHaptic('success');
-                    toast("НИЧЬЯ! Все избавились от карт.", false);
-                    dk_active=false; setTimeout(leaveGame, 4000);
-                }
-                else if(!dk_myHand.length) { 
-                    triggerHaptic('success');
-                    toast("ПОБЕДА! Вы избавились от всех карт.", false); 
-                    playSnd('win'); startCoinsRain();
-                    dk_active=false; setTimeout(leaveGame, 5000); 
-                }
-                else if(!dk_oppHand.length) { 
-                    toast("ПОРАЖЕНИЕ! Вы остались в дураках.", true); 
-                    dk_active=false; setTimeout(leaveGame, 4000); 
-                }
+                if(!dk_myHand.length && !dk_oppHand.length) { triggerHaptic('success'); toast("НИЧЬЯ!", false); dk_active=false; setTimeout(leaveGame, 4000); }
+                else if(!dk_myHand.length) { triggerHaptic('success'); toast("ПОБЕДА!", false); playSnd('win'); startCoinsRain(); dk_active=false; setTimeout(leaveGame, 5000); }
+                else if(!dk_oppHand.length) { toast("ПОРАЖЕНИЕ!", true); dk_active=false; setTimeout(leaveGame, 4000); }
             }
         }
 
         function dk_sync() {
             if(!isHost || !p2pConn) return;
-            const state = { 
-                deckLen: dk_deck.length, tCard: dk_trumpCard, tSuit: dk_trumpSuit, 
-                table: dk_table, clientHand: dk_oppHand, hostHandLen: dk_myHand.length, 
-                clientTurn: !dk_myTurn, hasDiscarded: dk_hasDiscarded
-            };
-            p2pConn.send({type:'DK_STATE', state: state});
-            dk_renderUI();
+            const state = { deckLen: dk_deck.length, tCard: dk_trumpCard, tSuit: dk_trumpSuit, table: dk_table, clientHand: dk_oppHand, hostHandLen: dk_myHand.length, clientTurn: !dk_myTurn, hasDiscarded: dk_hasDiscarded };
+            p2pConn.send({type:'DK_STATE', state: state}); dk_renderUI();
         }
 
         function dk_applyState(s) {
             if(isHost) return;
-            dk_deck = new Array(s.deckLen).fill(null); 
-            dk_trumpCard = s.tCard; dk_trumpSuit = s.tSuit; 
-            dk_table = s.table; dk_myHand = s.clientHand; dk_oppHand = { length: s.hostHandLen }; 
-            dk_myTurn = s.clientTurn;
-            dk_hasDiscarded = s.hasDiscarded;
-
-            if(dk_hasDiscarded) {
-                document.getElementById('dk-discard-visual').classList.remove('hidden');
-            } else {
-                document.getElementById('dk-discard-visual').classList.add('hidden');
-            }
-            
+            dk_deck = new Array(s.deckLen).fill(null); dk_trumpCard = s.tCard; dk_trumpSuit = s.tSuit; 
+            dk_table = s.table; dk_myHand = s.clientHand; dk_oppHand = { length: s.hostHandLen }; dk_myTurn = s.clientTurn; dk_hasDiscarded = s.hasDiscarded;
+            if(dk_hasDiscarded) document.getElementById('dk-discard-visual').classList.remove('hidden'); else document.getElementById('dk-discard-visual').classList.add('hidden');
             dk_renderUI();
-            if(!dk_active){ dk_active=true; toast("Сетевая игра началась!"); playSnd('card'); }
+            if(!dk_active){ dk_active=true; toast("Игра началась!"); playSnd('card'); }
             dk_checkWin();
         }
 
@@ -1671,119 +1073,59 @@
             if(dk_processMove(c, action, false)) dk_sync();
         }
 
-        function dk_handleClientAction(action) {
-            if(!isHost) return;
-            dk_processAction(false);
-            dk_sync();
-        }
+        function dk_handleClientAction(action) { if(!isHost) return; dk_processAction(false); dk_sync(); }
 
-        // --- BLACKJACK ENGINE ---
+        // --- BLACKJACK ONLINE P2P ENGINE (Host is Dealer) ---
         let bj_deck = [], bj_pHand = [], bj_dHand = [];
-        let bj_active = false, bj_turn = 'NONE'; 
-        let bj_msg = '';
-        
-        let bj_bet = 10;
-        let bj_current_bet_placed = 10;
+        let bj_active = false, bj_turn = 'NONE', bj_msg = '';
+        let bj_bet = 10, bj_current_bet_placed = 0;
 
         function bj_createDeck() {
             bj_deck = [];
             for(let shoe = 0; shoe < 4; shoe++) {
-                DK_SUITS.forEach(s => DK_VALUES.forEach(v => {
-                    let w = parseInt(v);
-                    if (['J','Q','K'].includes(v)) w = 10;
-                    if (v === 'A') w = 11;
-                    bj_deck.push({suit: s, value: v, weight: w, color: (s==='♥'||s==='♦')?'red':'black'});
-                }));
+                DK_SUITS.forEach(s => DK_VALUES.forEach(v => { let w = parseInt(v); if (['J','Q','K'].includes(v)) w = 10; if (v === 'A') w = 11; bj_deck.push({suit: s, value: v, weight: w, color: (s==='♥'||s==='♦')?'red':'black'}); }));
             }
             bj_shuffle();
         }
 
-        function bj_shuffle() {
-            toast("Перемешивание шуза...");
-            for(let i=bj_deck.length-1; i>0; i--) { 
-                const j=Math.floor(Math.random()*(i+1)); 
-                [bj_deck[i], bj_deck[j]]=[dk_deck[j] || bj_deck[j], dk_deck[i] || bj_deck[i]]; 
-            }
-        }
-
-        function bj_calcScore(hand) {
-            let score = 0, aces = 0;
-            hand.forEach(c => { score += c.weight; if(c.value==='A') aces++; });
-            while(score > 21 && aces > 0) { score -= 10; aces--; }
-            return score;
-        }
+        function bj_shuffle() { toast("Перемешивание шуза..."); for(let i=bj_deck.length-1; i>0; i--) { const j=Math.floor(Math.random()*(i+1)); [bj_deck[i], bj_deck[j]]=[bj_deck[j], bj_deck[i]]; } }
+        function bj_calcScore(hand) { let score = 0, aces = 0; hand.forEach(c => { score += c.weight; if(c.value==='A') aces++; }); while(score > 21 && aces > 0) { score -= 10; aces--; } return score; }
 
         function bj_renderCard(c, hidden = false, delay = 0) {
-            const el = document.createElement('div');
-            el.className = `playing-card bj-card card-animate ${hidden ? 'card-back skin-gold' : c.color}`;
-            el.style.animationDelay = `${delay}s`;
-            if(!hidden) el.innerHTML = `<div class="top-left">${c.value}<br>${c.suit}</div><div class="center-suit">${c.suit}</div><div class="bottom-right">${c.value}<br>${c.suit}</div>`;
-            return el;
+            const el = document.createElement('div'); el.className = `playing-card bj-card card-animate ${hidden ? 'card-back skin-gold' : c.color}`; el.style.animationDelay = `${delay}s`;
+            if(!hidden) el.innerHTML = `<div class="top-left">${c.value}<br>${c.suit}</div><div class="center-suit">${c.suit}</div><div class="bottom-right">${c.value}<br>${c.suit}</div>`; return el;
         }
 
         function bj_selectBet(amount) {
             if (amount <= window.rubBalance) {
-                bj_bet = amount;
-                triggerHaptic('light');
-                document.getElementById('bj-bet-preview').innerText = `${bj_bet} ₽`;
-                
-                [10, 50, 100, 500].forEach(a => {
-                    document.getElementById(`chip-${a}`).classList.remove('scale-110', 'border-amber-400');
-                });
-                if(document.getElementById(`chip-${amount}`)) {
-                    document.getElementById(`chip-${amount}`).classList.add('scale-110', 'border-amber-400');
-                }
-            } else {
-                toast("Недостаточно рублей на балансе!", true);
-                openDepositModal();
-            }
+                bj_bet = amount; triggerHaptic('light'); document.getElementById('bj-bet-preview').innerText = `${bj_bet} ₽`;
+                [10, 50, 100, 500].forEach(a => { if(document.getElementById(`chip-${a}`)) document.getElementById(`chip-${a}`).classList.remove('scale-110', 'border-amber-400'); });
+                if(document.getElementById(`chip-${amount}`)) document.getElementById(`chip-${amount}`).classList.add('scale-110', 'border-amber-400');
+            } else { toast("Недостаточно баланса!", true); openDepositModal(); }
         }
 
         function bj_confirmBet() {
+            if(isHost) return; // Client only
             triggerHaptic('medium');
             bj_current_bet_placed = bj_bet;
             window.rubBalance -= bj_current_bet_placed;
             updateRUBBalances(); 
-            
             document.getElementById('bj-bet-tray').classList.add('hidden');
-            
-            if (isSingleplayer) {
-                bj_dealInitialCards();
-            } else {
-                bj_dealInitialCardsMulti();
-            }
-        }
-
-        function bj_dealInitialCards() {
-            if (bj_deck.length < 40) bj_createDeck(); 
-
-            bj_pHand = [bj_deck.pop(), bj_deck.pop()];
-            bj_dHand = [bj_deck.pop(), bj_deck.pop()];
-            bj_turn = 'PLAYER';
-            
-            bj_renderUI();
-            
-            if(bj_calcScore(bj_pHand) === 21) {
-                bj_stand();
-            }
+            p2pConn.send({type: 'BJ_BET', amount: bj_current_bet_placed});
+            document.getElementById('bj-waiting').classList.remove('hidden');
+            document.getElementById('bj-wait-text').innerText = "Ожидание Дилера...";
         }
 
         function bj_dealInitialCardsMulti() {
+            if(!isHost) return;
             if (bj_deck.length < 40) bj_createDeck();
-
-            bj_pHand = [bj_deck.pop(), bj_deck.pop()];
-            bj_dHand = [bj_deck.pop(), bj_deck.pop()];
-            bj_turn = 'CLIENT'; 
-            bj_sync();
-            
-            if(bj_calcScore(bj_pHand) === 21) {
-                 bj_turn = 'HOST'; bj_sync();
-            }
+            bj_pHand = [bj_deck.pop(), bj_deck.pop()]; bj_dHand = [bj_deck.pop(), bj_deck.pop()];
+            bj_turn = 'CLIENT'; bj_sync();
+            if(bj_calcScore(bj_pHand) === 21) { bj_turn = 'HOST'; bj_sync(); setTimeout(bj_dealerAutoPlay, 1000); }
         }
 
         function bj_renderUI() {
             updateRUBBalancesUI();
-
             document.getElementById('bj-shoe-info').innerText = `Шуз: ${bj_deck.length} карт`;
 
             const pH = document.getElementById('bj-player-hand'); pH.innerHTML = '';
@@ -1791,347 +1133,124 @@
             document.getElementById('bj-player-score').innerText = bj_calcScore(bj_pHand);
 
             const dH = document.getElementById('bj-dealer-hand'); dH.innerHTML = '';
-            const hideDealer = (bj_turn === 'PLAYER' || bj_turn === 'CLIENT') && bj_dHand.length > 1;
-            
-            bj_dHand.forEach((c, i) => {
-                dH.appendChild(bj_renderCard(c, (i===1 && hideDealer), i*0.1));
-            });
+            const hideDealer = (bj_turn === 'CLIENT') && bj_dHand.length > 1 && !isHost;
+            bj_dHand.forEach((c, i) => { dH.appendChild(bj_renderCard(c, (i===1 && hideDealer), i*0.1)); });
             
             if (hideDealer) document.getElementById('bj-dealer-score').innerText = bj_dHand[0] ? bj_dHand[0].weight : '?';
             else document.getElementById('bj-dealer-score').innerText = bj_calcScore(bj_dHand);
 
-            const msgEl = document.getElementById('bj-msg');
-            const controls = document.getElementById('bj-controls');
-            const waitEl = document.getElementById('bj-waiting');
-            const resetBtn = document.getElementById('bj-reset-btn');
-            const waitTxt = document.getElementById('bj-wait-text');
-            const doubleBtn = document.getElementById('bj-btn-double');
-
+            const msgEl = document.getElementById('bj-msg'); const controls = document.getElementById('bj-controls'); const waitEl = document.getElementById('bj-waiting'); const resetBtn = document.getElementById('bj-reset-btn'); const waitTxt = document.getElementById('bj-wait-text'); const doubleBtn = document.getElementById('bj-btn-double');
             document.getElementById('bj-current-bet-display').innerText = `${bj_current_bet_placed} ₽`;
 
-            if (bj_pHand.length === 2 && window.rubBalance >= bj_current_bet_placed) {
-                doubleBtn.classList.remove('opacity-40', 'pointer-events-none');
-            } else {
-                doubleBtn.classList.add('opacity-40', 'pointer-events-none');
-            }
+            if (bj_pHand.length === 2 && window.rubBalance >= bj_current_bet_placed) doubleBtn.classList.remove('opacity-40', 'pointer-events-none');
+            else doubleBtn.classList.add('opacity-40', 'pointer-events-none');
 
             if(bj_turn === 'BETTING') {
-                document.getElementById('bj-bet-tray').classList.remove('hidden');
-                document.getElementById('bj-balance-preview').innerText = `${window.rubBalance.toLocaleString('ru-RU')} ₽`;
-                bj_selectBet(10);
+                if(!isHost) { document.getElementById('bj-bet-tray').classList.remove('hidden'); document.getElementById('bj-balance-preview').innerText = `${window.rubBalance.toLocaleString('ru-RU')} ₽`; bj_selectBet(10); }
+                else { waitEl.classList.remove('hidden'); waitTxt.innerText = "Ожидание ставки Игрока..."; controls.classList.add('hidden'); }
+                resetBtn.classList.add('hidden'); msgEl.className = "text-center font-black title-font text-base md:text-lg opacity-0 transform scale-90";
             } else if(bj_turn === 'OVER') {
                 msgEl.innerText = bj_msg; 
-                msgEl.className = `text-center font-black title-font text-base md:text-lg transition-all duration-500 bg-black/85 px-5 py-2 rounded-2xl backdrop-blur-sm border shadow-2xl opacity-100 transform scale-100 ${bj_msg.includes('ПОБЕД') ? 'text-emerald-400 border-emerald-500/50 shadow-emerald-500/20' : (bj_msg.includes('НИЧЬЯ') ? 'text-gray-300 border-gray-500/50' : 'text-red-500 border-red-500/50 shadow-red-500/20')}`;
+                msgEl.className = `text-center font-black title-font text-base md:text-lg transition-all duration-500 bg-black/85 px-5 py-2 rounded-2xl backdrop-blur-sm border shadow-2xl opacity-100 transform scale-100 ${bj_msg.includes('ИГРОК ПОБЕДИЛ') || bj_msg.includes('ВЫ ПОБЕДИЛИ') || bj_msg.includes('БЛЭКДЖЕК') ? 'text-emerald-400 border-emerald-500/50 shadow-emerald-500/20' : (bj_msg.includes('НИЧЬЯ') ? 'text-gray-300 border-gray-500/50' : 'text-red-500 border-red-500/50 shadow-red-500/20')}`;
                 controls.classList.add('hidden'); waitEl.classList.add('hidden');
-                
-                if (isSingleplayer || isHost) resetBtn.classList.remove('hidden');
+                if (isHost) { resetBtn.classList.remove('hidden'); resetBtn.innerText = "Новая раздача"; resetBtn.disabled = false; resetBtn.classList.remove('opacity-50'); }
                 else { resetBtn.classList.remove('hidden'); resetBtn.innerText = "Ожидание дилера..."; resetBtn.disabled = true; resetBtn.classList.add('opacity-50'); }
             } else {
-                msgEl.className = "text-center font-black title-font text-base md:text-lg transition-all duration-500 bg-black/85 px-5 py-2 rounded-2xl backdrop-blur-sm border shadow-2xl opacity-0 transform scale-90";
-                resetBtn.classList.add('hidden');
-
-                if (isSingleplayer) {
-                    if(bj_turn === 'PLAYER') { controls.classList.remove('hidden'); waitEl.classList.add('hidden'); }
-                    else { controls.classList.add('hidden'); waitEl.classList.remove('hidden'); waitTxt.innerText = "Дилер играет..."; }
-                } else {
-                    if (isHost) {
-                        if(bj_turn === 'HOST') { controls.classList.remove('hidden'); waitEl.classList.add('hidden'); }
-                        else { controls.classList.add('hidden'); waitEl.classList.remove('hidden'); waitTxt.innerText = "Ожидание хода игрока..."; }
-                    } else {
-                        if(bj_turn === 'CLIENT') { controls.classList.remove('hidden'); waitEl.classList.add('hidden'); }
-                        else { controls.classList.add('hidden'); waitEl.classList.remove('hidden'); waitTxt.innerText = "Дилер думает..."; }
-                    }
-                }
+                msgEl.className = "text-center font-black title-font text-base md:text-lg opacity-0 transform scale-90"; resetBtn.classList.add('hidden');
+                if (isHost) { controls.classList.add('hidden'); waitEl.classList.remove('hidden'); waitTxt.innerText = bj_turn === 'HOST' ? "Выдача карт..." : "Ожидание хода игрока..."; } 
+                else { if(bj_turn === 'CLIENT') { controls.classList.remove('hidden'); waitEl.classList.add('hidden'); } else { controls.classList.add('hidden'); waitEl.classList.remove('hidden'); waitTxt.innerText = "Дилер думает..."; } }
             }
         }
 
-        function bj_startSingle() {
-            bj_active = true; 
-            bj_createDeck();
-            bj_turn = 'BETTING';
-            bj_renderUI();
-        }
-
-        function bj_startMulti() {
-            bj_active = true; 
-            bj_createDeck();
-            bj_turn = 'BETTING';
-            bj_renderUI();
-        }
+        function bj_startMulti() { bj_active = true; bj_createDeck(); bj_turn = 'BETTING'; bj_renderUI(); }
 
         window.bj_hit = function() {
-            if(!bj_active) return; playSnd('card'); triggerHaptic('light');
-            
-            if(isSingleplayer && bj_turn === 'PLAYER') {
-                bj_pHand.push(bj_deck.pop()); 
-                if(bj_calcScore(bj_pHand) > 21) { 
-                    bj_msg = "ПЕРЕБОР! ДИЛЕР ВЫИГРАЛ"; 
-                    bj_turn = 'OVER'; 
-                    triggerHaptic('error');
-                }
-                bj_renderUI();
-            } else if (!isSingleplayer) {
-                if(isHost && bj_turn === 'HOST') {
-                    bj_dHand.push(bj_deck.pop());
-                    if(bj_calcScore(bj_dHand) > 21) { bj_msg = "ДИЛЕР ПЕРЕБРАЛ! ИГРОК ПОБЕДИЛ"; bj_turn = 'OVER'; bj_payoutWins(); }
-                    bj_sync();
-                } else if (!isHost && bj_turn === 'CLIENT') {
-                    p2pConn.send({type: 'BJ_ACTION', action: 'HIT'});
-                }
-            }
+            if(!bj_active || isHost) return; playSnd('card'); triggerHaptic('light');
+            if (bj_turn === 'CLIENT') p2pConn.send({type: 'BJ_ACTION', action: 'HIT'});
         }
 
         window.bj_doubleDown = function() {
-            if(!bj_active) return;
-            if (window.rubBalance < bj_current_bet_placed) return toast("Недостаточно рублей на балансе!", true);
-
+            if(!bj_active || isHost || bj_turn !== 'CLIENT') return;
+            if (window.rubBalance < bj_current_bet_placed) return toast("Недостаточно рублей!", true);
             playSnd('card'); triggerHaptic('heavy');
-            
-            window.rubBalance -= bj_current_bet_placed;
-            bj_current_bet_placed *= 2;
-            updateRUBBalances();
-
-            if (isSingleplayer && bj_turn === 'PLAYER') {
-                bj_pHand.push(bj_deck.pop());
-                if(bj_calcScore(bj_pHand) > 21) {
-                    bj_msg = "ПЕРЕБОР С ДАБЛА! ДИЛЕР ВЫИГРАЛ";
-                    bj_turn = 'OVER';
-                } else {
-                    bj_turn = 'DEALER';
-                    setTimeout(bj_aiDealerTurn, 800);
-                }
-                bj_renderUI();
-            } else if (!isSingleplayer) {
-                if (!isHost && bj_turn === 'CLIENT') {
-                    p2pConn.send({type: 'BJ_ACTION', action: 'DOUBLE'});
-                }
-            }
+            window.rubBalance -= bj_current_bet_placed; updateRUBBalances();
+            p2pConn.send({type: 'BJ_ACTION', action: 'DOUBLE'});
         }
 
         window.bj_stand = function() {
-            if(!bj_active) return; playSnd('click');
-            
-            if(isSingleplayer && bj_turn === 'PLAYER') {
-                bj_turn = 'DEALER'; bj_renderUI();
-                setTimeout(bj_aiDealerTurn, 800);
-            } else if (!isSingleplayer) {
-                if (isHost && bj_turn === 'HOST') {
-                    bj_calcWinner(); bj_sync();
-                } else if (!isHost && bj_turn === 'CLIENT') {
-                    p2pConn.send({type: 'BJ_ACTION', action: 'STAND'});
-                }
-            }
+            if(!bj_active || isHost || bj_turn !== 'CLIENT') return; playSnd('click');
+            p2pConn.send({type: 'BJ_ACTION', action: 'STAND'});
         }
 
-        function bj_aiDealerTurn() {
-            if(!bj_active) return;
+        function bj_dealerAutoPlay() {
+            if(!isHost || !bj_active || bj_turn !== 'HOST') return;
             let dScore = bj_calcScore(bj_dHand);
-            if(dScore < 17) {
-                bj_dHand.push(bj_deck.pop()); playSnd('card'); bj_renderUI();
-                setTimeout(bj_aiDealerTurn, 800);
-            } else {
-                bj_calcWinner(); bj_renderUI();
-            }
-        }
-
-        function bj_payoutWins() {
-            triggerHaptic('success');
-            startCoinsRain();
-            window.rubBalance += bj_current_bet_placed * 2;
-            updateRUBBalances(); 
-        }
-
-        function bj_payoutBlackjack() {
-            triggerHaptic('success');
-            startCoinsRain();
-            window.rubBalance += Math.floor(bj_current_bet_placed * 2.5); 
-            updateRUBBalances();
-        }
-
-        function bj_payoutDraw() {
-            window.rubBalance += bj_current_bet_placed; 
-            updateRUBBalances();
+            if(dScore < 17) { bj_dHand.push(bj_deck.pop()); playSnd('card'); bj_sync(); setTimeout(bj_dealerAutoPlay, 1000); } 
+            else { bj_calcWinner(); bj_sync(); }
         }
 
         function bj_calcWinner() {
-            const pScore = bj_calcScore(bj_pHand);
-            const dScore = bj_calcScore(bj_dHand);
-            bj_turn = 'OVER';
-            
-            if(dScore > 21) {
-                bj_msg = "ДИЛЕР ПЕРЕБРАЛ. ПОБЕДА!";
-                bj_payoutWins();
-            } else if(pScore > dScore) {
-                if (pScore === 21 && bj_pHand.length === 2) {
-                    bj_msg = "БЛЭКДЖЕК! ПОБЕДА!";
-                    bj_payoutBlackjack();
-                } else {
-                    bj_msg = "ВЫ ПОБЕДИЛИ!";
-                    bj_payoutWins();
-                }
-            } else if(pScore < dScore) {
-                bj_msg = "ДИЛЕР ВЫИГРАЛ";
-                triggerHaptic('error');
-            } else {
-                bj_msg = "НИЧЬЯ (ПУШ)";
-                bj_payoutDraw();
-            }
-            
-            if(bj_msg.includes("ПОБЕД") || bj_msg.includes("ВЫИГРАЛ")) playSnd('win');
+            const pScore = bj_calcScore(bj_pHand); const dScore = bj_calcScore(bj_dHand); bj_turn = 'OVER';
+            if(dScore > 21) { bj_msg = "ДИЛЕР ПЕРЕБРАЛ! ИГРОК ПОБЕДИЛ"; } 
+            else if(pScore > dScore) { if (pScore === 21 && bj_pHand.length === 2) bj_msg = "БЛЭКДЖЕК! ИГРОК ПОБЕДИЛ"; else bj_msg = "ИГРОК ПОБЕДИЛ!"; } 
+            else if(pScore < dScore) { bj_msg = "ДИЛЕР ВЫИГРАЛ"; triggerHaptic('error'); } 
+            else { bj_msg = "НИЧЬЯ (ПУШ)"; }
+            if(bj_msg.includes("ПОБЕД") || bj_msg.includes("ВЫИГРАЛ") && !isHost) playSnd('win');
         }
 
         window.bj_resetGame = function() {
-            playSnd('click');
-            stopCoinsRain();
-            if (window.rubBalance <= 0) {
-                toast("Вы обанкротились! Получите кредит в 100 ₽.");
-                window.rubBalance = 100;
-                updateRUBBalances(); 
-            }
-            bj_turn = 'BETTING';
-            bj_pHand = [];
-            bj_dHand = [];
-            bj_renderUI();
+            if(!isHost) return; playSnd('click'); stopCoinsRain();
+            bj_turn = 'BETTING'; bj_pHand = []; bj_dHand = []; bj_current_bet_placed = 0; bj_sync();
         }
 
         function bj_sync() {
             if(!isHost || !p2pConn) return;
             let sendDHand = bj_dHand;
-            if (bj_turn === 'CLIENT' && bj_dHand.length > 1) {
-                sendDHand = [bj_dHand[0], {suit: '?', value: '?', weight: 0, color: 'black'}];
-            }
-            
-            const state = { 
-                pHand: bj_pHand, dHand: sendDHand, turn: bj_turn, msg: bj_msg, 
-                placedBet: bj_current_bet_placed, hostBalance: window.rubBalance 
-            };
-            p2pConn.send({type: 'BJ_STATE', state: state});
-            bj_renderUI();
+            if (bj_turn === 'CLIENT' && bj_dHand.length > 1) sendDHand = [bj_dHand[0], {suit: '?', value: '?', weight: 0, color: 'black'}];
+            const state = { pHand: bj_pHand, dHand: sendDHand, turn: bj_turn, msg: bj_msg, placedBet: bj_current_bet_placed };
+            p2pConn.send({type: 'BJ_STATE', state: state}); bj_renderUI();
         }
 
         function bj_applyState(s) {
             if(isHost) return;
-            bj_pHand = s.pHand; bj_dHand = s.dHand; bj_turn = s.turn; bj_msg = s.msg;
-            bj_current_bet_placed = s.placedBet;
-            
-            if(!bj_active){ bj_active=true; toast("Раздача началась!"); }
-            if(bj_turn === 'OVER' && bj_msg.includes('ИГРОК ПОБЕДИЛ')) { playSnd('win'); startCoinsRain(); }
+            bj_pHand = s.pHand; bj_dHand = s.dHand; bj_turn = s.turn; bj_msg = s.msg; bj_current_bet_placed = s.placedBet;
+            if(!bj_active && bj_turn !== 'BETTING'){ bj_active=true; toast("Раздача началась!"); }
+            if(bj_turn === 'OVER' && (bj_msg.includes('ИГРОК ПОБЕДИЛ') || bj_msg.includes('ВЫ ПОБЕДИЛИ') || bj_msg.includes('БЛЭКДЖЕК'))) { 
+                if (bj_msg.includes('БЛЭКДЖЕК')) window.rubBalance += Math.floor(bj_current_bet_placed * 2.5);
+                else window.rubBalance += bj_current_bet_placed * 2;
+                updateRUBBalances(); playSnd('win'); startCoinsRain(); 
+            } else if (bj_turn === 'OVER' && bj_msg.includes('НИЧЬЯ')) {
+                window.rubBalance += bj_current_bet_placed; updateRUBBalances();
+            }
             bj_renderUI();
         }
 
         function bj_handleClientAction(action) {
             if(!isHost || bj_turn !== 'CLIENT') return;
-            
             if(action === 'HIT') {
                 bj_pHand.push(bj_deck.pop()); playSnd('card');
                 if(bj_calcScore(bj_pHand) > 21) { bj_msg = "ИГРОК ПЕРЕБРАЛ! ДИЛЕР ПОБЕДИЛ"; bj_turn = 'OVER'; }
                 bj_sync();
             } else if (action === 'DOUBLE') {
-                bj_pHand.push(bj_deck.pop()); playSnd('card');
-                bj_current_bet_placed *= 2; 
-                
-                if(bj_calcScore(bj_pHand) > 21) { 
-                    bj_msg = "ПЕРЕБОР С ДАБЛА! ДИЛЕР ПОБЕДИЛ"; 
-                    bj_turn = 'OVER'; 
-                } else {
-                    bj_turn = 'HOST';
-                }
-                bj_sync();
+                bj_pHand.push(bj_deck.pop()); playSnd('card'); bj_current_bet_placed *= 2; 
+                if(bj_calcScore(bj_pHand) > 21) { bj_msg = "ПЕРЕБОР С ДАБЛА! ДИЛЕР ПОБЕДИЛ"; bj_turn = 'OVER'; bj_sync(); } 
+                else { bj_turn = 'HOST'; bj_sync(); setTimeout(bj_dealerAutoPlay, 1000); }
             } else if (action === 'STAND') {
-                bj_turn = 'HOST'; playSnd('click');
-                bj_sync();
+                bj_turn = 'HOST'; playSnd('click'); bj_sync(); setTimeout(bj_dealerAutoPlay, 1000);
             }
         }
 
         // --- COIN RAIN ANIMATION ENGINE ---
-        const canvas = document.getElementById("coin-canvas");
-        const ctx = canvas.getContext("2d");
-        let coins = [];
-        let coinAnimId;
-
+        const canvas = document.getElementById("coin-canvas"); const ctx = canvas.getContext("2d"); let coins = []; let coinAnimId;
         class Coin {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * -canvas.height;
-                this.size = Math.random() * 14 + 10;
-                this.speedY = Math.random() * 3 + 2;
-                this.speedX = Math.random() * 1.5 - 0.75;
-                this.rotation = Math.random() * 360;
-                this.spinSpeed = Math.random() * 10 - 5;
-            }
-            update() {
-                this.y += this.speedY;
-                this.x += this.speedX;
-                this.rotation += this.spinSpeed;
-            }
-            draw() {
-                ctx.save();
-                ctx.translate(this.x, this.y);
-                ctx.rotate((this.rotation * Math.PI) / 180);
-                
-                ctx.beginPath();
-                ctx.arc(0, 0, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = "#fbbf24";
-                ctx.shadowColor = "rgba(251, 191, 36, 0.6)";
-                ctx.shadowBlur = 8;
-                ctx.fill();
-                
-                ctx.beginPath();
-                ctx.arc(0, 0, this.size - 3, 0, Math.PI * 2);
-                ctx.lineWidth = 1;
-                ctx.strokeStyle = "#d97706";
-                ctx.stroke();
-
-                ctx.fillStyle = "#78350f";
-                ctx.font = `bold ${this.size * 0.9}px sans-serif`;
-                ctx.textAlign = "center";
-                ctx.textBaseline = "middle";
-                ctx.fillText("₽", 0, 0);
-
-                ctx.restore();
-            }
+            constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * -canvas.height; this.size = Math.random() * 14 + 10; this.speedY = Math.random() * 3 + 2; this.speedX = Math.random() * 1.5 - 0.75; this.rotation = Math.random() * 360; this.spinSpeed = Math.random() * 10 - 5; }
+            update() { this.y += this.speedY; this.x += this.speedX; this.rotation += this.spinSpeed; }
+            draw() { ctx.save(); ctx.translate(this.x, this.y); ctx.rotate((this.rotation * Math.PI) / 180); ctx.beginPath(); ctx.arc(0, 0, this.size, 0, Math.PI * 2); ctx.fillStyle = "#fbbf24"; ctx.shadowColor = "rgba(251, 191, 36, 0.6)"; ctx.shadowBlur = 8; ctx.fill(); ctx.beginPath(); ctx.arc(0, 0, this.size - 3, 0, Math.PI * 2); ctx.lineWidth = 1; ctx.strokeStyle = "#d97706"; ctx.stroke(); ctx.fillStyle = "#78350f"; ctx.font = `bold ${this.size * 0.9}px sans-serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText("₽", 0, 0); ctx.restore(); }
         }
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-
-        function startCoinsRain() {
-            resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
-            canvas.style.display = 'block';
-            coins = [];
-            for (let i = 0; i < 70; i++) {
-                coins.push(new Coin());
-            }
-            animateCoins();
-        }
-
-        function animateCoins() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            let stillOnScreen = false;
-            
-            coins.forEach(coin => {
-                coin.update();
-                coin.draw();
-                if (coin.y < canvas.height + 50) {
-                    stillOnScreen = true;
-                }
-            });
-
-            if (stillOnScreen) {
-                coinAnimId = requestAnimationFrame(animateCoins);
-            } else {
-                stopCoinsRain();
-            }
-        }
-
-        function stopCoinsRain() {
-            cancelAnimationFrame(coinAnimId);
-            canvas.style.display = 'none';
-            window.removeEventListener('resize', resizeCanvas);
-        }
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        function startCoinsRain() { resizeCanvas(); window.addEventListener('resize', resizeCanvas); canvas.style.display = 'block'; coins = []; for (let i = 0; i < 70; i++) { coins.push(new Coin()); } animateCoins(); }
+        function animateCoins() { ctx.clearRect(0, 0, canvas.width, canvas.height); let stillOnScreen = false; coins.forEach(coin => { coin.update(); coin.draw(); if (coin.y < canvas.height + 50) stillOnScreen = true; }); if (stillOnScreen) coinAnimId = requestAnimationFrame(animateCoins); else stopCoinsRain(); }
+        function stopCoinsRain() { cancelAnimationFrame(coinAnimId); canvas.style.display = 'none'; window.removeEventListener('resize', resizeCanvas); }
     </script>
 </body>
 </html>
