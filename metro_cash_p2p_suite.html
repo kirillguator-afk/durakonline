@@ -14,180 +14,177 @@
 
         :root {
             --metro-green: #10b981;
-            --metro-green-glow: rgba(16, 185, 129, 0.4);
+            --metro-green-glow: rgba(16, 185, 129, 0.45);
             --metro-gold: #fbbf24;
-            --metro-gold-glow: rgba(251, 191, 36, 0.4);
-            --metro-dark: #030712;
+            --metro-gold-glow: rgba(251, 191, 36, 0.45);
+            --metro-dark: #020617;
             
-            --card-width-dk: clamp(52px, 11vw, 72px);
-            --card-height-dk: clamp(76px, 16.5vw, 106px);
-            --card-width-bj: clamp(56px, 12vw, 78px);
-            --card-height-bj: clamp(82px, 18vw, 114px);
+            /* Увеличенные размеры карт для лучшей видимости и тач-таргетинга */
+            --card-width-dk: clamp(60px, 13vw, 84px);
+            --card-height-dk: clamp(88px, 19vw, 122px);
+            --card-width-bj: clamp(66px, 14vw, 92px);
+            --card-height-bj: clamp(96px, 20.5vw, 134px);
         }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            color: #f3f4f6;
+            color: #f8fafc;
             overflow: hidden;
             -webkit-tap-highlight-color: transparent;
             background-color: var(--metro-dark);
             height: 100dvh;
-            background-image: radial-gradient(circle at 50% 0%, #111827 0%, var(--metro-dark) 80%);
+            background-image: radial-gradient(circle at 50% 0%, #0f172a 0%, var(--metro-dark) 85%);
             padding-bottom: env(safe-area-inset-bottom);
         }
 
-        /* Столы с объемными тенями */
         .table-felt-durak {
-            background: radial-gradient(circle at center, #0f4d2a 0%, #062b16 65%, #021209 100%);
-            box-shadow: inset 0 0 100px rgba(0,0,0,0.95);
+            background: radial-gradient(circle at center, #064e3b 0%, #022c22 65%, #011510 100%);
+            box-shadow: inset 0 0 120px rgba(0,0,0,0.95);
         }
         .table-felt-blackjack {
-            background: radial-gradient(circle at center, #3d0e05 0%, #1f0501 65%, #080000 100%);
-            box-shadow: inset 0 0 100px rgba(0,0,0,0.95);
+            background: radial-gradient(circle at center, #4c1d95 0%, #2e1065 65%, #0f051d 100%);
+            box-shadow: inset 0 0 120px rgba(0,0,0,0.95);
         }
 
         .title-font { font-family: 'Orbitron', sans-serif; }
 
-        /* Улучшенный Glassmorphism */
+        /* Премиальный Glassmorphism с более глубоким размытием */
         .glass-panel {
-            background: rgba(15, 23, 42, 0.55);
-            backdrop-filter: blur(28px);
-            -webkit-backdrop-filter: blur(28px);
-            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
             border-left: 1px solid rgba(255, 255, 255, 0.08);
-            border-right: 1px solid rgba(0, 0, 0, 0.4);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.6);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+            border-right: 1px solid rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.7);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.05);
         }
 
-        /* Общие стили карт */
         .playing-card {
             background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(0,0,0,0.08);
             display: flex; flex-direction: column; justify-content: space-between;
-            padding: 6px;
-            font-size: clamp(10px, 2.2vw, 13px);
+            padding: 8px;
+            font-size: clamp(12px, 2.6vw, 16px);
             font-weight: 800; position: relative;
             cursor: pointer; user-select: none;
             touch-action: none;
+            transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
         }
         .playing-card.red { color: #ef4444; }
-        .playing-card.black { color: #111827; }
+        .playing-card.black { color: #0f172a; }
         
-        .playing-card .top-left { text-align: left; line-height: 1; }
-        .playing-card .bottom-right { text-align: right; transform: rotate(180deg); line-height: 1; }
-        .playing-card .center-suit { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 2.4em; opacity: 0.1; pointer-events: none; }
+        .playing-card .top-left { text-align: left; line-height: 1.1; }
+        .playing-card .bottom-right { text-align: right; transform: rotate(180deg); line-height: 1.1; }
+        .playing-card .center-suit { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 2.8em; opacity: 0.12; pointer-events: none; }
 
-        /* Рубашки карт */
+        /* Рубашки карт с неоновым свечением */
         .card-back { color: transparent !important; }
         .skin-emerald {
-            background: radial-gradient(circle, #065f46 0%, #022c22 100%);
+            background: radial-gradient(circle, #059669 0%, #064e3b 100%);
             border: 2px solid var(--metro-green);
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.9), 0 0 8px var(--metro-green-glow);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.85), 0 0 12px var(--metro-green-glow);
         }
         .skin-emerald::after {
             content: 'M'; font-family: 'Orbitron', sans-serif; position: absolute;
             top: 50%; left: 50%; transform: translate(-50%, -50%);
-            color: var(--metro-green); font-size: clamp(18px, 4vw, 26px);
-            text-shadow: 0 0 8px var(--metro-green);
+            color: var(--metro-green); font-size: clamp(22px, 5vw, 30px);
+            text-shadow: 0 0 10px var(--metro-green);
         }
         .skin-gold {
-            background: radial-gradient(circle, #92400e 0%, #451a03 100%);
+            background: radial-gradient(circle, #d97706 0%, #78350f 100%);
             border: 2px solid var(--metro-gold);
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.9), 0 0 8px var(--metro-gold-glow);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.85), 0 0 12px var(--metro-gold-glow);
         }
         .skin-gold::after {
             content: '★'; font-family: 'Orbitron', sans-serif; position: absolute;
             top: 50%; left: 50%; transform: translate(-50%, -50%);
-            color: var(--metro-gold); font-size: clamp(18px, 4vw, 26px);
-            text-shadow: 0 0 8px var(--metro-gold);
+            color: var(--metro-gold); font-size: clamp(22px, 5vw, 30px);
+            text-shadow: 0 0 10px var(--metro-gold);
         }
 
-        /* Дурак CSS */
         .dk-card { width: var(--card-width-dk); height: var(--card-height-dk); }
         .card-in-hand { 
             transform-origin: bottom center; 
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.15), z-index 0.1s, box-shadow 0.3s; 
+            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.2), z-index 0.1s, box-shadow 0.25s; 
         }
         .card-in-hand:hover, .card-in-hand:active {
-            transform: translateY(-28px) scale(1.25) rotate(0deg) !important;
+            transform: translateY(-35px) scale(1.3) rotate(0deg) !important;
             z-index: 250 !important;
-            box-shadow: 0 15px 30px rgba(16, 185, 129, 0.6), 0 0 12px var(--metro-green);
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.75), 0 0 18px var(--metro-green);
             border: 1px solid var(--metro-green);
         }
         .dragging {
-            opacity: 0.9; transform: scale(1.15) !important; z-index: 1000 !important;
-            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.7) !important;
+            opacity: 0.95; transform: scale(1.22) !important; z-index: 1000 !important;
+            box-shadow: 0 25px 50px rgba(16, 185, 129, 0.85) !important;
             transition: none !important;
         }
         .drag-target-active {
-            box-shadow: inset 0 0 40px rgba(16, 185, 129, 0.5) !important;
-            border: 1px solid rgba(16, 185, 129, 0.8) !important;
+            box-shadow: inset 0 0 60px rgba(16, 185, 129, 0.35) !important;
+            border: 2px dashed rgba(16, 185, 129, 0.8) !important;
         }
 
         /* Блэкджек CSS */
-        .bj-card { width: var(--card-width-bj); height: var(--card-height-bj); font-size: clamp(12px, 2.8vw, 16px); padding: 7px; }
-        .card-animate { animation: dropIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards; opacity: 0; }
+        .bj-card { width: var(--card-width-bj); height: var(--card-height-bj); font-size: clamp(14px, 3vw, 18px); padding: 9px; }
+        .card-animate { animation: dropIn 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.25) forwards; opacity: 0; }
         @keyframes dropIn { 
-            from { transform: translateY(-60px) scale(0.6) rotate(10deg); opacity: 0; } 
+            from { transform: translateY(-80px) scale(0.5) rotate(15deg); opacity: 0; } 
             to { transform: translateY(0) scale(1) rotate(0); opacity: 1; } 
         }
 
-        /* UI Кнопки */
         .btn-neon-emerald {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(16, 185, 129, 0.05));
             border: 1px solid var(--metro-green); color: var(--metro-green);
             transition: all 0.25s ease;
         }
         .btn-neon-emerald:hover { background: var(--metro-green); color: var(--metro-dark); box-shadow: 0 0 25px var(--metro-green-glow); }
-        .btn-neon-emerald:active { transform: scale(0.95); }
+        .btn-neon-emerald:active { transform: scale(0.97); }
 
         .btn-neon-gold {
-            background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(251, 191, 36, 0.05));
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.25), rgba(251, 191, 36, 0.05));
             border: 1px solid var(--metro-gold); color: var(--metro-gold);
             transition: all 0.25s ease;
         }
         .btn-neon-gold:hover { background: var(--metro-gold); color: var(--metro-dark); box-shadow: 0 0 25px var(--metro-gold-glow); }
-        .btn-neon-gold:active { transform: scale(0.95); }
+        .btn-neon-gold:active { transform: scale(0.97); }
 
         .app-view { display: none; }
-        .app-view.active { display: flex; animation: fadeIn 0.3s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .app-view.active { display: flex; animation: fadeIn 0.35s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Эмодзи Реакции */
         .reaction-bubble {
-            position: absolute; font-size: 3.2rem; pointer-events: none; z-index: 999;
-            animation: floatUpAndFade 1.4s cubic-bezier(0.18, 0.89, 0.32, 1.2) forwards;
+            position: absolute; font-size: 3.5rem; pointer-events: none; z-index: 999;
+            animation: floatUpAndFade 1.5s cubic-bezier(0.18, 0.89, 0.32, 1.2) forwards;
         }
         @keyframes floatUpAndFade {
             0% { transform: translateY(50px) scale(0.3) rotate(0deg); opacity: 0; }
             20% { opacity: 1; }
-            100% { transform: translateY(-350px) scale(1.6) rotate(35deg); opacity: 0; }
+            100% { transform: translateY(-400px) scale(1.7) rotate(35deg); opacity: 0; }
         }
 
         /* Фишки */
         .metro-chip {
-            width: clamp(48px, 11vw, 62px); height: clamp(48px, 11vw, 62px);
-            border-radius: 50%; border: 4px dashed rgba(255,255,255,0.9);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.6), inset 0 0 8px rgba(0,0,0,0.5);
+            width: clamp(52px, 12vw, 68px); height: clamp(52px, 12vw, 68px);
+            border-radius: 50%; border: 4px dashed rgba(255,255,255,0.95);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.65), inset 0 0 10px rgba(0,0,0,0.6);
             display: flex; align-items: center; justify-content: center;
-            font-weight: 900; font-size: 12px; cursor: pointer;
+            font-weight: 900; font-size: 13px; cursor: pointer;
             transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.25);
         }
         .metro-chip:active { transform: scale(0.85) rotate(-15deg); }
 
-        .discard-pile-slot { border: 2px dashed rgba(255, 255, 255, 0.15); background: rgba(0, 0, 0, 0.3); transition: all 0.3s; }
-        .card-flying-to-discard { position: fixed; z-index: 500; transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1); pointer-events: none; }
+        .discard-pile-slot { border: 2px dashed rgba(255, 255, 255, 0.2); background: rgba(0, 0, 0, 0.4); transition: all 0.3s; }
+        .card-flying-to-discard { position: fixed; z-index: 500; transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1); pointer-events: none; }
         
         #coin-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100; display: none; }
         input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.25); border-radius: 6px; }
         
-        /* Дополнение для плавной смены лампочки */
-        #header-lightbulb { filter: drop-shadow(0 0 5px currentColor); }
+        #header-lightbulb { filter: drop-shadow(0 0 6px currentColor); }
     </style>
 </head>
 <body class="flex flex-col relative w-full h-[100dvh] overflow-hidden">
@@ -195,25 +192,23 @@
     <canvas id="coin-canvas"></canvas>
 
     <!-- Global Header -->
-    <header class="w-full p-3 flex flex-row justify-between items-center gap-2 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-xl shrink-0 z-50 transition-all duration-300 shadow-lg" id="main-header">
-        <div class="flex items-center gap-2 shrink-0">
-            <!-- Улучшенный минималистичный логотип с лампочкой вместо вкладки модификатора -->
-            <div id="header-icon" class="w-8 h-8 md:w-9 md:h-9 bg-slate-900 rounded-xl border border-slate-700/60 shadow-inner flex items-center justify-center transition-colors">
-                <i class="fa-solid fa-lightbulb text-red-500 animate-pulse text-sm md:text-base transition-colors duration-500" id="header-lightbulb" title="Статус сети"></i>
+    <header class="w-full p-4 flex flex-row justify-between items-center gap-2 border-b border-slate-800/80 bg-slate-950/85 backdrop-blur-xl shrink-0 z-50 transition-all duration-300 shadow-lg" id="main-header">
+        <div class="flex items-center gap-2.5 shrink-0">
+            <div id="header-icon" class="w-9 h-9 bg-slate-900 rounded-xl border border-slate-700/60 shadow-inner flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-lightbulb text-red-500 animate-pulse text-base transition-colors duration-500" id="header-lightbulb" title="Статус сети"></i>
             </div>
             <div>
-                <!-- Смена названия на METRO CASH -->
-                <h1 class="text-[13px] md:text-[15px] title-font font-black tracking-widest text-white drop-shadow-md shrink-0">METRO<span class="text-emerald-500">CASH</span></h1>
+                <h1 class="text-[14px] md:text-[17px] title-font font-black tracking-widest text-white drop-shadow-md shrink-0">METRO<span class="text-emerald-500">CASH</span></h1>
                 <p id="header-subtitle" class="text-[7px] md:text-[8px] text-gray-400 uppercase tracking-widest font-bold">Multiplayer Hub</p>
             </div>
         </div>
         <div class="flex items-center gap-2 shrink-0 max-w-[65%]">
             <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700/50 shadow-inner">
-                <span id="profile-name-label" class="max-w-[70px] md:max-w-[120px] truncate text-[9px] text-gray-400 font-bold uppercase flex items-center cursor-pointer" title="Профиль" onclick="switchTab('profile')">
+                <span id="profile-name-label" class="max-w-[70px] md:max-w-[120px] truncate text-[9px] text-gray-400 font-bold uppercase flex items-center cursor-pointer hover:text-white transition" title="Профиль" onclick="switchTab('profile')">
                     <i class="fa-solid fa-user-circle mr-1.5 text-slate-500 shrink-0"></i> ИГРОК
                 </span>
                 <div class="w-px h-3 bg-slate-700 mx-1 shrink-0"></div>
-                <span id="global-rub-balance" class="text-[12px] font-mono text-emerald-400 font-extrabold shrink-0">0 ₽</span>
+                <span id="global-rub-balance" class="text-[13px] font-mono text-emerald-400 font-extrabold shrink-0">0 ₽</span>
                 <button onclick="openDepositModal()" class="ml-2 shrink-0 px-2 py-0.5 bg-gradient-to-r from-amber-500 to-amber-400 text-black text-[9px] font-black rounded-md hover:scale-105 transition shadow-[0_0_12px_rgba(251,191,36,0.5)]">
                     <i class="fa-solid fa-plus"></i>
                 </button>
@@ -223,43 +218,54 @@
 
     <main class="w-full flex-1 relative overflow-hidden flex flex-col z-10 pb-16">
         
-        <!-- P2P Lobby Hub View -->
-        <div id="view-hub" class="app-view active flex-col w-full h-full overflow-y-auto p-4 md:p-6 max-w-6xl mx-auto space-y-6">
-            
-            <div class="w-full glass-panel rounded-3xl p-5 md:p-7 flex flex-col md:flex-row items-center justify-between gap-5 relative overflow-hidden shrink-0">
+        <!-- View 1: Home (Главная) -->
+        <div id="view-home" class="app-view active flex-col w-full h-full overflow-y-auto p-4 md:p-8 max-w-4xl mx-auto space-y-6">
+            <div class="text-center space-y-3 py-6">
+                <h2 class="text-2xl md:text-4xl title-font font-black text-white tracking-wider">ДОБРО ПОЖАЛОВАТЬ В <span class="text-emerald-400">METRO CASH</span></h2>
+                <p class="text-xs md:text-sm text-slate-400 max-w-lg mx-auto leading-relaxed">
+                    Современная игровая p2p-платформа для увлекательного отдыха. Сражайтесь с друзьями в классические карточные игры напрямую без серверов-посредников.
+                </p>
+            </div>
+
+            <!-- Иллюстративный стек карт -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="glass-panel p-6 rounded-3xl space-y-4 border-l-4 border-emerald-500 relative overflow-hidden group">
+                    <div class="absolute -right-12 -bottom-12 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all"></div>
+                    <div class="text-xl font-bold text-white flex items-center gap-2"><i class="fa-solid fa-cards text-emerald-400"></i> Сетевой Дурак</div>
+                    <p class="text-[11px] md:text-xs text-slate-400 leading-relaxed">
+                        Классическое русское карточное состязание. Выбирайте тип матча (Подкидной или Переводной) и количество карт в колоде (36 или 52). Играйте один на один с полной синхронизацией!
+                    </p>
+                </div>
+
+                <div class="glass-panel p-6 rounded-3xl space-y-4 border-l-4 border-amber-500 relative overflow-hidden group">
+                    <div class="absolute -right-12 -bottom-12 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl group-hover:bg-amber-500/20 transition-all"></div>
+                    <div class="text-xl font-bold text-white flex items-center gap-2"><i class="fa-solid fa-coins text-amber-400"></i> P2P Блэкджек</div>
+                    <p class="text-[11px] md:text-xs text-slate-400 leading-relaxed">
+                        Почувствуйте себя в роли крупье! Хост выступает в качестве дилера казино, сдавая карты и принимая ставки у подключающегося игрока по честным правилам Вегаса.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Крупная кнопка моментального перехода -->
+            <div class="flex flex-col items-center justify-center py-6">
+                <button onclick="switchTab('hub')" class="btn-neon-emerald px-10 py-5 rounded-2xl text-xs font-black uppercase tracking-widest shadow-2xl flex items-center gap-3">
+                    <i class="fa-solid fa-gamepad text-base"></i> Открыть Игровой Хаб
+                </button>
+            </div>
+        </div>
+
+        <!-- View 2: P2P Lobby Hub (Хаб) -->
+        <div id="view-hub" class="app-view flex-col w-full h-full overflow-y-auto p-4 md:p-6 max-w-6xl mx-auto space-y-6">
+            <div class="w-full glass-panel rounded-3xl p-5 flex flex-col md:flex-row items-center justify-between gap-4 relative overflow-hidden shrink-0">
                 <div class="absolute -right-10 -top-10 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl"></div>
-                <div class="flex flex-col relative z-10 w-full md:w-1/2">
-                    <h2 class="text-xl md:text-2xl title-font font-black text-white mb-2"><i class="fa-solid fa-satellite-dish text-emerald-400 mr-2 animate-pulse"></i>ONLINE СЕТЬ</h2>
-                    <p class="text-xs text-gray-400 mb-4 leading-relaxed">Играйте с реальными людьми напрямую. Ваш идентификатор:</p>
-                    
-                    <!-- Минималистичный показ ID (без лишних индикаторов - они теперь в лампочке) -->
-                    <div class="bg-black/60 border border-slate-700/60 rounded-xl p-3.5 flex items-center justify-between shadow-inner gap-2 overflow-hidden">
-                        <i class="fa-solid fa-fingerprint text-emerald-500/50"></i>
-                        <span class="text-xs font-mono text-emerald-400 tracking-wider truncate flex-1 ml-2" id="local-peer-id">Инициализация узла...</span>
-                        <button onclick="copyPeerId()" class="text-gray-400 hover:text-white transition p-1"><i class="fa-regular fa-copy"></i></button>
-                    </div>
+                <div class="flex flex-col relative z-10 w-full md:w-2/3">
+                    <h2 class="text-xl md:text-2xl title-font font-black text-white mb-2"><i class="fa-solid fa-satellite-dish text-emerald-400 mr-2 animate-pulse"></i>ИГРОВЫЕ СЕРВЕРА</h2>
+                    <p class="text-xs text-gray-400 leading-relaxed">Выберите активную комнату ниже для мгновенного подключения или создайте свою со специальными настройками.</p>
                 </div>
                 
-                <div class="w-full md:w-1/2 flex flex-col gap-3 relative z-10">
-                    <div class="grid grid-cols-2 gap-3">
-                        <div class="col-span-2 md:col-span-1">
-                            <label class="block text-[9px] text-gray-400 uppercase font-bold mb-1.5 ml-1">Имя в игре</label>
-                            <input type="text" id="player-nickname" class="w-full bg-black/50 border border-slate-600 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-400 outline-none transition shadow-inner" value="Игрок">
-                        </div>
-                        <div class="col-span-2 md:col-span-1">
-                            <label class="block text-[9px] text-gray-400 uppercase font-bold mb-1.5 ml-1">Название комнаты</label>
-                            <input type="text" id="room-name" class="w-full bg-black/50 border border-slate-600 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-400 outline-none transition shadow-inner" value="Metro VIP">
-                        </div>
-                        <div class="col-span-2">
-                            <label class="block text-[9px] text-gray-400 uppercase font-bold mb-1.5 ml-1">Режим Игры</label>
-                            <select id="game-mode-select" class="w-full bg-black/50 border border-slate-600 rounded-xl px-4 py-3.5 text-sm text-white focus:border-emerald-400 outline-none transition appearance-none cursor-pointer font-bold shadow-inner">
-                                <option value="DURAK">🃏 Дурак (Сетевая игра P2P)</option>
-                                <option value="BLACKJACK">🎰 Блэкджек (Вы играете за Дилера)</option>
-                            </select>
-                        </div>
-                    </div>
-                    <button onclick="hostGame()" class="btn-neon-emerald w-full py-4 rounded-xl text-xs font-black uppercase tracking-widest mt-2 flex items-center justify-center gap-2 shadow-lg">
-                        <i class="fa-solid fa-server text-sm"></i> Создать Сервер
+                <div class="w-full md:w-auto shrink-0 z-10">
+                    <button onclick="openCreateModal()" class="btn-neon-emerald w-full md:w-auto px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg">
+                        <i class="fa-solid fa-plus-circle text-sm"></i> Создать Сервер
                     </button>
                 </div>
             </div>
@@ -278,7 +284,7 @@
             </div>
         </div>
 
-        <!-- Profile Hub View -->
+        <!-- View 3: Profile (Профиль) -->
         <div id="view-profile" class="app-view flex-col w-full h-full overflow-y-auto p-4 md:p-6 max-w-lg mx-auto space-y-6">
             <div class="w-full glass-panel rounded-3xl p-6 flex flex-col items-center text-center relative overflow-hidden mt-4">
                 <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -303,13 +309,13 @@
                          <i class="fa-solid fa-wallet text-sm"></i> Пополнить
                     </button>
                     <button onclick="switchTab('hub')" class="btn-neon-emerald py-4 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg flex flex-col items-center gap-1 justify-center">
-                         <i class="fa-solid fa-gamepad text-sm"></i> Играть
+                         <i class="fa-solid fa-gamepad text-sm"></i> Найти игру
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Durak View -->
+        <!-- View 4: Durak -->
         <div id="view-durak" class="app-view flex-col w-full h-full relative">
             <div id="dk-setup" class="flex-1 flex items-center justify-center p-4">
                 <div class="glass-panel rounded-3xl p-8 text-center max-w-sm w-full border-t-2 border-emerald-500/50 shadow-[0_0_50px_rgba(16,185,129,0.2)]">
@@ -347,14 +353,14 @@
 
                 <div class="flex-1 w-full relative z-10 flex flex-col justify-center mt-6">
                     <div class="absolute left-2 top-1/2 -translate-y-1/2 scale-75 origin-left z-20 md:scale-90 md:left-6 flex flex-col gap-6">
-                        <div class="relative w-[54px] h-[80px] md:w-[70px] md:h-[102px]">
-                            <div id="dk-trump-card" class="playing-card dk-card absolute shadow-xl" style="transform: rotate(90deg) translate(25px, -15px); z-index: 1;"></div>
+                        <div class="relative w-[60px] h-[88px] md:w-[84px] md:h-[122px]">
+                            <div id="dk-trump-card" class="playing-card dk-card absolute shadow-xl" style="transform: rotate(90deg) translate(30px, -20px); z-index: 1;"></div>
                             <div id="dk-deck-pile" class="playing-card dk-card card-back skin-emerald absolute shadow-2xl" style="z-index: 2;"></div>
                         </div>
                         <div class="text-center mt-4 text-[11px] font-black text-white bg-slate-900/95 px-3 py-1.5 rounded-lg shadow-lg border border-emerald-500/40" id="dk-trump-ind">♠ 36</div>
                         
                         <div class="flex flex-col items-center mt-2">
-                            <div id="dk-discard-pile" class="w-[54px] h-[80px] md:w-[70px] md:h-[102px] rounded-xl discard-pile-slot border border-emerald-500/30 flex items-center justify-center relative shadow-inner">
+                            <div id="dk-discard-pile" class="w-[60px] h-[88px] md:w-[84px] md:h-[122px] rounded-xl discard-pile-slot border border-emerald-500/30 flex items-center justify-center relative shadow-inner">
                                 <div class="text-[9px] text-emerald-500/40 font-bold uppercase tracking-widest text-center select-none pointer-events-none">ОТБОЙ</div>
                                 <div id="dk-discard-visual" class="hidden playing-card dk-card card-back skin-emerald absolute top-0 left-0 shadow-lg" style="transform: rotate(-10deg);"></div>
                             </div>
@@ -377,13 +383,13 @@
                     <button onclick="sendEmoji('🤬')" class="hover:scale-125 transition text-lg md:text-xl">🤬</button>
                 </div>
 
-                <div class="h-32 md:h-40 w-full shrink-0 relative z-30 flex justify-center items-end pb-4 bg-gradient-to-t from-black/90 via-black/60 to-transparent pointer-events-none">
+                <div class="h-36 md:h-44 w-full shrink-0 relative z-30 flex justify-center items-end pb-4 bg-gradient-to-t from-black/90 via-black/60 to-transparent pointer-events-none">
                     <div id="dk-hand" class="pointer-events-auto flex justify-center items-end relative h-full w-full max-w-2xl"></div>
                 </div>
             </div>
         </div>
 
-        <!-- Blackjack View -->
+        <!-- View 5: Blackjack -->
         <div id="view-blackjack" class="app-view flex-col w-full h-full relative">
             <div id="bj-setup" class="flex-1 flex items-center justify-center p-4">
                 <div class="glass-panel rounded-3xl p-8 text-center max-w-sm w-full border-t-2 border-amber-500/50 shadow-[0_0_50px_rgba(251,191,36,0.2)]">
@@ -502,9 +508,13 @@
 
     </main>
 
-    <!-- Нижная панель навигации для телефона (Общий Хаб и Профиль) -->
+    <!-- Нижняя панель навигации для телефона (Главная, Хаб и Профиль) -->
     <nav id="bottom-nav" class="fixed bottom-0 left-0 w-full bg-slate-950/95 backdrop-blur-xl border-t border-slate-800 shadow-[0_-10px_30px_rgba(0,0,0,0.5)] z-50 flex justify-around items-center pb-[env(safe-area-inset-bottom)]">
-        <button onclick="switchTab('hub')" id="nav-hub" class="flex-1 py-3.5 flex flex-col items-center gap-1.5 text-emerald-400 transition-colors">
+        <button onclick="switchTab('home')" id="nav-home" class="flex-1 py-3.5 flex flex-col items-center gap-1.5 text-emerald-400 transition-colors">
+            <i class="fa-solid fa-house text-lg"></i>
+            <span class="text-[9px] font-bold uppercase tracking-widest">Главная</span>
+        </button>
+        <button onclick="switchTab('hub')" id="nav-hub" class="flex-1 py-3.5 flex flex-col items-center gap-1.5 text-gray-500 hover:text-gray-300 transition-colors">
             <i class="fa-solid fa-layer-group text-lg"></i>
             <span class="text-[9px] font-bold uppercase tracking-widest">Хаб</span>
         </button>
@@ -513,6 +523,70 @@
             <span class="text-[9px] font-bold uppercase tracking-widest">Профиль</span>
         </button>
     </nav>
+
+    <!-- Модальное окно создания своего сервера с глубокой настройкой -->
+    <div id="create-modal" class="hidden fixed inset-0 bg-black/85 z-[99999] flex items-center justify-center p-4 backdrop-blur-xl">
+        <div class="glass-panel rounded-3xl p-1 text-center max-w-md w-full shadow-[0_0_80px_rgba(16,185,129,0.2)] relative overflow-hidden">
+            <div class="bg-slate-950/90 rounded-[26px] p-6 relative z-10 border border-slate-700/50 text-left space-y-4">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                    <span class="text-xs text-emerald-400 uppercase tracking-widest font-extrabold flex items-center gap-2">
+                        <i class="fa-solid fa-server text-sm"></i> Новый игровой мир
+                    </span>
+                    <button onclick="closeCreateModal()" class="text-gray-400 hover:text-white transition w-8 h-8 flex items-center justify-center bg-slate-900 rounded-full border border-slate-700">
+                        <i class="fa-solid fa-xmark text-sm"></i>
+                    </button>
+                </div>
+
+                <div>
+                    <label class="block text-[9px] text-gray-400 uppercase font-bold mb-1 ml-1">Название комнаты</label>
+                    <input type="text" id="setup-room-name" class="w-full bg-black/60 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:border-emerald-400 outline-none transition" value="Metro VIP">
+                </div>
+
+                <div>
+                    <label class="block text-[9px] text-gray-400 uppercase font-bold mb-1 ml-1">Режим игры</label>
+                    <select id="setup-game-mode" onchange="toggleSetupFields()" class="w-full bg-black/60 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:border-emerald-400 outline-none transition cursor-pointer font-bold">
+                        <option value="DURAK">🃏 Дурак (Сетевой P2P)</option>
+                        <option value="BLACKJACK">🎰 Блэкджек (Казино дилер)</option>
+                    </select>
+                </div>
+
+                <!-- Блок специфичных настроек Дурака -->
+                <div id="setup-durak-fields" class="space-y-4">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[9px] text-gray-400 uppercase font-bold mb-1 ml-1">Тип колоды</label>
+                            <select id="setup-deck-size" class="w-full bg-black/60 border border-slate-700 rounded-xl px-4 py-2 text-xs text-white focus:border-emerald-400 outline-none">
+                                <option value="36">36 карт</option>
+                                <option value="52">52 карты</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[9px] text-gray-400 uppercase font-bold mb-1 ml-1">Тип игры</label>
+                            <select id="setup-durak-type" class="w-full bg-black/60 border border-slate-700 rounded-xl px-4 py-2 text-xs text-white focus:border-emerald-400 outline-none">
+                                <option value="classic">Подкидной</option>
+                                <option value="transfer">Переводной</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[9px] text-gray-400 uppercase font-bold mb-1 ml-1">Размер ставки</label>
+                    <select id="setup-match-bet" class="w-full bg-black/60 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:border-emerald-400 outline-none">
+                        <option value="10">10 ₽</option>
+                        <option value="50">50 ₽</option>
+                        <option value="100">100 ₽</option>
+                        <option value="500">500 ₽</option>
+                        <option value="1000">1000 ₽</option>
+                    </select>
+                </div>
+
+                <button onclick="confirmCreateServer()" class="w-full btn-neon-emerald py-3.5 rounded-xl text-xs font-black uppercase tracking-widest shadow-xl flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-play text-sm"></i> Запустить и опубликовать
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Deposit Modal -->
     <div id="deposit-modal" class="hidden fixed inset-0 bg-black/85 z-[99999] flex items-center justify-center p-4 backdrop-blur-xl">
@@ -618,6 +692,11 @@
         let tgLobbyPostId = null;
         let pingInterval, pongTimeout;
 
+        // Расширенные игровые настройки матча
+        let dk_deckSize = 36;
+        let dk_gameVariant = 'classic'; // 'classic' or 'transfer'
+        let setupMatchBet = 10;
+
         window.rubBalance = parseFloat(localStorage.getItem('metro_rub_balance')) || 1000.00;
 
         function triggerHaptic(type) {
@@ -633,6 +712,7 @@
             } catch (e) {}
         }
 
+        // Формирование приглашения с возможностью открытия WebApp кнопкой
         function shareInviteLink() {
             triggerHaptic('light');
             const modeName = currentGameMode === 'DURAK' ? 'Дурак' : 'Блэкджек';
@@ -648,13 +728,6 @@
                 dummy.select(); document.execCommand('copy'); document.body.removeChild(dummy);
                 toast("Ссылка на комнату скопирована!");
             }
-        }
-
-        function copyPeerId() {
-            triggerHaptic('light');
-            const dummy = document.createElement('input'); document.body.appendChild(dummy);
-            dummy.value = myPeerId || ''; dummy.select(); document.execCommand('copy'); document.body.removeChild(dummy);
-            toast("ID Скопирован!");
         }
 
         function sendEmoji(emoji) {
@@ -676,7 +749,6 @@
             // Профиль Баланс
             const profBal = document.getElementById('profile-view-balance'); if(profBal) profBal.innerText = `${window.rubBalance.toLocaleString('ru-RU')} ₽`;
             
-            const dkBal = document.getElementById('dk-game-rub-balance'); if(dkBal) dkBal.innerText = `${window.rubBalance.toLocaleString('ru-RU')} ₽`;
             const bjBal = document.getElementById('bj-game-rub-balance'); if(bjBal) bjBal.innerText = `${window.rubBalance.toLocaleString('ru-RU')} ₽`;
             const bjPrev = document.getElementById('bj-balance-preview'); if(bjPrev) bjPrev.innerText = `${window.rubBalance.toLocaleString('ru-RU')} ₽`;
             const bjDisp = document.getElementById('bj-current-balance-display'); if(bjDisp) bjDisp.innerText = `${window.rubBalance.toLocaleString('ru-RU')} ₽`;
@@ -748,7 +820,7 @@
                     document.getElementById('profile-tg-id').innerText = tg.initDataUnsafe.user.id.toString();
                 }
             }
-            initPeer(); switchTab('hub');
+            initPeer(); switchTab('home');
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('join')) setTimeout(() => { currentGameMode = urlParams.get('mode') || 'DURAK'; joinLobby(urlParams.get('join'), currentGameMode); }, 1000);
         });
@@ -756,25 +828,32 @@
         function switchTab(tab) {
             document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
             
-            // Header display logic
+            // Настройка видимости Header
             const header = document.getElementById('main-header');
-            if(tab === 'hub' || tab === 'profile') header.style.display = 'flex';
-            else header.style.display = 'none';
+            if(tab === 'game') header.style.display = 'none';
+            else header.style.display = 'flex';
 
-            // Bottom Nav display logic
+            // Настройка видимости Bottom Nav
             const bNav = document.getElementById('bottom-nav');
-            if(tab === 'hub' || tab === 'profile') {
+            if(tab === 'game') bNav.style.display = 'none';
+            else {
                 bNav.style.display = 'flex';
-                // Update active states
-                if(document.getElementById('nav-hub')) {
-                    document.getElementById('nav-hub').className = tab === 'hub' ? 'flex-1 py-3.5 flex flex-col items-center gap-1.5 text-emerald-400 transition-colors' : 'flex-1 py-3.5 flex flex-col items-center gap-1.5 text-gray-500 hover:text-gray-300 transition-colors';
-                    document.getElementById('nav-profile').className = tab === 'profile' ? 'flex-1 py-3.5 flex flex-col items-center gap-1.5 text-emerald-400 transition-colors' : 'flex-1 py-3.5 flex flex-col items-center gap-1.5 text-gray-500 hover:text-gray-300 transition-colors';
-                }
-            } else {
-                bNav.style.display = 'none';
+                // Смена активности кнопок
+                ['home', 'hub', 'profile'].forEach(id => {
+                    const btn = document.getElementById(`nav-${id}`);
+                    if(btn) {
+                        btn.className = id === tab 
+                            ? 'flex-1 py-3.5 flex flex-col items-center gap-1.5 text-emerald-400 transition-colors' 
+                            : 'flex-1 py-3.5 flex flex-col items-center gap-1.5 text-gray-500 hover:text-gray-300 transition-colors';
+                    }
+                });
             }
 
-            if(tab === 'hub') document.getElementById('view-hub').classList.add('active');
+            if(tab === 'home') document.getElementById('view-home').classList.add('active');
+            else if(tab === 'hub') {
+                document.getElementById('view-hub').classList.add('active');
+                fetchLobbies();
+            }
             else if (tab === 'profile') document.getElementById('view-profile').classList.add('active');
             else if (tab === 'game') {
                 if (currentGameMode === 'BLACKJACK') document.getElementById('view-blackjack').classList.add('active');
@@ -798,16 +877,12 @@
             ];
             myPeer = new Peer('', { config: { iceServers: iceServers } });
             
-            // Включаем лампочку-логотип (ожидание)
             const lb = document.getElementById('header-lightbulb');
             if(lb) { lb.className = "fa-solid fa-lightbulb text-red-500 animate-pulse text-sm md:text-base transition-colors duration-500"; }
 
             myPeer.on('open', id => {
                 myPeerId = id;
-                // Смена состояния лампочки логотипа на Онлайн (зеленый светится)
                 if(lb) { lb.className = "fa-solid fa-lightbulb text-emerald-500 text-sm md:text-base transition-colors duration-500 drop-shadow-[0_0_8px_rgba(16,185,129,0.8)]"; }
-                
-                document.getElementById('local-peer-id').innerText = id;
             });
             myPeer.on('connection', conn => {
                 if (dk_active || bj_active) { conn.close(); return; } 
@@ -830,7 +905,14 @@
             p2pConn = conn; isHost = hostRole; 
             
             const onOpen = () => {
-                conn.send({ type: 'HELLO', nick: document.getElementById('player-nickname').value, mode: currentGameMode });
+                conn.send({ 
+                    type: 'HELLO', 
+                    nick: document.getElementById('player-nickname').value, 
+                    mode: currentGameMode,
+                    deckSize: dk_deckSize,
+                    gameVariant: dk_gameVariant,
+                    matchBet: setupMatchBet
+                });
                 startHeartbeat();
             };
 
@@ -844,15 +926,29 @@
                 if (data.type === 'HELLO') {
                     toast(`${data.nick || 'Игрок'} подключился!`);
                     currentGameMode = data.mode || currentGameMode;
+                    dk_deckSize = data.deckSize || dk_deckSize;
+                    dk_gameVariant = data.gameVariant || dk_gameVariant;
+                    setupMatchBet = data.matchBet || setupMatchBet;
+                    
                     showGameBoard();
                     
                     if (isHost) {
                         removeLobby();
-                        if (currentGameMode === 'DURAK') { document.getElementById('dk-opp-name').innerText = data.nick; dk_startMulti(); } 
-                        else { document.getElementById('bj-player-label').innerText = data.nick; bj_startMulti(); }
+                        if (currentGameMode === 'DURAK') { 
+                            document.getElementById('dk-opp-name').innerText = data.nick; 
+                            dk_startMulti(); 
+                        } 
+                        else { 
+                            document.getElementById('bj-player-label').innerText = data.nick; 
+                            bj_startMulti(); 
+                        }
                     } else {
-                        if (currentGameMode === 'DURAK') { document.getElementById('dk-opp-name').innerText = data.nick; } 
-                        else { document.getElementById('bj-dealer-label').innerText = `Дилер (${data.nick})`; }
+                        if (currentGameMode === 'DURAK') { 
+                            document.getElementById('dk-opp-name').innerText = data.nick; 
+                        } 
+                        else { 
+                            document.getElementById('bj-dealer-label').innerText = `Дилер (${data.nick})`; 
+                        }
                     }
                 }
                 
@@ -878,13 +974,43 @@
             }
         }
 
-        window.hostGame = async function() {
+        // Конфигурационный модальный диалог
+        function openCreateModal() {
+            triggerHaptic('light');
+            document.getElementById('create-modal').classList.remove('hidden');
+        }
+
+        function closeCreateModal() {
+            document.getElementById('create-modal').classList.add('hidden');
+        }
+
+        function toggleSetupFields() {
+            const mode = document.getElementById('setup-game-mode').value;
+            const durakFields = document.getElementById('setup-durak-fields');
+            if (mode === 'DURAK') {
+                durakFields.classList.remove('hidden');
+            } else {
+                durakFields.classList.add('hidden');
+            }
+        }
+
+        async function confirmCreateServer() {
+            closeCreateModal();
+            currentGameMode = document.getElementById('setup-game-mode').value;
+            dk_deckSize = parseInt(document.getElementById('setup-deck-size').value) || 36;
+            dk_gameVariant = document.getElementById('setup-durak-type').value || 'classic';
+            setupMatchBet = parseFloat(document.getElementById('setup-match-bet').value) || 10;
+            const room = document.getElementById('setup-room-name').value || "Metro VIP";
+
+            if (window.rubBalance < setupMatchBet) {
+                toast("Недостаточно баланса для запуска комнаты с такой ставкой!", true);
+                return;
+            }
+
             playSnd('click');
-            currentGameMode = document.getElementById('game-mode-select').value;
-            const room = document.getElementById('room-name').value || "Metro VIP";
-            
             const icon = currentGameMode === 'DURAK' ? '🃏' : '🎰';
-            const text = `${icon} <b>METRO CASH P2P</b>\nРежим: ${currentGameMode}\nКомната: ${room}\n\nLOBBY_ACTIVE|${currentGameMode}|${room}|${myPeerId}|${Date.now()}`;
+            const specText = currentGameMode === 'DURAK' ? ` [Колода: ${dk_deckSize}, тип: ${dk_gameVariant === 'classic'?'Подкидной':'Переводной'}]` : '';
+            const text = `${icon} <b>METRO CASH P2P</b>\nРежим: ${currentGameMode}${specText}\nКомната: ${room}\nСтавка: ${setupMatchBet}₽\n\nLOBBY_ACTIVE|${currentGameMode}|${room}|${myPeerId}|${Date.now()}|${dk_deckSize}|${dk_gameVariant}|${setupMatchBet}`;
             
             try {
                 const res = await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
@@ -892,7 +1018,7 @@
                     body: JSON.stringify({ chat_id: TG_CHANNEL_NAME, text: text, parse_mode: "HTML" })
                 });
                 const data = await res.json();
-                if(data.ok) { tgLobbyPostId = data.result.message_id; toast("Сервер опубликован в сеть!"); }
+                if(data.ok) { tgLobbyPostId = data.result.message_id; toast("Сервер успешно опубликован!"); }
             } catch(e) { toast("Локальный запуск сервера", true); }
             
             isHost = true; switchTab('game');
@@ -901,21 +1027,22 @@
                 document.getElementById('dk-setup').classList.remove('hidden'); 
                 document.getElementById('dk-board').classList.add('hidden'); 
                 document.querySelector('#dk-setup h2').innerText = "ОЖИДАНИЕ ИГРОКА";
-                document.querySelector('#dk-setup p').innerText = "Сервер успешно запущен. Поделитесь ссылкой ниже, чтобы оппонент мог подключиться к вам напрямую.";
+                document.querySelector('#dk-setup p').innerText = `Колода: ${dk_deckSize} карт. Режим: ${dk_gameVariant === 'classic'?'Подкидной':'Переводной'}. Сделайте приглашение.`;
                 document.getElementById('dk-share-btn').classList.remove('hidden');
             } 
             else { 
                 document.getElementById('bj-setup').classList.remove('hidden'); 
                 document.getElementById('bj-board').classList.add('hidden'); 
                 document.querySelector('#bj-setup h2').innerText = "P2P КАЗИНО";
-                document.getElementById('bj-setup-desc').innerText = "Вы играете за Дилера. Ожидание подключения реального игрока...";
+                document.getElementById('bj-setup-desc').innerText = "Вы играете за Дилера. Ставка: " + setupMatchBet + "₽. Ожидание подключения реального игрока...";
                 document.getElementById('bj-share-btn').classList.remove('hidden');
             }
         }
 
         async function fetchLobbies() {
             const grid = document.getElementById('lobbies-grid');
-            const icon = document.getElementById('refresh-icon'); icon.classList.add('animate-spin');
+            if (!grid) return;
+            const icon = document.getElementById('refresh-icon'); if (icon) icon.classList.add('animate-spin');
             grid.innerHTML = '<div class="col-span-full text-center text-xs text-gray-500 py-10 glass-panel rounded-3xl">Загрузка сети...</div>';
             
             try {
@@ -930,20 +1057,29 @@
                     if(txt.includes('LOBBY_ACTIVE|')) {
                         const parts = txt.split('LOBBY_ACTIVE|')[1].split('|');
                         if (parts.length >= 4) {
-                            const mode = parts[0], room = parts[1], pid = parts[2], ts = parseInt(parts[3]);
+                            const mode = parts[0];
+                            const room = parts[1];
+                            const pid = parts[2];
+                            const ts = parseInt(parts[3]);
+                            const dSize = parts[4] || "36";
+                            const dVariant = parts[5] || "classic";
+                            const bet = parts[6] || "10";
+
                             if (Date.now() - ts < 7200000 && pid !== myPeerId) {
                                 found++;
                                 const isDk = mode === 'DURAK';
                                 const cIcon = isDk ? '<i class="fa-solid fa-cards text-emerald-400"></i>' : '<i class="fa-solid fa-coins text-amber-400"></i>';
                                 const btnCls = isDk ? 'text-emerald-400 border-emerald-500/30 hover:bg-emerald-900/50' : 'text-amber-400 border-amber-500/30 hover:bg-amber-900/50';
-                                
+                                const details = isDk ? `Карты: ${dSize} (${dVariant === 'classic'?'Подкидной':'Переводной'})` : `Обычный шуз`;
+
                                 grid.innerHTML += `
                                     <div class="glass-panel p-5 rounded-3xl flex flex-col justify-between transition hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(0,0,0,0.6)]">
-                                        <div class="flex flex-col mb-5">
+                                        <div class="flex flex-col mb-4">
                                             <div class="text-sm font-black title-font text-white flex items-center gap-2">${cIcon} ${room}</div>
-                                            <div class="text-[10px] text-gray-400 font-mono mt-1.5 uppercase opacity-80">Режим: ${mode}</div>
+                                            <div class="text-[10px] text-gray-400 font-mono mt-1.5 uppercase opacity-80">${details}</div>
+                                            <div class="text-[11px] text-emerald-400 font-bold mt-2 font-mono">Ставка: ${bet} ₽</div>
                                         </div>
-                                        <button onclick="joinLobby('${pid}', '${mode}')" class="w-full bg-black/50 border ${btnCls} text-[10px] font-bold uppercase py-3 rounded-xl transition active:scale-95 shadow-inner">Подключиться</button>
+                                        <button onclick="joinLobby('${pid}', '${mode}', ${dSize}, '${dVariant}', ${bet})" class="w-full bg-black/50 border ${btnCls} text-[10px] font-bold uppercase py-3 rounded-xl transition active:scale-95 shadow-inner">Подключиться</button>
                                     </div>
                                 `;
                             }
@@ -952,13 +1088,23 @@
                 });
                 if(found===0) grid.innerHTML = '<div class="col-span-full text-center text-xs text-gray-500 py-10 glass-panel rounded-3xl">Нет активных серверов</div>';
             } catch(e) { grid.innerHTML = '<div class="col-span-full text-center text-red-400/70 text-xs py-10 glass-panel rounded-3xl">Ошибка сети. Сервер недоступен.</div>'; }
-            setTimeout(()=>icon.classList.remove('animate-spin'), 500);
+            if (icon) setTimeout(()=>icon.classList.remove('animate-spin'), 500);
         }
 
-        window.joinLobby = function(pid, mode) {
+        window.joinLobby = function(pid, mode, dSize, dVariant, bet) {
             if(!pid) return;
             pid = pid.trim(); 
-            playSnd('click'); currentGameMode = mode; switchTab('game'); toast("Соединение с хостом...");
+            currentGameMode = mode;
+            dk_deckSize = dSize || 36;
+            dk_gameVariant = dVariant || 'classic';
+            setupMatchBet = bet || 10;
+
+            if (window.rubBalance < setupMatchBet) {
+                toast("Недостаточно баланса для входа в данную комнату!", true);
+                return;
+            }
+
+            playSnd('click'); switchTab('game'); toast("Соединение с хостом...");
             
             if(mode === 'DURAK') { 
                 document.getElementById('dk-setup').classList.remove('hidden'); 
@@ -976,16 +1122,13 @@
             }
             
             const conn = myPeer.connect(pid, {reliable: true});
-            
             const connTimeout = setTimeout(() => {
                 if (!p2pConn || !p2pConn.open) {
                     toast("Ошибка: превышено время ожидания соединения", true);
                     leaveGame();
                 }
             }, 12000);
-            
             conn.on('open', () => clearTimeout(connTimeout));
-
             setupConnection(conn, false);
         }
 
@@ -999,7 +1142,7 @@
         // --- DURAK ONLINE P2P ENGINE ---
         const DK_SUITS = ['♠', '♥', '♦', '♣'];
         const DK_COLORS = {'♠': 'black', '♣': 'black', '♥': 'red', '♦': 'red'};
-        const DK_VALUES = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+        let DK_VALUES = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 
         class DkCard {
             constructor(s, v) { this.suit = s; this.value = v; this.color = DK_COLORS[s]; this.id = Math.random().toString(36).substr(2, 9); this.power = DK_VALUES.indexOf(v); }
@@ -1010,7 +1153,13 @@
         let dk_trumpSuit = '', dk_trumpCard = null, dk_myTurn = true, dk_active = false, dk_locked = false, dk_hasDiscarded = false;
 
         function dk_createDeck() {
-            dk_deck = []; DK_SUITS.forEach(s => DK_VALUES.forEach(v => dk_deck.push(new DkCard(s, v))));
+            dk_deck = [];
+            if (dk_deckSize === 52) {
+                DK_VALUES = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+            } else {
+                DK_VALUES = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+            }
+            DK_SUITS.forEach(s => DK_VALUES.forEach(v => dk_deck.push(new DkCard(s, v))));
             for(let i=dk_deck.length-1; i>0; i--) { const j=Math.floor(Math.random()*(i+1)); [dk_deck[i], dk_deck[j]]=[dk_deck[j], dk_deck[i]]; }
         }
 
@@ -1025,6 +1174,10 @@
 
         function dk_startMulti() {
             if(!isHost) return;
+            // Списываем начальную ставку за запуск
+            window.rubBalance -= setupMatchBet;
+            updateRUBBalances();
+
             dk_createDeck(); dk_trumpCard = dk_deck.pop(); dk_deck.unshift(dk_trumpCard); dk_trumpSuit = dk_trumpCard.suit;
             dk_myHand = []; dk_oppHand = []; dk_table = []; dk_hasDiscarded = false;
             document.getElementById('dk-discard-visual').classList.add('hidden');
@@ -1053,10 +1206,10 @@
                 const rect = card.getBoundingClientRect(); const clone = card.cloneNode(true);
                 clone.style.position = 'fixed'; clone.style.top = `${rect.top}px`; clone.style.left = `${rect.left}px`; clone.style.width = `${rect.width}px`; clone.style.height = `${rect.height}px`; clone.style.margin = '0'; clone.classList.add('card-flying-to-discard');
                 document.body.appendChild(clone);
-                setTimeout(() => { clone.style.top = `${discardRect.top}px`; clone.style.left = `${discardRect.left}px`; clone.style.transform = 'scale(0.4) rotate(-35deg)'; clone.style.opacity = '0'; }, 20);
-                setTimeout(() => clone.remove(), 600);
+                setTimeout(() => { clone.style.top = `${discardRect.top}px`; clone.style.left = `${discardRect.left}px`; clone.style.transform = 'scale(0.3) rotate(-35deg)'; clone.style.opacity = '0'; }, 20);
+                setTimeout(() => clone.remove(), 700);
             });
-            setTimeout(() => { document.getElementById('dk-discard-visual').classList.remove('hidden'); dk_hasDiscarded = true; callback(); }, 650);
+            setTimeout(() => { document.getElementById('dk-discard-visual').classList.remove('hidden'); dk_hasDiscarded = true; callback(); }, 750);
         }
 
         function renderOpponentHandVisuals(count) {
@@ -1064,8 +1217,8 @@
             const maxVisible = Math.min(count, 12); 
             for (let i = 0; i < maxVisible; i++) {
                 const el = document.createElement('div'); el.className = 'playing-card dk-card card-back skin-emerald absolute border border-emerald-500/40 shadow-md';
-                const offset = (i - (maxVisible - 1) / 2) * 9, angle = (i - (maxVisible - 1) / 2) * 3;
-                el.style.left = `calc(50% + ${offset}px)`; el.style.transform = `translateX(-50%) translateY(${Math.abs(offset/3)}px) rotate(${angle}deg) scale(0.65)`; el.style.transformOrigin = 'bottom center'; el.style.zIndex = i;
+                const offset = (i - (maxVisible - 1) / 2) * 11, angle = (i - (maxVisible - 1) / 2) * 3.5;
+                el.style.left = `calc(50% + ${offset}px)`; el.style.transform = `translateX(-50%) translateY(${Math.abs(offset/2.8)}px) rotate(${angle}deg) scale(0.7)`; el.style.transformOrigin = 'bottom center'; el.style.zIndex = i;
                 oppHandDiv.appendChild(el);
             }
         }
@@ -1074,7 +1227,14 @@
             updateRUBBalancesUI();
             const tEl = document.getElementById('dk-trump-card'); tEl.className = `playing-card dk-card ${dk_trumpCard.color} absolute shadow-xl`;
             tEl.innerHTML = `<div class="top-left">${dk_trumpCard.value}<br>${dk_trumpCard.suit}</div><div class="center-suit">${dk_trumpCard.suit}</div><div class="bottom-right">${dk_trumpCard.value}<br>${dk_trumpCard.suit}</div>`;
-            document.getElementById('dk-trump-ind').innerHTML = `${dk_trumpSuit} ${dk_deck.length}`; document.getElementById('dk-deck-pile').style.display = dk_deck.length ? 'block' : 'none';
+            
+            let tS = dk_trumpSuit;
+            if (tS === '♠') tS = '<span class="text-slate-200">♠</span>';
+            else if (tS === '♣') tS = '<span class="text-slate-200">♣</span>';
+            else if (tS === '♥') tS = '<span class="text-red-500">♥</span>';
+            else if (tS === '♦') tS = '<span class="text-red-500">♦</span>';
+
+            document.getElementById('dk-trump-ind').innerHTML = `${tS} ${dk_deck.length}`; document.getElementById('dk-deck-pile').style.display = dk_deck.length ? 'block' : 'none';
 
             const oppCount = isHost ? dk_oppHand.length : (dk_oppHand.length || 0);
             document.getElementById('dk-opp-count').innerText = oppCount; renderOpponentHandVisuals(oppCount);
@@ -1087,14 +1247,14 @@
                 return wA - wB;
             });
 
-            const total = dk_myHand.length; const spacing = window.innerWidth < 400 ? (total > 6 ? -32 : -24) : -18; hCont.style.gap = `${spacing}px`;
+            const total = dk_myHand.length; const spacing = window.innerWidth < 400 ? (total > 6 ? -35 : -26) : -20; hCont.style.gap = `${spacing}px`;
 
             dk_myHand.forEach((c, i) => {
                 const el = document.createElement('div'); el.className = `playing-card dk-card ${c.color} card-in-hand`; el.dataset.id = c.id; 
                 el.innerHTML = `<div class="top-left">${c.value}<br>${c.suit}</div><div class="center-suit">${c.suit}</div><div class="bottom-right">${c.value}<br>${c.suit}</div>`;
                 
                 let angle = 0, transY = 0;
-                if(total > 1) { const off = i - (total-1)/2; angle = off * 4; transY = Math.abs(off)*Math.abs(off)*1.5; }
+                if(total > 1) { const off = i - (total-1)/2; angle = off * 3.5; transY = Math.abs(off)*Math.abs(off)*1.6; }
                 el.style.transform = `rotate(${angle}deg) translateY(${transY}px)`; el.dataset.origTr = el.style.transform; el.style.zIndex = i;
                 
                 el.onclick = () => dk_playCard(c); el.addEventListener('touchstart', dk_touchStart, {passive:false}); el.addEventListener('touchmove', dk_touchMove, {passive:false}); el.addEventListener('touchend', dk_touchEnd);
@@ -1116,20 +1276,26 @@
             });
 
             const ind = document.getElementById('dk-turn-ind'); const btn = document.getElementById('dk-action-btn');
-            if(dk_myTurn) { ind.innerText = "Ваш ход"; ind.className = "absolute top-14 left-1/2 -translate-x-1/2 bg-slate-900/95 px-5 py-2 rounded-full border border-emerald-500 text-emerald-400 text-[9px] font-bold uppercase tracking-widest z-30 animate-pulse shadow-[0_0_20px_rgba(16,185,129,0.4)] opacity-100 transition-opacity"; } 
+            if(dk_myTurn) { ind.innerText = "Ваш ход"; ind.className = "absolute top-14 left-1/2 -translate-x-1/2 bg-slate-900/95 px-5 py-2 rounded-full border border-emerald-500 text-emerald-400 text-[10px] font-bold uppercase tracking-widest z-30 animate-pulse shadow-[0_0_20px_rgba(16,185,129,0.4)] opacity-100 transition-opacity"; } 
             else { ind.className = "opacity-0 absolute top-14 pointer-events-none"; }
 
             if(!dk_table.length) { btn.classList.add('hidden'); }
             else {
                 btn.classList.remove('hidden');
-                if(dk_myTurn) { btn.innerText = dk_table.every(p=>p.def) ? "Бито" : "Хватит"; btn.className = "absolute right-4 bottom-14 md:right-8 md:bottom-20 z-40 bg-slate-900/95 border border-emerald-500 text-emerald-500 font-bold py-3.5 px-7 rounded-xl shadow-[0_0_20px_rgba(16,185,129,0.4)] uppercase text-[10px] tracking-widest active:scale-95 transition backdrop-blur hover:bg-emerald-950"; } 
-                else { btn.innerText = "Взять"; btn.className = "absolute right-4 bottom-14 md:right-8 md:bottom-20 z-40 bg-slate-900/95 border border-red-500 text-red-500 font-bold py-3.5 px-7 rounded-xl shadow-[0_0_20px_rgba(239,68,68,0.4)] uppercase text-[10px] tracking-widest active:scale-95 transition backdrop-blur hover:bg-red-950"; }
+                if(dk_myTurn) { 
+                    btn.innerText = dk_table.every(p=>p.def) ? "Бито" : "Хватит"; 
+                    btn.className = "absolute right-4 bottom-14 md:right-8 md:bottom-20 z-40 bg-slate-900/95 border border-emerald-500 text-emerald-500 font-bold py-3.5 px-7 rounded-xl shadow-[0_0_20px_rgba(16,185,129,0.4)] uppercase text-[10px] tracking-widest active:scale-95 transition backdrop-blur hover:bg-emerald-950"; 
+                } 
+                else { 
+                    btn.innerText = "Взять"; 
+                    btn.className = "absolute right-4 bottom-14 md:right-8 md:bottom-20 z-40 bg-slate-900/95 border border-red-500 text-red-500 font-bold py-3.5 px-7 rounded-xl shadow-[0_0_20px_rgba(239,68,68,0.4)] uppercase text-[10px] tracking-widest active:scale-95 transition backdrop-blur hover:bg-red-950"; 
+                }
             }
         }
 
         let dk_dragCard, dk_dragEl, dk_tX, dk_tY;
         function dk_touchStart(e) { if(dk_locked || !dk_active) return; dk_dragCard = dk_myHand.find(c=>c.id === this.dataset.id); dk_dragEl = this; dk_dragEl.classList.add('dragging'); dk_tX = e.touches[0].clientX; dk_tY = e.touches[0].clientY; playSnd('click'); }
-        function dk_touchMove(e) { if(!dk_dragEl) return; e.preventDefault(); dk_dragEl.style.transform = `translate(${e.touches[0].clientX-dk_tX}px, ${e.touches[0].clientY-dk_tY}px) scale(1.15) rotate(0)`; dk_dragEl.style.pointerEvents = 'none'; const elem = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY); if(elem && elem.closest('#dk-table')) document.getElementById('dk-table').classList.add('drag-target-active'); else document.getElementById('dk-table').classList.remove('drag-target-active'); }
+        function dk_touchMove(e) { if(!dk_dragEl) return; e.preventDefault(); dk_dragEl.style.transform = `translate(${e.touches[0].clientX-dk_tX}px, ${e.touches[0].clientY-dk_tY}px) scale(1.22) rotate(0)`; dk_dragEl.style.pointerEvents = 'none'; const elem = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY); if(elem && elem.closest('#dk-table')) document.getElementById('dk-table').classList.add('drag-target-active'); else document.getElementById('dk-table').classList.remove('drag-target-active'); }
         function dk_touchEnd(e) {
             if(!dk_dragEl) return; dk_dragEl.style.pointerEvents = 'auto'; const elem = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY); document.getElementById('dk-table').classList.remove('drag-target-active');
             if(elem && elem.closest('#dk-table')) { const c = dk_dragCard; dk_dragEl.classList.remove('dragging'); dk_dragEl=null; dk_dragCard=null; dk_playCard(c); } 
@@ -1137,10 +1303,11 @@
         }
 
         function dk_playCard(c) {
-            if(!dk_active || dk_locked || !dk_myTurn) return;
+            if(!dk_active || dk_locked) return;
             dk_locked = true;
             if(isHost) { 
-                if(dk_processMove(c, 'ATK', true)) dk_sync(); 
+                const act = dk_table.every(p=>p.def) ? 'ATK' : 'DEF';
+                if(dk_processMove(c, act, true)) dk_sync(); 
                 else dk_locked = false;
             } 
             else { 
@@ -1148,11 +1315,26 @@
             }
         }
 
+        // Процессинг ходов, дополненный правилами ПЕРЕВОДНОГО Дурака
         function dk_processMove(c, mode, isHostMove) {
             let hand = isHostMove ? dk_myHand : dk_oppHand;
             const oppHandSize = isHostMove ? dk_oppHand.length : dk_myHand.length;
             
             if (mode === 'ATK') {
+                // Пытаемся сделать перевод
+                if (dk_gameVariant === 'transfer' && dk_table.length > 0 && dk_table.every(p => !p.def)) {
+                    const firstCardValue = dk_table[0].atk.value;
+                    if (c.value === firstCardValue) {
+                        // Условия для перевода соблюдены! Переносим ход обратно
+                        playSnd('card'); triggerHaptic('medium');
+                        if(isHostMove) dk_myHand = dk_myHand.filter(x=>x.id!==c.id); else dk_oppHand = dk_oppHand.filter(x=>x.id!==c.id);
+                        dk_table.push({atk:c, def:null});
+                        dk_myTurn = isHostMove; // Сохраняем ход за тем, кто перевел!
+                        toast("Перевод хода!");
+                        return true;
+                    }
+                }
+
                 let can = !dk_table.length;
                 if(!can) dk_table.forEach(p => { if(p.atk?.value===c.value || p.def?.value===c.value) can=true; });
                 if(can && dk_table.filter(p=>!p.def).length >= oppHandSize && dk_table.length) { toast("У соперника не хватит карт", true); return false; }
@@ -1165,10 +1347,27 @@
                 }
                 return false;
             } else {
+                // Оборона
+                // Проверяем, возможно ли перевести вместо защиты
+                if (dk_gameVariant === 'transfer' && dk_table.every(p => !p.def)) {
+                    const firstCardValue = dk_table[0].atk.value;
+                    if (c.value === firstCardValue) {
+                        playSnd('card'); triggerHaptic('medium');
+                        if(isHostMove) dk_myHand = dk_myHand.filter(x=>x.id!==c.id); else dk_oppHand = dk_oppHand.filter(x=>x.id!==c.id);
+                        dk_table.push({atk:c, def:null});
+                        dk_myTurn = isHostMove; // Перевели — теперь атакует ходивший ранее!
+                        toast("Перевод хода!");
+                        return true;
+                    }
+                }
+
                 const cur = dk_table.find(p=>!p.def);
                 if(cur) {
                     const a = cur.atk; let beats = false;
-                    if(c.suit===a.suit && c.power>a.power) beats=true;
+                    // Рассчитываем силу карт
+                    const cPower = DK_VALUES.indexOf(c.value);
+                    const aPower = DK_VALUES.indexOf(a.value);
+                    if(c.suit===a.suit && cPower>aPower) beats=true;
                     if(c.suit===dk_trumpSuit && a.suit!==dk_trumpSuit) beats=true;
                     if(beats) {
                         playSnd('card'); triggerHaptic('light');
@@ -1182,7 +1381,7 @@
         }
 
         window.dk_handleAction = function() {
-            if(dk_locked || !dk_active || !dk_myTurn) return; 
+            if(dk_locked || !dk_active) return; 
             playSnd('click'); dk_locked = true;
             if(isHost) { dk_processAction(true); dk_sync(); } 
             else { p2pConn.send({type:'DK_ACTION', action: dk_myTurn ? 'END_TURN' : 'TAKE'}); }
@@ -1202,8 +1401,24 @@
         function dk_checkWin() {
             if(!dk_deck.length && dk_active) {
                 if(!dk_myHand.length && !dk_oppHand.length) { triggerHaptic('success'); toast("НИЧЬЯ!", false); dk_active=false; setTimeout(leaveGame, 4000); }
-                else if(!dk_myHand.length) { triggerHaptic('success'); toast("ПОБЕДА!", false); playSnd('win'); startCoinsRain(); dk_active=false; setTimeout(leaveGame, 5000); }
-                else if(!dk_oppHand.length) { toast("ПОРАЖЕНИЕ!", true); dk_active=false; setTimeout(leaveGame, 4000); }
+                else if(!dk_myHand.length) { 
+                    triggerHaptic('success'); 
+                    toast("ПОБЕДА!", false); 
+                    playSnd('win'); 
+                    startCoinsRain(); 
+                    
+                    // Зачисление выигрыша за матч
+                    window.rubBalance += setupMatchBet * 2;
+                    updateRUBBalances();
+
+                    dk_active=false; 
+                    setTimeout(leaveGame, 5000); 
+                }
+                else if(!dk_oppHand.length) { 
+                    toast("ПОРАЖЕНИЕ!", true); 
+                    dk_active=false; 
+                    setTimeout(leaveGame, 4000); 
+                }
             }
         }
 
@@ -1232,7 +1447,15 @@
             if(dk_hasDiscarded) document.getElementById('dk-discard-visual').classList.remove('hidden'); else document.getElementById('dk-discard-visual').classList.add('hidden');
             dk_locked = false;
             dk_renderUI();
-            if(!dk_active){ dk_active=true; toast("Игра началась!"); playSnd('card'); }
+            if(!dk_active){ 
+                dk_active=true; 
+                toast("Игра началась!"); 
+                playSnd('card'); 
+                
+                // Списываем ставку у подключившегося клиента
+                window.rubBalance -= setupMatchBet;
+                updateRUBBalances();
+            }
             dk_checkWin();
         }
 
@@ -1423,28 +1646,12 @@
         class Coin {
             constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * -canvas.height; this.size = Math.random() * 16 + 12; this.speedY = Math.random() * 4 + 2; this.speedX = Math.random() * 2 - 1; this.rotation = Math.random() * 360; this.spinSpeed = Math.random() * 12 - 6; }
             update() { this.y += this.speedY; this.x += this.speedX; this.rotation += this.spinSpeed; }
-            draw() { 
-                ctx.save(); ctx.translate(this.x, this.y); ctx.rotate((this.rotation * Math.PI) / 180); 
-                ctx.beginPath(); ctx.arc(0, 0, this.size, 0, Math.PI * 2); 
-                ctx.fillStyle = '#fbbf24'; ctx.fill(); 
-                ctx.lineWidth = 2; ctx.strokeStyle = '#b45309'; ctx.stroke(); 
-                ctx.beginPath(); ctx.arc(0, 0, this.size*0.7, 0, Math.PI * 2); ctx.stroke();
-                ctx.fillStyle = '#b45309'; ctx.font = `bold ${this.size}px monospace`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('₽', 0, 1);
-                ctx.restore(); 
-            }
+            draw() { ctx.save(); ctx.translate(this.x, this.y); ctx.rotate((this.rotation * Math.PI) / 180); ctx.beginPath(); ctx.arc(0, 0, this.size, 0, Math.PI * 2); ctx.fillStyle = "#fbbf24"; ctx.shadowColor = "rgba(251, 191, 36, 0.7)"; ctx.shadowBlur = 10; ctx.fill(); ctx.beginPath(); ctx.arc(0, 0, this.size - 3, 0, Math.PI * 2); ctx.lineWidth = 1; ctx.strokeStyle = "#d97706"; ctx.stroke(); ctx.fillStyle = "#78350f"; ctx.font = `bold ${this.size * 0.9}px sans-serif`; ctx.textBaseline = "middle"; ctx.textAlign = "center"; ctx.fillText("₽", 0, 0); ctx.restore(); }
         }
-        function startCoinsRain() {
-            canvas.style.display = 'block'; canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            coins = []; for(let i=0; i<100; i++) coins.push(new Coin());
-            function animate() {
-                ctx.clearRect(0,0,canvas.width,canvas.height);
-                let allDown = true;
-                coins.forEach(c => { c.update(); c.draw(); if(c.y < canvas.height + 50) allDown = false; });
-                if(!allDown) { coinAnimId = requestAnimationFrame(animate); } else { stopCoinsRain(); }
-            }
-            animate();
-        }
-        function stopCoinsRain() { cancelAnimationFrame(coinAnimId); canvas.style.display = 'none'; ctx.clearRect(0,0,canvas.width,canvas.height); }
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        function startCoinsRain() { resizeCanvas(); window.addEventListener('resize', resizeCanvas); canvas.style.display = 'block'; coins = []; for (let i = 0; i < 80; i++) { coins.push(new Coin()); } animateCoins(); }
+        function animateCoins() { ctx.clearRect(0, 0, canvas.width, canvas.height); let stillOnScreen = false; coins.forEach(coin => { coin.update(); coin.draw(); if (coin.y < canvas.height + 50) stillOnScreen = true; }); if (stillOnScreen) coinAnimId = requestAnimationFrame(animateCoins); else stopCoinsRain(); }
+        function stopCoinsRain() { cancelAnimationFrame(coinAnimId); canvas.style.display = 'none'; window.removeEventListener('resize', resizeCanvas); }
     </script>
 </body>
 </html>
