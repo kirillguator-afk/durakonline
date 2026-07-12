@@ -949,7 +949,14 @@
             document.getElementById('dk-opp-count').innerText = oppCount; renderOpponentHandVisuals(oppCount);
 
             const hCont = document.getElementById('dk-hand'); hCont.innerHTML = '';
-            dk_myHand.sort((a,b) => a.weight() - b.weight());
+            
+            // ИСПРАВЛЕНИЕ: Безопасная сортировка на случай, если объекты переданы через WebRTC и потеряли свои методы
+            dk_myHand.sort((a,b) => {
+                let wA = typeof a.weight === 'function' ? a.weight() : (a.power + (a.suit === dk_trumpSuit ? 100 : 0));
+                let wB = typeof b.weight === 'function' ? b.weight() : (b.power + (b.suit === dk_trumpSuit ? 100 : 0));
+                return wA - wB;
+            });
+
             const total = dk_myHand.length; const spacing = window.innerWidth < 400 ? (total > 6 ? -32 : -24) : -18; hCont.style.gap = `${spacing}px`;
 
             dk_myHand.forEach((c, i) => {
@@ -1080,7 +1087,20 @@
         function dk_applyState(s) {
             if(isHost) return;
             dk_deck = new Array(s.deckLen).fill(null); dk_trumpCard = s.tCard; dk_trumpSuit = s.tSuit; 
-            dk_table = s.table; dk_myHand = s.clientHand; dk_oppHand = { length: s.hostHandLen }; dk_myTurn = s.clientTurn; dk_hasDiscarded = s.hasDiscarded;
+            dk_table = s.table; 
+
+            // ИСПРАВЛЕНИЕ: WebRTC (PeerJS) при передаче удаляет методы классов (включая weight()).
+            // Мы заново пересобираем объекты карт для клиента (ре-гидрация), чтобы игра могла читать свойства и сортировать их.
+            dk_myHand = s.clientHand.map(c => {
+                const card = new DkCard(c.suit, c.value);
+                card.id = c.id; // Критично важно восстановить ID для правильной синхронизации ходов
+                return card;
+            });
+
+            dk_oppHand = { length: s.hostHandLen }; 
+            dk_myTurn = s.clientTurn; 
+            dk_hasDiscarded = s.hasDiscarded;
+            
             if(dk_hasDiscarded) document.getElementById('dk-discard-visual').classList.remove('hidden'); else document.getElementById('dk-discard-visual').classList.add('hidden');
             dk_locked = false; // Клиент разблокирует себя при получении нового стейта
             dk_renderUI();
