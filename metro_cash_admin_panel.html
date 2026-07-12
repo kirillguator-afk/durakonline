@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>METRO CASH - Admin Host Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Orbitron:wght@700;900&display=swap');
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #f3f4f6;
+            background-color: #030712;
+            background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, #030712 70%);
+        }
+
+        .title-font { font-family: 'Orbitron', sans-serif; }
+
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        .nav-link.active {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            border-right: 3px solid #10b981;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(16, 185, 129, 0.2); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(16, 185, 129, 0.5); }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside class="w-64 glass-panel border-r border-slate-800/80 flex flex-col z-20 hidden md:flex shrink-0">
+        <div class="p-6 border-b border-slate-800/80">
+            <h1 class="text-xl title-font font-black tracking-widest text-white drop-shadow-md flex items-center gap-2">
+                <i class="fa-solid fa-server text-emerald-400"></i> METRO<span class="text-emerald-500">HOST</span>
+            </h1>
+            <p class="text-[10px] text-gray-400 uppercase tracking-widest font-bold mt-1">Панель Администратора</p>
+        </div>
+        
+        <nav class="flex-1 py-4 flex flex-col gap-1">
+            <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-link active w-full text-left px-6 py-4 text-sm font-bold uppercase tracking-wider text-gray-400 hover:text-white flex items-center gap-3">
+                <i class="fa-solid fa-chart-line w-5"></i> Дашборд
+            </button>
+            <button onclick="switchTab('network')" id="nav-network" class="nav-link w-full text-left px-6 py-4 text-sm font-bold uppercase tracking-wider text-gray-400 hover:text-white flex items-center gap-3">
+                <i class="fa-solid fa-network-wired w-5"></i> Сеть & P2P
+            </button>
+            <button onclick="switchTab('database')" id="nav-database" class="nav-link w-full text-left px-6 py-4 text-sm font-bold uppercase tracking-wider text-gray-400 hover:text-white flex items-center gap-3">
+                <i class="fa-solid fa-database w-5"></i> База Данных
+            </button>
+            <button onclick="switchTab('balance')" id="nav-balance" class="nav-link w-full text-left px-6 py-4 text-sm font-bold uppercase tracking-wider text-gray-400 hover:text-white flex items-center gap-3">
+                <i class="fa-solid fa-coins w-5"></i> Управление Финансами
+            </button>
+        </nav>
+        
+        <div class="p-6 border-t border-slate-800/80 text-[10px] text-gray-500 text-center font-mono">
+            V 2.5 — Online Core Update<br>System Operational
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto relative z-10 p-4 md:p-8">
+        
+        <!-- Mobile Header (Visible only on small screens) -->
+        <div class="md:hidden glass-panel p-4 rounded-2xl mb-6 flex justify-between items-center">
+            <h1 class="text-lg title-font font-black tracking-widest text-white"><i class="fa-solid fa-server text-emerald-400 mr-2"></i>METRO<span class="text-emerald-500">HOST</span></h1>
+            <select onchange="switchTab(this.value)" class="bg-black/50 border border-slate-700 rounded-lg px-2 py-1 text-xs text-white outline-none">
+                <option value="dashboard">Дашборд</option>
+                <option value="network">Сеть & P2P</option>
+                <option value="database">База Данных</option>
+                <option value="balance">Финансы</option>
+            </select>
+        </div>
+
+        <!-- Dashboard Tab -->
+        <div id="tab-dashboard" class="tab-content active space-y-6">
+            <h2 class="text-2xl title-font font-black text-white mb-2">Обзор Системы</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-panel p-6 rounded-2xl border-t-2 border-t-emerald-500/50">
+                    <div class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2">Статус P2P</div>
+                    <div class="text-2xl font-black title-font">ОНЛАЙН</div>
+                    <p class="text-[10px] text-gray-400 mt-1">Клиентские соединения разрешены</p>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border-t-2 border-t-blue-500/50">
+                    <div class="text-blue-400 text-xs font-bold uppercase tracking-wider mb-2">Активных Лобби</div>
+                    <div class="text-2xl font-black title-font" id="dash-lobbies-count">0</div>
+                    <p class="text-[10px] text-gray-400 mt-1">Обновление каждые 30с</p>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border-t-2 border-t-amber-500/50">
+                    <div class="text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">Телеграм Бот</div>
+                    <div class="text-2xl font-black title-font" id="dash-bot-status">ПОДКЛЮЧЕН</div>
+                    <p class="text-[10px] text-gray-400 mt-1">Ожидание логов и серверов</p>
+                </div>
+            </div>
+
+            <div class="glass-panel p-6 rounded-3xl mt-6">
+                <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-2">
+                    <h3 class="text-sm font-bold text-white uppercase tracking-wider">Мониторинг Сети (Live)</h3>
+                    <button onclick="fetchActiveLobbies()" class="text-xs text-emerald-400 hover:text-white transition"><i class="fa-solid fa-rotate-right"></i> Обновить</button>
+                </div>
+                <div id="admin-lobbies-list" class="space-y-3">
+                    <div class="text-center text-sm text-gray-500 py-6">Загрузка данных из канала лобби...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Network Config Tab -->
+        <div id="tab-network" class="tab-content">
+            <h2 class="text-2xl title-font font-black text-white mb-6">Сетевые Настройки PeerJS</h2>
+            
+            <div class="glass-panel p-6 md:p-8 rounded-3xl max-w-3xl">
+                <p class="text-sm text-gray-400 mb-6">Конфигурация серверов STUN/TURN для пробития NAT. Измените, если игроки не могут подключиться друг к другу (особенно через мобильный интернет LTE/5G).</p>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs text-gray-400 uppercase font-bold mb-2">JSON Массив ICE серверов</label>
+                        <textarea id="config-ice-servers" rows="6" class="w-full bg-black/40 border border-slate-600 rounded-xl p-4 text-sm font-mono text-emerald-400 focus:border-emerald-500 outline-none transition"></textarea>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex gap-4">
+                    <button onclick="saveConfig()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(16,185,129,0.3)] transition active:scale-95">Сохранить Конфиг</button>
+                    <button onclick="resetIceServers()" class="bg-slate-800 hover:bg-slate-700 text-white px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider border border-slate-600 transition active:scale-95">По умолчанию</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Database Tab -->
+        <div id="tab-database" class="tab-content">
+            <h2 class="text-2xl title-font font-black text-white mb-6">Настройки Телеграм & БД</h2>
+            
+            <div class="glass-panel p-6 md:p-8 rounded-3xl max-w-3xl">
+                <p class="text-sm text-gray-400 mb-6">Настройка интеграции с Telegram API для публикации серверов (P2P Lobbies) и ведения логов баланса (Database Channel).</p>
+                
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-xs text-gray-400 uppercase font-bold mb-2">Токен Бота (Bot API Token)</label>
+                        <input type="password" id="config-bot-token" class="w-full bg-black/40 border border-slate-600 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-500 outline-none transition font-mono">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-400 uppercase font-bold mb-2">Канал для Лобби (P2P Servers)</label>
+                        <input type="text" id="config-lobby-channel" class="w-full bg-black/40 border border-slate-600 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-500 outline-none transition font-mono" placeholder="@metrocash_p2p_lobbies">
+                        <p class="text-[10px] text-gray-500 mt-1">Публичный канал, куда бот кидает инвайты лобби.</p>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-400 uppercase font-bold mb-2">Канал Базы Данных (Логи Баланса)</label>
+                        <input type="text" id="config-db-channel" class="w-full bg-black/40 border border-slate-600 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-500 outline-none transition font-mono" placeholder="-1003734695647">
+                        <p class="text-[10px] text-gray-500 mt-1">ID приватного канала, где бот ведет учет транзакций.</p>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex gap-4">
+                    <button onclick="saveConfig()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(16,185,129,0.3)] transition active:scale-95">Сохранить & Применить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Finances/Balance Management Tab -->
+        <div id="tab-balance" class="tab-content">
+            <h2 class="text-2xl title-font font-black text-white mb-6">Управление Финансами Игроков</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="glass-panel p-6 rounded-3xl border-t-2 border-t-amber-500/50">
+                    <h3 class="text-sm font-bold text-amber-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-file-invoice-dollar"></i> Создать ручной лог пополнения/списания
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-[10px] text-gray-400 uppercase font-bold mb-1">Telegram ID Игрока</label>
+                            <input type="text" id="manual-user-id" class="w-full bg-black/40 border border-slate-600 rounded-lg px-4 py-2.5 text-sm font-mono text-white focus:border-amber-500 outline-none transition" placeholder="Пример: 123456789">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-gray-400 uppercase font-bold mb-1">Никнейм Игрока (Для лога)</label>
+                            <input type="text" id="manual-user-name" class="w-full bg-black/40 border border-slate-600 rounded-lg px-4 py-2.5 text-sm text-white focus:border-amber-500 outline-none transition" placeholder="Иван">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-gray-400 uppercase font-bold mb-1">Новый итоговый баланс (₽)</label>
+                            <input type="number" id="manual-balance" class="w-full bg-black/40 border border-slate-600 rounded-lg px-4 py-2.5 text-lg font-black title-font text-emerald-400 focus:border-amber-500 outline-none transition" value="1500">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-gray-400 uppercase font-bold mb-1">Причина/Тип (Опционально)</label>
+                            <select id="manual-type" class="w-full bg-black/40 border border-slate-600 rounded-lg px-4 py-2 text-sm text-white focus:border-amber-500 outline-none transition">
+                                <option value="ПОПОЛНЕНИЕ ЧЕРЕЗ ОПЕРАТОРА">Пополнение</option>
+                                <option value="ВЫВОД СРЕДСТВ">Вывод средств</option>
+                                <option value="АДМИН КОРРЕКТИРОВКА">Ручная корректировка</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button onclick="sendManualLog()" class="w-full mt-6 bg-amber-600 hover:bg-amber-500 text-black px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest shadow-[0_0_20px_rgba(251,191,36,0.3)] transition active:scale-95">
+                        Отправить лог в БД-канал
+                    </button>
+                    <p class="text-[9px] text-gray-500 mt-3 text-center">Внимание: это создаст лог в канале, но не изменит баланс в CloudStorage. CloudStorage обновляется только с клиента пользователя.</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <div id="toast-box" class="fixed bottom-10 right-10 flex flex-col gap-2 z-[9999] pointer-events-none"></div>
+
+    <script>
+        // Default Configurations
+        const DEFAULT_ICE = [
+            { urls: 'stun:stun.l.google.com:19302' },
+            { urls: 'turn:openrelay.metered.ca:443', username: 'openrelayproject', credential: 'openrelayproject' }
+        ];
+
+        let config = {
+            botToken: "8575086263:AAG74PmRjUT8ExtDkC_kOxfYfmss2BG0C_A",
+            lobbyChannel: "@metrocash_p2p_lobbies",
+            dbChannel: "-1003734695647",
+            iceServers: JSON.stringify(DEFAULT_ICE, null, 2)
+        };
+
+        // Initialize and load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadConfig();
+            fetchActiveLobbies();
+            setInterval(fetchActiveLobbies, 30000); // Auto refresh lobbies
+        });
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById('tab-' + tabId).classList.add('active');
+            if(document.getElementById('nav-' + tabId)) document.getElementById('nav-' + tabId).classList.add('active');
+        }
+
+        function loadConfig() {
+            const saved = localStorage.getItem('metro_admin_config');
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    config = { ...config, ...parsed };
+                } catch (e) {}
+            }
+            
+            // Populate UI
+            document.getElementById('config-bot-token').value = config.botToken;
+            document.getElementById('config-lobby-channel').value = config.lobbyChannel;
+            document.getElementById('config-db-channel').value = config.dbChannel;
+            
+            try {
+                document.getElementById('config-ice-servers').value = JSON.stringify(JSON.parse(config.iceServers), null, 4);
+            } catch(e) {
+                document.getElementById('config-ice-servers').value = config.iceServers;
+            }
+        }
+
+        function saveConfig() {
+            config.botToken = document.getElementById('config-bot-token').value;
+            config.lobbyChannel = document.getElementById('config-lobby-channel').value;
+            config.dbChannel = document.getElementById('config-db-channel').value;
+            
+            try {
+                // Validate JSON
+                const ice = document.getElementById('config-ice-servers').value;
+                JSON.parse(ice);
+                config.iceServers = ice;
+                
+                localStorage.setItem('metro_admin_config', JSON.stringify(config));
+                toast("Настройки успешно сохранены!");
+                
+                // This simulates immediate local storage write which the client app reads on load.
+            } catch(e) {
+                toast("Ошибка JSON в ICE серверах!", true);
+            }
+        }
+
+        function resetIceServers() {
+            document.getElementById('config-ice-servers').value = JSON.stringify(DEFAULT_ICE, null, 4);
+            toast("Восстановлены дефолтные STUN/TURN");
+        }
+
+        function toast(msg, err=false) {
+            const box = document.getElementById('toast-box');
+            const el = document.createElement('div');
+            const colors = err ? 'bg-red-950/90 border-red-500/50 text-red-200' : 'bg-emerald-950/90 border-emerald-500/50 text-emerald-200';
+            el.className = `p-4 rounded-xl shadow-2xl border ${colors} text-[12px] font-bold backdrop-blur-md transition-all duration-300 transform translate-y-4 opacity-0`;
+            el.innerText = msg; box.appendChild(el);
+            requestAnimationFrame(() => { el.classList.remove('translate-y-4', 'opacity-0'); });
+            setTimeout(() => { el.classList.add('opacity-0', 'translate-y-4'); setTimeout(()=>el.remove(), 300); }, 3000);
+        }
+
+        async function fetchActiveLobbies() {
+            const list = document.getElementById('admin-lobbies-list');
+            const countEl = document.getElementById('dash-lobbies-count');
+            const channel = config.lobbyChannel.replace('@', '');
+            
+            try {
+                const res = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent('https://t.me/s/' + channel)}`);
+                if (!res.ok) throw new Error("Network response was not ok");
+                
+                const html = await res.text();
+                const doc = new DOMParser().parseFromString(html, 'text/html');
+                const msgs = doc.querySelectorAll('.tgme_widget_message_text');
+                list.innerHTML = '';
+                let count = 0;
+
+                msgs.forEach(msg => {
+                    const txt = msg.innerText || "";
+                    if(txt.includes('LOBBY_ACTIVE|')) {
+                        const parts = txt.split('LOBBY_ACTIVE|')[1].split('|');
+                        if (parts.length >= 4) {
+                            const mode = parts[0];
+                            const room = parts[1];
+                            const pid = parts[2];
+                            const ts = parseInt(parts[3]);
+                            
+                            // Valid if younger than 2 hours
+                            if (Date.now() - ts < 7200000) {
+                                count++;
+                                const ageMins = Math.floor((Date.now() - ts) / 60000);
+                                const isDk = mode === 'DURAK';
+                                const cIcon = isDk ? '<i class="fa-solid fa-cards text-emerald-400"></i>' : '<i class="fa-solid fa-coins text-amber-400"></i>';
+                                
+                                list.innerHTML += `
+                                    <div class="bg-black/40 border border-slate-700 p-4 rounded-xl flex justify-between items-center hover:border-slate-500 transition">
+                                        <div class="flex flex-col">
+                                            <div class="text-sm font-bold text-white flex items-center gap-2">${cIcon} ${room}</div>
+                                            <div class="text-xs text-gray-400 font-mono mt-1">ID: ${pid}</div>
+                                        </div>
+                                        <div class="flex flex-col items-end">
+                                            <span class="text-xs font-bold ${isDk ? 'text-emerald-400' : 'text-amber-400'}">${mode}</span>
+                                            <span class="text-[10px] text-gray-500 mt-1">Создано ${ageMins} мин назад</span>
+                                        </div>
+                                    </div>
+                                `;
+                            }
+                        }
+                    }
+                });
+                
+                countEl.innerText = count;
+                if (count === 0) {
+                    list.innerHTML = '<div class="text-center text-sm text-gray-500 py-6">Нет активных P2P серверов в сети</div>';
+                }
+            } catch (e) {
+                list.innerHTML = '<div class="text-center text-sm text-red-400/70 py-6">Ошибка парсинга Telegram Web. Проверьте имя канала лобби.</div>';
+                countEl.innerText = "ERR";
+            }
+        }
+
+        async function sendManualLog() {
+            const uid = document.getElementById('manual-user-id').value;
+            const uname = document.getElementById('manual-user-name').value || "Игрок";
+            const amount = parseFloat(document.getElementById('manual-balance').value);
+            const type = document.getElementById('manual-type').value;
+
+            if(!uid || isNaN(amount)) {
+                toast("Заполните ID и корректный баланс!", true);
+                return;
+            }
+
+            const text = `⚙️ <b>${type}</b>\n👤 Участник: <a href="tg://user?id=${uid}">${uname}</a>\n🆔 ID: <code>${uid}</code>\n💰 Установлен баланс: <b>${amount.toFixed(2)} ₽</b>\n⏱ Время: ${new Date().toLocaleString('ru-RU')}`;
+            
+            try {
+                const res = await fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        chat_id: config.dbChannel, 
+                        text: text, 
+                        parse_mode: "HTML" 
+                    })
+                });
+                
+                const data = await res.json();
+                if(data.ok) {
+                    toast("Лог успешно отправлен в Базу Данных!");
+                } else {
+                    toast("Ошибка API: " + data.description, true);
+                }
+            } catch(error) {
+                toast("Сетевая ошибка при отправке в TG", true);
+            }
+        }
+    </script>
+</body>
+</html>
