@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>METRO CASH - Premium P2P Suite</title>
+    <title>METRO CASH</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
@@ -192,21 +192,22 @@
 
     <!-- Global Header -->
     <header class="w-full p-3 flex flex-row justify-between items-center gap-2 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-xl shrink-0 z-50 transition-all duration-300 shadow-lg" id="main-header">
-        <div class="flex items-center gap-2">
-            <div id="header-icon" class="p-1.5 bg-emerald-500/10 rounded-xl border border-emerald-500/40 transition-colors shadow-[0_0_12px_rgba(16,185,129,0.15)]">
+        <div class="flex items-center gap-2 shrink-0">
+            <div id="header-icon" class="p-1.5 bg-emerald-500/10 rounded-xl border border-emerald-500/40 transition-colors shadow-[0_0_12px_rgba(16,185,129,0.15)] hidden md:block">
                 <i class="fa-solid fa-network-wired text-emerald-400" id="header-icon-i"></i>
             </div>
             <div>
-                <h1 class="text-[13px] title-font font-black tracking-widest text-white drop-shadow-md">METRO<span class="text-emerald-500">P2P</span></h1>
+                <h1 class="text-[13px] title-font font-black tracking-widest text-white drop-shadow-md shrink-0">METRO<span class="text-emerald-500">P2P</span></h1>
                 <p id="header-subtitle" class="text-[7px] text-gray-400 uppercase tracking-widest font-bold">Multiplayer Hub</p>
             </div>
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2 shrink-0 max-w-[65%]">
             <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700/50 shadow-inner">
-                <span id="profile-name-label" class="text-[9px] text-gray-400 font-bold uppercase flex items-center"><i class="fa-solid fa-user-circle mr-1.5 text-slate-500"></i> ИГРОК</span>
-                <div class="w-px h-3 bg-slate-700 mx-1"></div>
-                <span id="global-rub-balance" class="text-[12px] font-mono text-emerald-400 font-extrabold">0 ₽</span>
-                <button onclick="openDepositModal()" class="ml-2 px-2 py-0.5 bg-gradient-to-r from-amber-500 to-amber-400 text-black text-[9px] font-black rounded-md hover:scale-105 transition shadow-[0_0_12px_rgba(251,191,36,0.5)]">
+                <!-- ДОБАВЛЕНЫ: max-w-[80px] и truncate для предотвращения растягивания на мобилках -->
+                <span id="profile-name-label" class="max-w-[70px] md:max-w-[120px] truncate text-[9px] text-gray-400 font-bold uppercase flex items-center" title="ИГРОК"><i class="fa-solid fa-user-circle mr-1.5 text-slate-500 shrink-0"></i> ИГРОК</span>
+                <div class="w-px h-3 bg-slate-700 mx-1 shrink-0"></div>
+                <span id="global-rub-balance" class="text-[12px] font-mono text-emerald-400 font-extrabold shrink-0">0 ₽</span>
+                <button onclick="openDepositModal()" class="ml-2 shrink-0 px-2 py-0.5 bg-gradient-to-r from-amber-500 to-amber-400 text-black text-[9px] font-black rounded-md hover:scale-105 transition shadow-[0_0_12px_rgba(251,191,36,0.5)]">
                     <i class="fa-solid fa-plus"></i>
                 </button>
             </div>
@@ -218,14 +219,15 @@
         <!-- P2P Lobby Hub View -->
         <div id="view-hub" class="app-view active flex-col w-full h-full overflow-y-auto p-4 md:p-6 max-w-6xl mx-auto space-y-6 pb-24">
             
-            <div class="w-full glass-panel rounded-3xl p-5 md:p-7 flex flex-col md:flex-row items-center justify-between gap-5 relative overflow-hidden">
+            <div class="w-full glass-panel rounded-3xl p-5 md:p-7 flex flex-col md:flex-row items-center justify-between gap-5 relative overflow-hidden shrink-0">
                 <div class="absolute -right-10 -top-10 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl"></div>
                 <div class="flex flex-col relative z-10 w-full md:w-1/2">
                     <h2 class="text-xl md:text-2xl title-font font-black text-white mb-2"><i class="fa-solid fa-satellite-dish text-emerald-400 mr-2 animate-pulse"></i>ONLINE СЕТЬ</h2>
                     <p class="text-xs text-gray-400 mb-4 leading-relaxed">Играйте с реальными людьми напрямую через защищенное P2P соединение. Ваш уникальный идентификатор:</p>
-                    <div class="bg-black/60 border border-slate-700/60 rounded-xl p-3.5 flex items-center justify-between shadow-inner">
-                        <span class="text-xs font-mono text-emerald-400 tracking-wider" id="local-peer-id">Инициализация узла...</span>
-                        <div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded bg-slate-800/80 border border-slate-700">
+                    <!-- ДОБАВЛЕНЫ: gap-2 overflow-hidden на контейнер, и truncate на ID -->
+                    <div class="bg-black/60 border border-slate-700/60 rounded-xl p-3.5 flex items-center justify-between shadow-inner gap-2 overflow-hidden">
+                        <span class="text-xs font-mono text-emerald-400 tracking-wider truncate" id="local-peer-id">Инициализация узла...</span>
+                        <div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded bg-slate-800/80 border border-slate-700 shrink-0">
                             <span id="global-peer-indicator" class="h-2 w-2 rounded-full bg-red-500 animate-pulse"></span>
                             <span id="global-peer-text" class="text-[9px] text-gray-300 font-bold uppercase tracking-wider">ОЖИДАНИЕ</span>
                         </div>
@@ -256,15 +258,17 @@
                 </div>
             </div>
 
-            <div class="flex-1 flex flex-col min-h-[350px]">
+            <!-- ИСПРАВЛЕНИЕ: min-h-[350px] заменено на min-h-0, чтобы избежать переполнения экрана -->
+            <div class="flex-1 flex flex-col min-h-0">
                 <div class="flex justify-between items-center mb-4 px-2 shrink-0">
                     <h2 class="text-sm font-bold text-white flex items-center gap-2 uppercase tracking-wider"><i class="fa-solid fa-globe text-blue-400"></i> Активные Игры</h2>
-                    <button onclick="fetchLobbies()" class="text-gray-300 hover:text-white transition flex items-center gap-2 bg-slate-800/80 border border-slate-700 rounded-lg px-3 py-2 text-[10px] font-bold uppercase active:scale-95 shadow-md">
+                    <button onclick="fetchLobbies()" class="text-gray-300 hover:text-white transition flex items-center gap-2 bg-slate-800/80 border border-slate-700 rounded-lg px-3 py-2 text-[10px] font-bold uppercase active:scale-95 shadow-md shrink-0">
                         <i class="fa-solid fa-rotate-right" id="refresh-icon"></i> Обновить
                     </button>
                 </div>
                 
-                <div id="lobbies-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 overflow-y-auto pb-4 pr-1 content-start">
+                <!-- ИСПРАВЛЕНИЕ: добавлен flex-1 для корректного скролла внутри сетки -->
+                <div id="lobbies-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 overflow-y-auto pb-4 pr-1 content-start flex-1">
                     <div class="col-span-full text-center text-xs text-gray-500 py-10 glass-panel rounded-2xl">Сбор данных о серверах...</div>
                 </div>
             </div>
@@ -294,7 +298,7 @@
                             <i class="fa-solid fa-right-from-bracket"></i> Выйти
                         </button>
                         <div class="flex flex-col ml-1">
-                            <span id="dk-opp-name" class="text-[9px] font-bold text-white uppercase">Оппонент</span>
+                            <span id="dk-opp-name" class="text-[9px] font-bold text-white uppercase truncate max-w-[80px]">Оппонент</span>
                             <span class="text-[6px] text-emerald-400/90 tracking-widest" id="dk-p2p-status">P2P СОЕДИНЕНИЕ</span>
                         </div>
                     </div>
@@ -380,7 +384,7 @@
                 <div class="flex flex-col items-center mt-16 relative z-10">
                     <div class="text-[10px] uppercase font-bold text-gray-300 mb-3 flex items-center gap-2 bg-slate-950/90 px-4 py-1.5 rounded-full border border-amber-900/50 shadow-lg">
                         <i class="fa-solid fa-crown text-amber-500"></i> 
-                        <span id="bj-dealer-label">Дилер (Хост)</span>
+                        <span id="bj-dealer-label" class="truncate max-w-[80px]">Дилер (Хост)</span>
                         <span id="bj-dealer-score" class="bg-black/90 px-2.5 py-0.5 rounded text-amber-400 border border-amber-500/40">?</span>
                     </div>
                     <div id="bj-dealer-hand" class="flex justify-center relative min-h-[var(--card-height-bj)] gap-3"></div>
@@ -427,7 +431,7 @@
                 <div class="flex flex-col items-center mb-6 relative z-10 w-full px-4">
                     <div class="text-[10px] uppercase font-bold text-gray-300 mb-3 flex items-center gap-2 bg-slate-950/90 px-4 py-1.5 rounded-full border border-slate-700/60 shadow-lg">
                         <i class="fa-solid fa-user text-gray-400"></i> 
-                        <span id="bj-player-label">ИГРОК</span>
+                        <span id="bj-player-label" class="truncate max-w-[80px]">ИГРОК</span>
                         <span id="bj-player-score" class="bg-black/90 px-2.5 py-0.5 rounded text-white border border-slate-600 font-mono">0</span>
                     </div>
                     <div id="bj-player-hand" class="flex justify-center relative min-h-[var(--card-height-bj)] mb-5 gap-3"></div>
@@ -680,7 +684,7 @@
                 if (tg.initDataUnsafe?.user) {
                     const tgName = tg.initDataUnsafe.user.first_name || 'Игрок TG';
                     document.getElementById('player-nickname').value = tgName;
-                    document.getElementById('profile-name-label').innerHTML = `<i class="fa-solid fa-user-circle mr-1.5 text-slate-500"></i> ${tgName.toUpperCase()}`;
+                    document.getElementById('profile-name-label').innerHTML = `<i class="fa-solid fa-user-circle mr-1.5 text-slate-500 shrink-0"></i> ${tgName.toUpperCase()}`;
                 }
             }
             initPeer(); switchTab('hub');
@@ -706,8 +710,10 @@
         }
 
         function initPeer() {
+            // ИСПРАВЛЕНИЕ: Добавлен запасной STUN сервер от Google для повышения вероятности соединения
             const iceServers = savedConfig.iceServers ? JSON.parse(savedConfig.iceServers) : [
                 { urls: 'stun:stun.l.google.com:19302' },
+                { urls: 'stun:stun1.l.google.com:19302' },
                 { urls: 'turn:openrelay.metered.ca:443', username: 'openrelayproject', credential: 'openrelayproject' }
             ];
             myPeer = new Peer('', { config: { iceServers: iceServers } });
@@ -739,10 +745,17 @@
         function setupConnection(conn, hostRole) {
             p2pConn = conn; isHost = hostRole; 
             
-            conn.on('open', () => {
+            // ИСПРАВЛЕНИЕ: Мгновенная проверка conn.open (решает баг бесконечного зависания при подключении)
+            const onOpen = () => {
                 conn.send({ type: 'HELLO', nick: document.getElementById('player-nickname').value, mode: currentGameMode });
                 startHeartbeat();
-            });
+            };
+
+            if (conn.open) {
+                onOpen();
+            } else {
+                conn.on('open', onOpen);
+            }
             
             conn.on('data', data => {
                 if (data.type === 'PING') { if (p2pConn && p2pConn.open) p2pConn.send({ type: 'PONG' }); return; }
@@ -804,8 +817,22 @@
             } catch(e) { toast("Локальный запуск сервера", true); }
             
             isHost = true; switchTab('game');
-            if(currentGameMode === 'DURAK') { document.getElementById('dk-setup').classList.remove('hidden'); document.getElementById('dk-board').classList.add('hidden'); } 
-            else { document.getElementById('bj-setup').classList.remove('hidden'); document.getElementById('bj-board').classList.add('hidden'); }
+            
+            // ИСПРАВЛЕНИЕ: Устанавливаем правильные тексты для хоста
+            if(currentGameMode === 'DURAK') { 
+                document.getElementById('dk-setup').classList.remove('hidden'); 
+                document.getElementById('dk-board').classList.add('hidden'); 
+                document.querySelector('#dk-setup h2').innerText = "ОЖИДАНИЕ ИГРОКА";
+                document.querySelector('#dk-setup p').innerText = "Сервер успешно запущен. Поделитесь ссылкой ниже, чтобы оппонент мог подключиться к вам напрямую.";
+                document.getElementById('dk-share-btn').classList.remove('hidden');
+            } 
+            else { 
+                document.getElementById('bj-setup').classList.remove('hidden'); 
+                document.getElementById('bj-board').classList.add('hidden'); 
+                document.querySelector('#bj-setup h2').innerText = "P2P КАЗИНО";
+                document.getElementById('bj-setup-desc').innerText = "Вы играете за Дилера. Ожидание подключения реального игрока...";
+                document.getElementById('bj-share-btn').classList.remove('hidden');
+            }
         }
 
         async function fetchLobbies() {
@@ -851,10 +878,38 @@
         }
 
         window.joinLobby = function(pid, mode) {
+            if(!pid) return;
+            pid = pid.trim(); // ИСПРАВЛЕНИЕ: Удаляем случайные пробелы/переносы строк, ломающие PeerJS
             playSnd('click'); currentGameMode = mode; switchTab('game'); toast("Соединение с хостом...");
-            if(mode === 'DURAK') { document.getElementById('dk-setup').classList.remove('hidden'); document.getElementById('dk-board').classList.add('hidden'); document.getElementById('dk-share-btn').classList.add('hidden'); } 
-            else { document.getElementById('bj-setup').classList.remove('hidden'); document.getElementById('bj-board').classList.add('hidden'); document.getElementById('bj-share-btn').classList.add('hidden'); document.getElementById('bj-setup-desc').innerText = "Подключение к столу Дилера..."; }
+            
+            // ИСПРАВЛЕНИЕ: Устанавливаем правильные тексты подключения для клиента
+            if(mode === 'DURAK') { 
+                document.getElementById('dk-setup').classList.remove('hidden'); 
+                document.getElementById('dk-board').classList.add('hidden'); 
+                document.getElementById('dk-share-btn').classList.add('hidden'); 
+                document.querySelector('#dk-setup h2').innerText = "ПОДКЛЮЧЕНИЕ...";
+                document.querySelector('#dk-setup p').innerText = "Установка P2P соединения с сервером. Пожалуйста, подождите...";
+            } 
+            else { 
+                document.getElementById('bj-setup').classList.remove('hidden'); 
+                document.getElementById('bj-board').classList.add('hidden'); 
+                document.getElementById('bj-share-btn').classList.add('hidden'); 
+                document.querySelector('#bj-setup h2').innerText = "ПОДКЛЮЧЕНИЕ...";
+                document.getElementById('bj-setup-desc').innerText = "Синхронизация с узлом Дилера. Пожалуйста, подождите..."; 
+            }
+            
             const conn = myPeer.connect(pid, {reliable: true});
+            
+            // ИСПРАВЛЕНИЕ: Добавлен таймаут (отмена бесконечной загрузки при недоступности сети хоста)
+            const connTimeout = setTimeout(() => {
+                if (!p2pConn || !p2pConn.open) {
+                    toast("Ошибка: превышено время ожидания соединения", true);
+                    leaveGame();
+                }
+            }, 12000);
+            
+            conn.on('open', () => clearTimeout(connTimeout));
+
             setupConnection(conn, false);
         }
 
@@ -950,7 +1005,6 @@
 
             const hCont = document.getElementById('dk-hand'); hCont.innerHTML = '';
             
-            // ИСПРАВЛЕНИЕ: Безопасная сортировка на случай, если объекты переданы через WebRTC и потеряли свои методы
             dk_myHand.sort((a,b) => {
                 let wA = typeof a.weight === 'function' ? a.weight() : (a.power + (a.suit === dk_trumpSuit ? 100 : 0));
                 let wB = typeof b.weight === 'function' ? b.weight() : (b.power + (b.suit === dk_trumpSuit ? 100 : 0));
@@ -1079,7 +1133,7 @@
 
         function dk_sync() {
             if(!isHost || !p2pConn) return;
-            dk_locked = false; // хост разблокирует себя после синхронизации
+            dk_locked = false; 
             const state = { deckLen: dk_deck.length, tCard: dk_trumpCard, tSuit: dk_trumpSuit, table: dk_table, clientHand: dk_oppHand, hostHandLen: dk_myHand.length, clientTurn: !dk_myTurn, hasDiscarded: dk_hasDiscarded };
             p2pConn.send({type:'DK_STATE', state: state}); dk_renderUI();
         }
@@ -1089,11 +1143,9 @@
             dk_deck = new Array(s.deckLen).fill(null); dk_trumpCard = s.tCard; dk_trumpSuit = s.tSuit; 
             dk_table = s.table; 
 
-            // ИСПРАВЛЕНИЕ: WebRTC (PeerJS) при передаче удаляет методы классов (включая weight()).
-            // Мы заново пересобираем объекты карт для клиента (ре-гидрация), чтобы игра могла читать свойства и сортировать их.
             dk_myHand = s.clientHand.map(c => {
                 const card = new DkCard(c.suit, c.value);
-                card.id = c.id; // Критично важно восстановить ID для правильной синхронизации ходов
+                card.id = c.id; 
                 return card;
             });
 
@@ -1102,7 +1154,7 @@
             dk_hasDiscarded = s.hasDiscarded;
             
             if(dk_hasDiscarded) document.getElementById('dk-discard-visual').classList.remove('hidden'); else document.getElementById('dk-discard-visual').classList.add('hidden');
-            dk_locked = false; // Клиент разблокирует себя при получении нового стейта
+            dk_locked = false;
             dk_renderUI();
             if(!dk_active){ dk_active=true; toast("Игра началась!"); playSnd('card'); }
             dk_checkWin();
@@ -1259,7 +1311,6 @@
             bj_pHand = s.pHand; bj_dHand = s.dHand; bj_turn = s.turn; bj_msg = s.msg; bj_current_bet_placed = s.placedBet;
             if(!bj_active && bj_turn !== 'BETTING'){ bj_active=true; toast("Раздача началась!"); }
             
-            // Защита от двойных выплат (Начисляем только если раунд ТОЛЬКО ЧТО завершился)
             let justFinished = (bj_turn === 'OVER' && bj_last_turn !== 'OVER');
             bj_last_turn = bj_turn;
 
